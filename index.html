@@ -28,12 +28,12 @@
 
   /* custom cursor */
   .cursor,.cursor-d{position:fixed;top:0;left:0;z-index:9999;pointer-events:none;transform:translate(-50%,-50%);border-radius:50%}
-  .cursor{width:9px;height:9px;background:var(--aqua);transition:width .18s,height .18s,opacity .2s}
-  .cursor-d{width:42px;height:42px;border:1.5px solid var(--aqua);transition:transform .12s ease-out,width .25s,height .25s,opacity .25s;display:flex;align-items:center;justify-content:center}
-  .cursor-d .lab{font-family:var(--mono);font-size:.5rem;letter-spacing:.12em;color:var(--aqua);opacity:0;text-transform:uppercase;transition:opacity .2s}
+  .cursor{width:9px;height:9px;background:var(--orange);transition:width .18s,height .18s,opacity .2s}
+  .cursor-d{width:42px;height:42px;border:1.5px solid var(--orange);transition:transform .12s ease-out,width .25s,height .25s,opacity .25s;display:flex;align-items:center;justify-content:center}
+  .cursor-d .lab{font-family:var(--mono);font-size:.5rem;letter-spacing:.12em;color:var(--orange);opacity:0;text-transform:uppercase;transition:opacity .2s}
   body.cur-big .cursor{opacity:0}
-  body.cur-big .cursor-d{width:74px;height:74px;background:rgba(28,229,196,.10)}
-  body.cur-drag .cursor-d{width:84px;height:84px;background:rgba(28,229,196,.12)}
+  body.cur-big .cursor-d{width:74px;height:74px;background:rgba(255, 90, 36, 0.10)}
+  body.cur-drag .cursor-d{width:84px;height:84px;background:rgba(255, 90, 36, 0.12)}
   body.cur-drag .cursor-d .lab{opacity:1}
   @media(hover:none),(pointer:coarse){.cursor,.cursor-d{display:none}}
 
