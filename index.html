@@ -12,7 +12,7 @@
   :root{
     --paper:#F5EFE4; --paper-2:#EAE1D1; --ink:#15181A; --ink-2:#5C6660;
     --dark:#0B1413; --dark-2:#102320; --on-dark:#EAF3EF; --on-dark-2:#8DA39B;
-    --aqua:#1CE5C4; --teal:#0B6E5F; --orange:#FF5A24; --orange-d:#E0440F; --line:rgba(20,23,26,.14); --line-d:rgba(234,243,239,.16);
+    --aqua:#1CE5C4; --teal:#0B6E5F; --gold:#b07b2e; --gold-d:#8a5f22; --line:rgba(20,23,26,.14); --line-d:rgba(234,243,239,.16);
     --grotesk:"Space Grotesk",sans-serif; --mono:"JetBrains Mono",monospace; --serif:"Fraunces",Georgia,serif;
   }
   *{box-sizing:border-box;margin:0;padding:0}
@@ -28,12 +28,12 @@
 
   /* custom cursor */
   .cursor,.cursor-d{position:fixed;top:0;left:0;z-index:9999;pointer-events:none;transform:translate(-50%,-50%);border-radius:50%}
-  .cursor{width:9px;height:9px;background:var(--orange);transition:width .18s,height .18s,opacity .2s}
-  .cursor-d{width:42px;height:42px;border:1.5px solid var(--orange);transition:transform .12s ease-out,width .25s,height .25s,opacity .25s;display:flex;align-items:center;justify-content:center}
-  .cursor-d .lab{font-family:var(--mono);font-size:.5rem;letter-spacing:.12em;color:var(--orange);opacity:0;text-transform:uppercase;transition:opacity .2s}
+  .cursor{width:9px;height:9px;background:var(--gold);transition:width .18s,height .18s,opacity .2s}
+  .cursor-d{width:42px;height:42px;border:1.5px solid var(--gold);transition:transform .12s ease-out,width .25s,height .25s,opacity .25s;display:flex;align-items:center;justify-content:center}
+  .cursor-d .lab{font-family:var(--mono);font-size:.5rem;letter-spacing:.12em;color:var(--gold);opacity:0;text-transform:uppercase;transition:opacity .2s}
   body.cur-big .cursor{opacity:0}
-  body.cur-big .cursor-d{width:74px;height:74px;background:rgba(255, 90, 36, 0.10)}
-  body.cur-drag .cursor-d{width:84px;height:84px;background:rgba(255, 90, 36, 0.12)}
+  body.cur-big .cursor-d{width:74px;height:74px;background:rgba(176, 123, 46, 0.10)}
+  body.cur-drag .cursor-d{width:84px;height:84px;background:rgba(176, 123, 46, 0.12)}
   body.cur-drag .cursor-d .lab{opacity:1}
   @media(hover:none),(pointer:coarse){.cursor,.cursor-d{display:none}}
 
@@ -47,7 +47,7 @@
   .bar nav a{color:var(--ink-2);transition:color .2s}
   .bar nav a:hover{color:var(--ink)}
   .bar .go{background:var(--teal);color:#fff;padding:9px 16px;border-radius:3px;font-weight:700;transition:background .35s ease,color .35s ease}
-  .bar .go.go-orange{background:var(--orange);color:#fff}
+  .bar .go.go-gold{background:var(--gold);color:#fff}
   @media(max-width:760px){.bar nav a:not(.go){display:none}}
 
   /* marquee */
@@ -74,8 +74,8 @@
   .btn--o:hover{transform:translateY(-2px);background:var(--teal);color:#fff}
   .btn--g{border:1px solid var(--line-d);color:var(--on-dark)}
   .btn--g:hover{border-color:var(--aqua);color:var(--aqua)}
-  .btn--final{background:var(--orange);color:#fff}
-  .btn--final:hover{transform:translateY(-2px);background:var(--orange-d);color:#fff}
+  .btn--final{background:var(--gold);color:#fff}
+  .btn--final:hover{transform:translateY(-2px);background:var(--gold-d);color:#fff}
 
   /* generic section */
   .sec{padding:96px 0;border-top:1px solid var(--line)}
@@ -358,10 +358,10 @@
     window.addEventListener('pointerup',function(){down=false;strip.classList.remove('grabbing');});
     strip.addEventListener('pointermove',function(e){if(!down)return;var d=e.pageX-sx;if(Math.abs(d)>4)moved=true;strip.scrollLeft=sl-d;});
     strip.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(e){if(moved)e.preventDefault();});});
-    // header CTA turns orange once the closing CTA is in view
+    // header CTA turns gold once the closing CTA is in view
     var go=document.querySelector('.bar .go'), contact=document.querySelector('.contact');
     if(go && contact && 'IntersectionObserver' in window){
-      var co=new IntersectionObserver(function(e){go.classList.toggle('go-orange', e[0].isIntersecting);},{threshold:0,rootMargin:'0px 0px -45% 0px'});
+      var co=new IntersectionObserver(function(e){go.classList.toggle('go-gold', e[0].isIntersecting);},{threshold:0,rootMargin:'0px 0px -45% 0px'});
       co.observe(contact);
     }
   })();
