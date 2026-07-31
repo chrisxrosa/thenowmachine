@@ -272,7 +272,8 @@ footer a{color:var(--n-0)}footer a:hover{color:var(--block-acid)}
 .work-body{width:100%;margin:var(--sp-3) 0 0;opacity:0;transition:opacity var(--dur-base) var(--ease-out);font-size:14px;line-height:1.5;color:var(--text-secondary);text-wrap:pretty}
 .wcard.on .work-body{opacity:1}
 .founder-grid{display:grid;grid-template-columns:minmax(0,0.85fr) minmax(0,1.15fr);gap:clamp(32px,6vw,110px);align-items:start}
-.founder-copy{align-self:start}
+/* Copy centres against the square portrait so the column reads balanced, not top-heavy. */
+.founder-copy{align-self:center}
 .track-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp-12);margin-top:clamp(56px,7vw,104px)}
 @media (max-width:1100px){.track-grid{gap:var(--sp-10)}}
 .contact-foot{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:var(--sp-10);margin-top:clamp(48px,6vw,96px)}
