@@ -225,9 +225,10 @@ div:has(>div>.foot-mark){grid-template-columns:1fr!important}
 .caps-hold{background:var(--n-900);color:var(--n-50);display:flex;align-items:center;padding:var(--section-y) 0;min-height:100vh;position:sticky;top:0}
 .caps-inner{width:100%}
 .caps-hold .cap{border-top-color:var(--line-inverse)}
-/* Desktop: the section holds its content back until the video begins shrinking. */
-@media (min-width:901px){.caps-hold .cap,.caps-hold h1,.caps-hold h2{opacity:0;transform:translateY(14px);transition:opacity var(--dur-scroll) var(--ease-scroll),transform var(--dur-scroll) var(--ease-scroll)}
-.caps-hold.lit .cap,.caps-hold.lit h1,.caps-hold.lit h2{opacity:1;transform:none}}
+/* The section holds its content back until the video begins shrinking, so it fades in
+   behind the reel instead of visibly sliding up out of the hero. */
+.caps-hold .cap,.caps-hold h1,.caps-hold h2{opacity:0;transform:translateY(14px);transition:opacity var(--dur-scroll) var(--ease-scroll),transform var(--dur-scroll) var(--ease-scroll)}
+.caps-hold.lit .cap,.caps-hold.lit h1,.caps-hold.lit h2{opacity:1;transform:none}
 .caps-hold .cap p{color:var(--n-300);text-wrap:pretty}
 .caps-hold .cap:hover{border-top-color:var(--n-50)}
 .caps-hold .cap:hover p{color:var(--n-50)}
@@ -271,6 +272,7 @@ footer a{color:var(--n-0)}footer a:hover{color:var(--block-acid)}
 .track-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--sp-10);margin-top:clamp(48px,6vw,88px)}
 .contact-foot{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:var(--sp-10);margin-top:clamp(48px,6vw,96px)}
 @media (max-width:900px){
+.hero-media-holder{height:auto;aspect-ratio:1/1}
 .cap-grid,.track-grid,.founder-grid{grid-template-columns:1fr;gap:var(--sp-10)}
 .caps-hold{position:static;min-height:auto}
 .caps-spacer{display:none}
@@ -1459,16 +1461,16 @@ function ReelHandoff() {
       const vh = window.innerHeight, vw = window.innerWidth;
       const hr = holder.getBoundingClientRect();
       if (!mq.matches) {
-        const caps0 = document.getElementById('capabilities');
-        if (caps0) caps0.classList.add('lit');
         /* Mobile keeps the original handoff: pin near the top, shrink straight
            into the thumbnail as the page scrolls. No full-bleed, no sticky hold. */
+        const caps0 = document.getElementById('capabilities');
         const pin = 96;
         const t0 = target.getBoundingClientRect();
         const from = hr.top + sy - pin + hr.height / 2;
         const to = (t0.top + sy + t0.height / 2) - vh * 0.55;
         const p = clamp((sy - from) / Math.max(to - from, 1), 0, 1);
         if (cue) cue.style.opacity = String(clamp((0.95 - p) / 0.25, 0, 1));
+        if (caps0) caps0.classList.toggle('lit', p > 0.02);
         if (hr.top >= pin && p <= 0.001) return reset();
         const st = { left: hr.left, width: hr.width, height: hr.height, top: Math.max(hr.top, pin) };
         stage.style.position = 'fixed';
