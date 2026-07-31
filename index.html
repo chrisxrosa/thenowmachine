@@ -173,6 +173,10 @@ html{scroll-behavior:smooth}html,body{background:var(--n-50)}body{overflow-x:hid
 a{color:var(--text-link)}a:hover{color:var(--text-link-hover)}
 .nav-logo{height:26px;width:auto}
 .ln{display:block}
+.lines-narrow{display:none}
+@media (max-width:900px){.lines-wide{display:none}.lines-narrow{display:block}
+/* The five-line mobile break needs "to outpace agencies." to hold one line. */
+.model-inner .lines-narrow{font-size:clamp(1.9rem,8.4vw,2.5rem)}}
 .oneline{font-size:min(5.5rem,6.2vw)!important}
 @media (min-width:560px){.oneline{white-space:nowrap}}
 .mark{background-image:linear-gradient(var(--block-acid),var(--block-acid));background-repeat:no-repeat;background-size:0% .9em;background-position:0 62%;padding:0 .08em;-webkit-box-decoration-break:clone;box-decoration-break:clone;transition:background-size 700ms var(--ease-scroll),color 260ms 320ms var(--ease-out)}
@@ -269,7 +273,8 @@ footer a{color:var(--n-0)}footer a:hover{color:var(--block-acid)}
 .wcard.on .work-body{opacity:1}
 .founder-grid{display:grid;grid-template-columns:minmax(0,0.85fr) minmax(0,1.15fr);gap:clamp(32px,6vw,110px);align-items:start}
 .founder-copy{align-self:start}
-.track-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--sp-10);margin-top:clamp(48px,6vw,88px)}
+.track-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp-12);margin-top:clamp(56px,7vw,104px)}
+@media (max-width:1100px){.track-grid{gap:var(--sp-10)}}
 .contact-foot{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:var(--sp-10);margin-top:clamp(48px,6vw,96px)}
 @media (max-width:900px){
 .hero-media-holder{height:auto;aspect-ratio:16/9}
@@ -1551,8 +1556,8 @@ function Manifesto() {
 /* ── 5. Capabilities ── */
 const CAPS = [
   { id: 'C-02', mid: 'C-01', title: 'Content production', body: "Personality-driven, hosted content that invites your audience into the lifestyle you're building.", media: true },
-  { id: 'C-01', mid: 'C-02', title: 'Paid media', body: 'Cross-platform advertising working as a single funnel, building your audience, then convert them into real leads.', poster: 'assets/paid-media-poster.jpg' },
-  { id: 'C-03', title: 'Funnel-building', body: 'An engine that warming cold inquiries while you sleep, and surfacing the ones ready to talk.', poster: 'assets/funnel-building-poster.jpg' }
+  { id: 'C-01', mid: 'C-02', title: 'Paid advertising', body: 'Cross-platform advertising working as a single funnel, building your audience, then converting them into real leads.', poster: 'assets/paid-media-poster.jpg' },
+  { id: 'C-03', title: 'Funnel-building', body: 'An engine that warms cold inquiries while you sleep, and surfaces the ones ready to talk.', poster: 'assets/funnel-building-poster.jpg' }
 ];
 
 function Capabilities() {
@@ -1603,11 +1608,18 @@ function Model() {
     <section ref={wrap} id="operator" data-screen-label="The model" className="model-dark">
       <div className="model-inner">
         <Frame style={{ width: '100%' }}>
-          <DisplayHeading size={1} tone="inverse" className="tight">
+          <DisplayHeading size={1} tone="inverse" className="tight lines-wide">
             <span className="ln">Agile enough to</span>
             <span className="ln">outpace <span className={'mark' + on(0.45)}>agencies.</span></span>
             <span className="ln">Capable enough to</span>
             <span className="ln"><span>outperform </span><span className={'mark' + on(0.5)}>freelancers.</span></span>
+          </DisplayHeading>
+          <DisplayHeading size={1} tone="inverse" className="tight lines-narrow">
+            <span className="ln">Agile enough</span>
+            <span className="ln">to outpace <span className={'mark' + on(0.45)}>agencies.</span></span>
+            <span className="ln">Capable enough</span>
+            <span className="ln">to outperform</span>
+            <span className="ln"><span className={'mark' + on(0.5)}>freelancers.</span></span>
           </DisplayHeading>
         </Frame>
       </div>
@@ -1617,7 +1629,7 @@ function Model() {
 
 /* ── 7. Selected work — scroll-driven rail, centre poster prominent ── */
 const WORK = [
-  { id: 'W-01', client: 'Baia Vista', cat: 'Development', poster: 'assets/baia-vista-poster.jpg', video: 'assets/baia-vista-hover.mp4', body: 'The Now Machine runs the launch content engine for a 150-home Curaçao resort development, turning an empty construction site into a steady stream of buyer leads.' },
+  { id: 'W-01', client: 'Baia Vista', cat: 'Development', poster: 'assets/baia-vista-poster.jpg', video: 'assets/baia-vista-hover.mp4', body: 'The Now Machine runs the marketing engine for the 200-home Curaçao development, turning an empty construction site into a steady stream of buyer leads.' },
   { id: 'W-02', client: 'CoveCasa', cat: 'Built it from zero', poster: 'assets/covecasa-poster.jpg', video: 'assets/covecasa-hover.mp4', body: 'The Now Machine built paid media, funnels, and content production for a luxury vacation rental portfolio, scaling it to 20+ properties under management in year one.' }
 ];
 const GAP = 48;
@@ -1695,8 +1707,9 @@ function Work() {
 
 /* ── 8. The operator ── */
 const TRACK = [
-  { id: 'EX-01', title: 'Airbnb Luxe', meta: 'Island consultant', body: "Designated island consultant for Airbnb Luxe, vetting properties through the lens of Airbnb's most premium guests." },
-  { id: 'EX-02', title: 'BuzzFeed Tasty', meta: '175M+ audience', body: 'Ran content strategy and high-velocity pipelines for the digital media powerhouse, now featured on Netflix.' }
+  { id: 'EX-01', title: 'BuzzFeed Tasty', meta: 'Content engine', body: 'Led content engine for the digital media leader, shipping editorial and branded content at a scale most brands never touch.' },
+  { id: 'EX-02', title: 'Airbnb Luxe', meta: 'Premium property vetting', body: "Designated Airbnb Luxe consultant, vetting high-end real estate against what Airbnb's most demanding guest-tier pays for." },
+  { id: 'EX-03', title: 'RE Developments', meta: 'Pre-construction', body: 'Running launch engines for multi-home developments, filling a buyer pipeline for homes that do not exist yet.' }
 ];
 
 function Founder() {
@@ -1717,19 +1730,19 @@ function Founder() {
             <MonoLabel tone="inverse" size="xs" style={{ position: 'absolute', left: 'var(--sp-4)', bottom: 'var(--sp-4)', background: 'var(--surface-scrim)', backdropFilter: 'var(--blur-chrome)', padding: '6px 10px', borderRadius: 'var(--r-pill)', pointerEvents: 'none' }}>OP-01 · Curaçao</MonoLabel>
           </div>
           <div className="rev founder-copy">
-            <div ref={head}><DisplayHeading size={2}>Island born. Made in<br />Los Angeles. <span className={'mark' + (lit ? ' on' : '')}>Returned.</span></DisplayHeading></div>
+            <div ref={head}><DisplayHeading size={2}><span className="lines-wide">Island born. Made in<br />Los Angeles. <span className={'mark' + (lit ? ' on' : '')}>Returned.</span></span><span className="lines-narrow">Island born.<br />Made in<br />Los Angeles.<br /><span className={'mark' + (lit ? ' on' : '')}>Returned.</span></span></DisplayHeading></div>
             <p style={{ maxWidth: 'none', marginTop: 'var(--sp-10)', color: 'var(--text-secondary)', textWrap: 'pretty' }}>The Now Machine is operator-led, not agency-layered. Behind the work is a producer who built for scale, and came home with the playbook.</p>
-            <div className="track-grid">
-              {TRACK.map(t => (
-                <article key={t.id} className="cap rev">
-                  <MonoLabel className="id" tone="muted" style={{ display: 'block', marginBottom: 'var(--sp-8)' }}>{t.id}</MonoLabel>
-                  <h3 style={{ margin: '0 0 var(--sp-2)', fontSize: 'var(--text-title)', fontWeight: 'var(--fw-bold)', letterSpacing: 'var(--ls-title)' }}>{t.title}</h3>
-                  <MonoLabel tone="muted" style={{ display: 'block', marginBottom: 'var(--sp-5)' }}>{t.meta}</MonoLabel>
-                  <p style={{ margin: 0, maxWidth: 'var(--measure)' }}>{t.body}</p>
-                </article>
-              ))}
-            </div>
           </div>
+        </div>
+        <div className="track-grid rev">
+          {TRACK.map(t => (
+            <article key={t.id} className="cap rev">
+              <MonoLabel className="id" tone="muted" style={{ display: 'block', marginBottom: 'var(--sp-8)' }}>{t.id}</MonoLabel>
+              <h3 style={{ margin: '0 0 var(--sp-2)', fontSize: 'var(--text-title)', fontWeight: 'var(--fw-bold)', letterSpacing: 'var(--ls-title)' }}>{t.title}</h3>
+              <MonoLabel tone="muted" style={{ display: 'block', marginBottom: 'var(--sp-5)' }}>{t.meta}</MonoLabel>
+              <p style={{ margin: 0, maxWidth: 'var(--measure)' }}>{t.body}</p>
+            </article>
+          ))}
         </div>
       </Frame>
     </section>
