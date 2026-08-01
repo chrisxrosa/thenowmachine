@@ -2,7 +2,7 @@
 <title>THE NOW MACHINE · Demand Generation for Multi-Home Developments</title>
 <meta name="description" content="Demand generation for multi-home developments. We cast the face of your development and build the content and paid media engine around it.">
 <meta property="og:title" content="THE NOW MACHINE · Demand Generation for Multi-Home Developments">
-<meta property="og:description" content="Buyers follow people, not floor plans. We cast the face of your development and build the demand engine around it.">
+<meta property="og:description" content="Buyers trust people, not floor plans. We cast the face of your development and build the demand engine around it.">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
 <meta property="og:image" content="assets/og-image.png">
@@ -248,6 +248,9 @@ footer a{color:var(--n-0)}footer a:hover{color:var(--block-acid)}
 .hero-eyebrow{display:block;margin-bottom:var(--sp-6)}
 .hero-sub{margin:var(--sp-6) auto 0;max-width:46ch;font-family:var(--font-serif);font-size:var(--text-lead);line-height:1.35;color:var(--text-secondary)}
 @media (max-width:900px){.hero-eyebrow{margin-bottom:var(--sp-5)}.hero-sub{margin-top:var(--sp-5);max-width:32ch;font-size:var(--text-body)}}
+/* Desktop: the sub-line reads as one sentence, so it holds one line. Type scales with
+   the viewport below ~1150px so it never runs into the gutter. */
+@media (min-width:901px){.hero-sub{max-width:none;white-space:nowrap;font-size:min(var(--text-lead),2.2vw)}}
 .cap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp-12);align-items:start}
 /* Desktop only: Casting and content sits centre so the hero video lands mid-row.
    Mobile keeps DOM order (Casting and content first). */
@@ -1432,7 +1435,7 @@ function Hero() {
       <Frame>
         <div className="hero-lockup">
           <MonoLabel tone="muted" className="hero-eyebrow">Demand generation for multi-home developments</MonoLabel>
-          <DisplayHeading as="h1" size={1}>Buyers follow people,</DisplayHeading>
+          <DisplayHeading as="h1" size={1}>Buyers trust people,</DisplayHeading>
           <DisplayHeading as="h2" size={1}>not floor plans.</DisplayHeading>
           <p className="hero-sub">We cast the face of your development and build the demand engine around it.</p>
         </div>
