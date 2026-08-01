@@ -1,8 +1,8 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>THE NOW MACHINE · Demand Generation for Multi-Home Developments</title>
-<meta name="description" content="Demand generation for multi-home developments. Content production, paid media, and funnel-building that fill the pipeline before you break ground.">
+<meta name="description" content="Demand generation for multi-home developments. We cast the face of your development and build the content and paid media engine around it.">
 <meta property="og:title" content="THE NOW MACHINE · Demand Generation for Multi-Home Developments">
-<meta property="og:description" content="Content production, paid media, and funnel-building that fill the pipeline before you break ground.">
+<meta property="og:description" content="Buyers follow people, not floor plans. We cast the face of your development and build the demand engine around it.">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
 <meta property="og:image" content="assets/og-image.png">
@@ -244,9 +244,13 @@ footer{background:var(--block-ink);color:var(--n-0);border-top:none!important}
 footer a{color:var(--n-0)}footer a:hover{color:var(--block-acid)}
 .hero-lockup{display:grid;gap:0;justify-items:center;text-align:center}
 .hero-lockup>*{text-align:center!important}
+/* Eyebrow carries the category so the display lines are free to carry the thesis. */
+.hero-eyebrow{display:block;margin-bottom:var(--sp-6)}
+.hero-sub{margin:var(--sp-6) auto 0;max-width:46ch;font-family:var(--font-serif);font-size:var(--text-lead);line-height:1.35;color:var(--text-secondary)}
+@media (max-width:900px){.hero-eyebrow{margin-bottom:var(--sp-5)}.hero-sub{margin-top:var(--sp-5);max-width:32ch;font-size:var(--text-body)}}
 .cap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp-12);align-items:start}
-/* Desktop only: Content production sits centre so the hero video lands mid-row.
-   Mobile keeps DOM order (Content production first). */
+/* Desktop only: Casting and content sits centre so the hero video lands mid-row.
+   Mobile keeps DOM order (Casting and content first). */
 @media (min-width:901px){.cap-grid>.cap:nth-child(1){order:2}.cap-grid>.cap:nth-child(2){order:1}.cap-grid>.cap:nth-child(3){order:3}}
 .id-narrow{display:none}
 @media (max-width:900px){.id-wide{display:none}.id-narrow{display:inline}}
@@ -1427,8 +1431,10 @@ function Hero() {
     <header ref={wrap} id="top" data-screen-label="Hero" className="hero-plain">
       <Frame>
         <div className="hero-lockup">
-          <DisplayHeading as="h1" size={1}>Demand generation</DisplayHeading>
-          <DisplayHeading as="h2" size={1}>for multi-home developments</DisplayHeading>
+          <MonoLabel tone="muted" className="hero-eyebrow">Demand generation for multi-home developments</MonoLabel>
+          <DisplayHeading as="h1" size={1}>Buyers follow people,</DisplayHeading>
+          <DisplayHeading as="h2" size={1}>not floor plans.</DisplayHeading>
+          <p className="hero-sub">We cast the face of your development and build the demand engine around it.</p>
         </div>
       </Frame>
       <div className="hero-media-holder">
@@ -1556,7 +1562,7 @@ function Manifesto() {
 
 /* ── 5. Capabilities ── */
 const CAPS = [
-  { id: 'C-02', mid: 'C-01', title: 'Content production', body: "Personality-driven, hosted content that invites your audience into the lifestyle you're building.", media: true },
+  { id: 'C-02', mid: 'C-01', title: 'Casting and content', body: "We cast a host who experiences the development the way your buyer would, then build the content engine around them. Not an agent selling to them. Someone they see themselves in.", media: true },
   { id: 'C-01', mid: 'C-02', title: 'Paid advertising', body: 'Cross-platform advertising working as a single funnel, building your audience, then converting them into real leads.', poster: 'assets/paid-media-poster.jpg' },
   { id: 'C-03', title: 'Funnel-building', body: 'An engine that warms cold inquiries while you sleep, and surfaces the ones ready to talk.', poster: 'assets/funnel-building-poster.jpg' }
 ];
@@ -1630,7 +1636,7 @@ function Model() {
 
 /* ── 7. Selected work — scroll-driven rail, centre poster prominent ── */
 const WORK = [
-  { id: 'W-01', client: 'Baia Vista', cat: 'Development', poster: 'assets/baia-vista-poster.jpg', video: 'assets/baia-vista-hover.mp4', body: 'The Now Machine runs the marketing engine for the 200-home Curaçao development, turning an empty construction site into a steady stream of buyer leads.' },
+  { id: 'W-01', client: 'Baia Vista', cat: 'Development', poster: 'assets/baia-vista-poster.jpg', video: 'assets/baia-vista-hover.mp4', body: 'A cast host, a content engine, and paid media running as one system for the 200-home Curaçao development. Roughly half the leads came from paid.' },
   { id: 'W-02', client: 'CoveCasa', cat: 'Built it from zero', poster: 'assets/covecasa-poster.jpg', video: 'assets/covecasa-hover.mp4', body: 'The Now Machine built paid media, funnels, and content production for a luxury vacation rental portfolio, scaling it to 20+ properties under management in year one.' }
 ];
 const GAP = 48;
@@ -1708,7 +1714,7 @@ function Work() {
 
 /* ── 8. The operator ── */
 const TRACK = [
-  { id: 'EX-01', title: 'BuzzFeed Tasty', meta: 'Content engine', body: 'Led content engine for the digital media leader, shipping editorial and branded content at a scale most brands never touch.' },
+  { id: 'EX-01', title: 'BuzzFeed Tasty', meta: 'Hosted formats at scale', body: 'Built talent-led formats for the digital media leader, putting a face on a category that never had one. Same playbook, different product.' },
   { id: 'EX-02', title: 'Airbnb Luxe', meta: 'Premium property vetting', body: "Designated Airbnb Luxe consultant, vetting high-end real estate against what Airbnb's most demanding guest-tier pays for." },
   { id: 'EX-03', title: 'RE Developments', meta: 'Pre-construction', body: 'Running launch engines for multi-home developments, filling a buyer pipeline for homes that do not exist yet.' }
 ];
@@ -1732,7 +1738,7 @@ function Founder() {
           </div>
           <div className="rev founder-copy">
             <div ref={head}><DisplayHeading size={2}><span className="lines-wide">Island born. Made in<br />Los Angeles. <span className={'mark' + (lit ? ' on' : '')}>Returned.</span></span><span className="lines-narrow">Island born.<br />Made in<br />Los Angeles.<br /><span className={'mark' + (lit ? ' on' : '')}>Returned.</span></span></DisplayHeading></div>
-            <p style={{ maxWidth: 'none', marginTop: 'var(--sp-10)', color: 'var(--text-secondary)', textWrap: 'pretty' }}>The Now Machine is operator-led, not agency-layered. Behind the work is a producer who built for scale, and came home with the playbook.</p>
+            <p style={{ maxWidth: 'none', marginTop: 'var(--sp-10)', color: 'var(--text-secondary)', textWrap: 'pretty' }}>The Now Machine is operator-led, not agency-layered. Behind the work is a producer who built for scale, and came home with the playbook. Casting and shoot coordination run across the Caribbean and beyond.</p>
           </div>
         </div>
         <div className="track-grid rev">
@@ -1768,7 +1774,7 @@ function Contact() {
 function Footer() {
   return (
     <SiteFooter wordmark={<span className="foot-mark"><img src="assets/foot-wordmark.png" alt="the now machine" width="941" height="94" loading="lazy" decoding="async" /></span>} columns={[]}
-      note={<span>Demand generation<br />for multi-home developments · <a href="mailto:hello@thenowmachine.com">Contact</a></span>} />
+      note={<span>Demand generation<br />for multi-home developments · <a href="mailto:hello@thenowmachine.com">Contact</a><span style={{ display: 'block', marginTop: 'var(--sp-4)' }}>© 2026 The Now Machine. All rights reserved.</span></span>} />
   );
 }
 
