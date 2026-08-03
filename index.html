@@ -229,8 +229,10 @@ div:has(>div>.foot-mark){grid-template-columns:1fr!important}
 .caps-hold .cap{border-top-color:var(--line-inverse)}
 /* The section holds its content back until the video begins shrinking, so it fades in
    behind the reel instead of visibly sliding up out of the hero. */
-.caps-hold .cap,.caps-hold h1,.caps-hold h2{opacity:0;transform:translateY(14px);transition:opacity var(--dur-scroll) var(--ease-scroll),transform var(--dur-scroll) var(--ease-scroll)}
-.caps-hold.lit .cap,.caps-hold.lit h1,.caps-hold.lit h2{opacity:1;transform:none}
+/* Driven every frame by JS via --reveal (0→1), tied to the video's own shrink
+   progress. No CSS transition — a transition here would lag behind scroll and
+   break the sync that makes the handoff read as one continuous motion. */
+.caps-hold .cap,.caps-hold h1,.caps-hold h2{opacity:var(--reveal,0);transform:translateY(calc(14px * (1 - var(--reveal,0))))}
 .caps-hold .cap p{color:var(--n-300);text-wrap:pretty}
 .caps-hold .cap:hover{border-top-color:var(--n-50)}
 .caps-hold .cap:hover p{color:var(--n-50)}
@@ -816,6 +818,10 @@ function ReelHandoff() {
       stage.style.opacity = stage.style.borderRadius = '';
       const f = document.getElementById('cap-media-fill');
       if (f) f.style.opacity = '0';
+      const hc = document.querySelector('.hero-lockup');
+      if (hc) hc.style.opacity = '';
+      const c = document.getElementById('capabilities');
+      if (c) c.style.removeProperty('--reveal');
     };
     const tick = () => {
       raf = null;
@@ -838,7 +844,9 @@ function ReelHandoff() {
         const to = (t0.top + sy + t0.height / 2) - vh * 0.55;
         const p = clamp((sy - from) / Math.max(to - from, 1), 0, 1);
         if (cue) cue.style.opacity = String(clamp((0.95 - p) / 0.25, 0, 1));
-        if (caps0) caps0.classList.toggle('lit', p > 0.02);
+        if (caps0) caps0.style.setProperty('--reveal', String(p));
+        const heroCopy0 = document.querySelector('.hero-lockup');
+        if (heroCopy0) heroCopy0.style.opacity = String(clamp(1 - p * 1.6, 0, 1));
         if (hr.top >= pin && p <= 0.001) return reset();
         const st = { left: hr.left, width: hr.width, height: hr.height, top: Math.max(hr.top, pin) };
         stage.style.position = 'fixed';
@@ -869,7 +877,11 @@ function ReelHandoff() {
       const sp = clamp((sy - pinTop) / shrinkLen, 0, 1);
       if (cue) cue.style.opacity = String(clamp((0.95 - sp) / 0.25, 0, 1));
       const caps = document.getElementById('capabilities');
-      if (caps) caps.classList.toggle('lit', sp > 0.005);
+      if (caps) caps.style.setProperty('--reveal', String(sp));
+      /* Hero copy dissolves out as the video grows over it, instead of just
+         being covered outright — this is the seam the cross-fade closes. */
+      const heroCopy = document.querySelector('.hero-lockup');
+      if (heroCopy) heroCopy.style.opacity = String(clamp(1 - g, 0, 1));
       if (g <= 0) return reset();
       const base = { left: hr.left, top: (vh - hr.height) / 2, width: hr.width, height: hr.height };
       const full = { left: 0, top: 0, width: vw, height: vh };
@@ -998,14 +1010,14 @@ function Model() {
             <span className="ln">Agile enough to</span>
             <span className="ln">outpace <span className={'mark' + on(0.45)}>agencies.</span></span>
             <span className="ln">Capable enough to</span>
-            <span className="ln"><span>outperform </span><span className={'mark' + on(0.5)}>freelancers.</span></span>
+            <span className="ln"><span>outperform </span><span className={'mark' + on(0.5)}>solo hires.</span></span>
           </DisplayHeading>
           <DisplayHeading size={1} tone="inverse" className="tight lines-narrow">
             <span className="ln">Agile enough</span>
             <span className="ln">to outpace <span className={'mark' + on(0.45)}>agencies.</span></span>
             <span className="ln">Capable enough</span>
             <span className="ln">to outperform</span>
-            <span className="ln"><span className={'mark' + on(0.5)}>freelancers.</span></span>
+            <span className="ln"><span className={'mark' + on(0.5)}>solo hires.</span></span>
           </DisplayHeading>
         </Frame>
       </div>
@@ -1153,7 +1165,7 @@ function Contact() {
 function Footer() {
   return (
     <SiteFooter wordmark={<span className="foot-mark"><img src="assets/foot-wordmark.png" alt="the now machine" width="941" height="94" loading="lazy" decoding="async" /></span>} columns={[]}
-      note={<span>Demand generation<br />for multi-home developments · <a href="mailto:hello@thenowmachine.com">Contact</a><span style={{ display: 'block', marginTop: 'var(--sp-4)' }}>© 2026 The Now Machine. All rights reserved.</span></span>} />
+      note={<span>Demand generation<br />for multi-home developments · <a href="mailto:hello@thenowmachine.com">Contact</a><span style={{ display: 'block', marginTop: 'var(--sp-4)', textAlign: 'center' }}>© 2026 The Now Machine. All rights reserved.</span></span>} />
   );
 }
 
