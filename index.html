@@ -207,7 +207,7 @@ a{color:var(--text-link)}a:hover{color:var(--text-link-hover)}
 .scroll-cue{position:absolute;left:0;right:0;bottom:0;height:clamp(90px,14vh,160px);display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:var(--sp-3);padding-bottom:var(--sp-6);background:var(--scrim-bottom);pointer-events:none;transition:opacity var(--dur-base) var(--ease-out)}
 .cue-chev{display:block;width:9px;height:9px;border-right:1.5px solid var(--n-0);border-bottom:1.5px solid var(--n-0);transform:rotate(45deg)}
 
-.reel-handoff-zone{height:60vh}
+.reel-handoff-zone{height:20vh}
 .caps-pin{position:relative}
 .caps-spacer{height:100vh}
 .cap-media{position:relative;width:100%;aspect-ratio:16/10;border-radius:var(--r-lg);overflow:hidden;background:var(--n-1000);margin-bottom:var(--sp-8)}
@@ -854,14 +854,14 @@ function ReelHandoff() {
       }
       const pinTop = pinEl.getBoundingClientRect().top + sy;
       const growFrom = hr.top + sy - (vh - hr.height) / 2;
-      const growDist0 = Math.max((pinTop - vh * 0.35) - growFrom, 1); /* original grow distance */
-      const holdDist0 = vh * 0.35; /* original hold distance, before shrink kicks in at pinTop */
-      const growLen = growDist0 / 2; /* grow 2x quicker */
-      const holdLen = holdDist0 / 10; /* hold 10x quicker — barely pauses before shrinking */
-      const shrinkStart = growFrom + growLen + holdLen;
-      const shrinkLen = vh * 0.85; /* shrink phase itself is unchanged */
-      const g = clamp((sy - growFrom) / growLen, 0, 1);
-      const sp = clamp((sy - shrinkStart) / shrinkLen, 0, 1);
+      const growTo = pinTop - vh * 0.05; /* small buffer — grow finishes just before the real pin, barely any hold */
+      const shrinkLen = vh * 0.85; /* shrink phase unchanged */
+      const g = clamp((sy - growFrom) / Math.max(growTo - growFrom, 1), 0, 1);
+      /* sp is gated strictly on the real pinTop — the exact scroll position where
+         .caps-hold's native CSS sticky engages. Shrink can never start before the
+         dark section is truly locked full-screen behind the video, or the white
+         background underneath would show through as it shrinks. */
+      const sp = clamp((sy - pinTop) / shrinkLen, 0, 1);
       if (cue) cue.style.opacity = String(clamp((0.95 - sp) / 0.25, 0, 1));
       const caps = document.getElementById('capabilities');
       if (caps) caps.classList.toggle('lit', sp > 0.005);
@@ -1010,7 +1010,7 @@ function Model() {
 
 /* ── 7. Selected work — scroll-driven rail, centre poster prominent ── */
 const WORK = [
-  { id: 'W-01', client: 'Baia Vista', cat: 'Development', poster: 'assets/baia-vista-poster.jpg', video: 'assets/baia-vista-hover.mp4', body: 'A cast host, a content engine, and paid media running as one system for the 175-home Curaçao development. Roughly half the leads came from paid.' },
+  { id: 'W-01', client: 'Baia Vista', cat: 'Development', poster: 'assets/baia-vista-poster.jpg', video: 'assets/baia-vista-hover.mp4', body: 'A cast host, a content engine, and paid media running as one system for the 175-home Curaçao development.' },
   { id: 'W-02', client: 'CoveCasa', cat: 'Built it from zero', poster: 'assets/covecasa-poster.jpg', video: 'assets/covecasa-hover.mp4', body: 'The Now Machine built paid media, funnels, and content production for a luxury vacation rental portfolio, scaling it to 20+ properties under management in year one.' }
 ];
 const GAP = 48;
