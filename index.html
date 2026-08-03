@@ -935,7 +935,7 @@ function Capabilities() {
                 )}
                 <MonoLabel className="id" tone="muted" style={{ display: 'block', marginBottom: 'var(--sp-8)' }}><span className="id-wide">{c.id}</span><span className="id-narrow">{c.mid || c.id}</span></MonoLabel>
                 <h3 style={{ margin: '0 0 var(--sp-5)', fontFamily: 'var(--font-display)', fontWeight: 'var(--fw-black)', fontSize: 'var(--text-display-3)', lineHeight: 'var(--lh-tight)', letterSpacing: 'var(--ls-title)' }}>{c.title}</h3>
-                <p style={{ margin: 0, maxWidth: 'var(--measure)' }}>{c.body}</p>
+                <p style={{ margin: 0 }}>{c.body}</p>
               </article>
             ))}
           </div>
@@ -1112,7 +1112,7 @@ function Founder() {
           </div>
           <div className="rev founder-copy">
             <div ref={head}><DisplayHeading size={2}><span className="lines-wide">Island born. Made in<br />Los Angeles. <span className={'mark' + (lit ? ' on' : '')}>Returned.</span></span><span className="lines-narrow">Island born.<br />Made in<br />Los Angeles.<br /><span className={'mark' + (lit ? ' on' : '')}>Returned.</span></span></DisplayHeading></div>
-            <p style={{ maxWidth: 'none', marginTop: 'var(--sp-10)', color: 'var(--text-secondary)', textWrap: 'pretty' }}>The Now Machine is operator-led, not agency-layered. Behind the work is a producer who built for scale, and came home with the playbook. Casting and shoot coordination run across the Caribbean and beyond.</p>
+            <p style={{ maxWidth: 'none', marginTop: 'var(--sp-10)', color: 'var(--text-secondary)', textWrap: 'pretty' }}>The Now Machine is operator-led, not agency-layered. A producer who built for scale came home with the playbook, and leads a small, senior team around it. Casting and shoot coordination run across the Caribbean and beyond.</p>
           </div>
         </div>
         <div className="track-grid rev">
