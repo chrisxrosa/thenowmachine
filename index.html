@@ -207,7 +207,7 @@ a{color:var(--text-link)}a:hover{color:var(--text-link-hover)}
 .scroll-cue{position:absolute;left:0;right:0;bottom:0;height:clamp(90px,14vh,160px);display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:var(--sp-3);padding-bottom:var(--sp-6);background:var(--scrim-bottom);pointer-events:none;transition:opacity var(--dur-base) var(--ease-out)}
 .cue-chev{display:block;width:9px;height:9px;border-right:1.5px solid var(--n-0);border-bottom:1.5px solid var(--n-0);transform:rotate(45deg)}
 
-.reel-handoff-zone{height:20vh}
+.reel-handoff-zone{height:4vh}
 .caps-pin{position:relative}
 .caps-spacer{height:100vh}
 .cap-media{position:relative;width:100%;aspect-ratio:16/10;border-radius:var(--r-lg);overflow:hidden;background:var(--n-1000);margin-bottom:var(--sp-8)}
@@ -854,13 +854,18 @@ function ReelHandoff() {
       }
       const pinTop = pinEl.getBoundingClientRect().top + sy;
       const growFrom = hr.top + sy - (vh - hr.height) / 2;
-      const growTo = pinTop - vh * 0.05; /* small buffer — grow finishes just before the real pin, barely any hold */
-      const shrinkLen = vh * 0.85; /* shrink phase unchanged */
-      const g = clamp((sy - growFrom) / Math.max(growTo - growFrom, 1), 0, 1);
-      /* sp is gated strictly on the real pinTop — the exact scroll position where
-         .caps-hold's native CSS sticky engages. Shrink can never start before the
-         dark section is truly locked full-screen behind the video, or the white
-         background underneath would show through as it shrinks. */
+      /* Grow and shrink are both fixed, fast distances now — independent of hero
+         layout — so the video visibly snaps to full-bleed and back down quickly,
+         instead of tracking however tall the hero content happens to be. */
+      const growLen = vh * 0.3;
+      const shrinkLen = vh * 0.3;
+      const g = clamp((sy - growFrom) / growLen, 0, 1);
+      /* sp is still gated strictly on the real pinTop — the exact scroll position
+         where .caps-hold's native CSS sticky engages. Shrink can never start before
+         the dark section is truly locked full-screen behind the video, or the white
+         background underneath would show through as it shrinks. Once grow finishes
+         early (fast), the video just sits full-bleed and static for whatever short
+         gap remains until pinTop, then shrink fires immediately. */
       const sp = clamp((sy - pinTop) / shrinkLen, 0, 1);
       if (cue) cue.style.opacity = String(clamp((0.95 - sp) / 0.25, 0, 1));
       const caps = document.getElementById('capabilities');
