@@ -1,8 +1,8 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>THE NOW MACHINE · Demand Generation for Multi-Home Developments</title>
-<meta name="description" content="Demand generation for multi-home developments. We cast the face of your development and build the content and paid media engine around it.">
+<meta name="description" content="We move multi-home developments from launch to sell-out through content, campaigns, and paid media.">
 <meta property="og:title" content="THE NOW MACHINE · Demand Generation for Multi-Home Developments">
-<meta property="og:description" content="Buyers trust people, not floor plans. We cast the face of your development and build the demand engine around it.">
+<meta property="og:description" content="Buyers trust people, not floor plans. We move multi-home developments from launch to sell-out through content, campaigns, and paid media.">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
 <meta property="og:image" content="assets/og-image.png">
@@ -177,8 +177,6 @@ a{color:var(--text-link)}a:hover{color:var(--text-link-hover)}
 @media (max-width:900px){.lines-wide{display:none}.lines-narrow{display:block}
 /* The five-line mobile break needs "to outpace agencies." to hold one line. */
 .model-inner .lines-narrow{font-size:clamp(1.9rem,8.4vw,2.5rem)}}
-.oneline{font-size:min(5.5rem,6.2vw)!important}
-@media (min-width:560px){.oneline{white-space:nowrap}}
 .mark{background-image:linear-gradient(var(--block-acid),var(--block-acid));background-repeat:no-repeat;background-size:0% .9em;background-position:0 62%;padding:0 .08em;-webkit-box-decoration-break:clone;box-decoration-break:clone;transition:background-size 700ms var(--ease-scroll),color 260ms 320ms var(--ease-out)}
 .mark.on{background-size:100% .9em;color:var(--n-900)}
 ::selection{background:var(--block-acid);color:var(--n-900)}
@@ -194,8 +192,6 @@ a{color:var(--text-link)}a:hover{color:var(--text-link-hover)}
 .tight{line-height:.84!important;letter-spacing:-.03em!important;font-weight:900!important}
 .rev{opacity:0;transform:translateY(28px);transition:opacity 900ms var(--ease-scroll),transform 900ms var(--ease-scroll)}
 .rev.in{opacity:1;transform:none}
-.rev-right{opacity:0;transform:translateX(8vw);transition:opacity 900ms var(--ease-scroll),transform 900ms var(--ease-scroll)}
-.rev-right.in{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){.rev{opacity:1;transform:none;transition:none}}
 .tnm-nav{position:fixed;top:var(--sp-6);left:var(--gutter);right:var(--gutter);z-index:60}
 .tnm-nav nav>div{transition:background var(--dur-base) var(--ease-out)}
@@ -220,12 +216,14 @@ a{color:var(--text-link)}a:hover{color:var(--text-link-hover)}
 .cap-media-fill{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .25s linear}
 .foot-mark{display:block;width:100%}
 /* SiteFooter wraps the wordmark in a shrink-to-fit box — open it up so % widths resolve. */
-.tnm-footer-mark-host,div:has(>.foot-mark){width:100%;max-width:100%}
+div:has(>.foot-mark){width:100%;max-width:100%}
 /* No link columns, so let the wordmark row span the full footer width. */
 div:has(>div>.foot-mark){grid-template-columns:1fr!important}
 /* 60% of the footer width on desktop, growing to full content width (equal gutters) at mobile. */
 .foot-mark img{width:clamp(60%,295px + 21.9vw,100%);max-width:100%;height:auto;display:block}
-.signal-band{background:var(--block-signal);color:var(--n-0);padding:clamp(48px,6vw,96px) 0 clamp(180px,26vh,340px)}
+/* Desktop clamps to 60% of the footer width (mobile still grows to 100% via the clamp
+   above). Bring it down closer to the surrounding headline scale. */
+@media (min-width:901px){.foot-mark img{width:48%}}
 .caps-hold{background:var(--n-900);color:var(--n-50);display:flex;align-items:center;padding:var(--section-y) 0;min-height:100vh;position:sticky;top:0}
 .caps-inner{width:100%}
 .caps-hold .cap{border-top-color:var(--line-inverse)}
@@ -246,11 +244,12 @@ footer a{color:var(--n-0)}footer a:hover{color:var(--block-acid)}
 .hero-lockup>*{text-align:center!important}
 /* Eyebrow carries the category so the display lines are free to carry the thesis. */
 .hero-eyebrow{display:block;margin-bottom:var(--sp-6)}
-.hero-sub{margin:var(--sp-6) auto 0;max-width:46ch;font-family:var(--font-serif);font-size:var(--text-lead);line-height:1.35;color:var(--text-secondary)}
-@media (max-width:900px){.hero-eyebrow{margin-bottom:var(--sp-5)}.hero-sub{margin-top:var(--sp-5);max-width:32ch;font-size:var(--text-body)}}
-/* Desktop: the sub-line reads as one sentence, so it holds one line. Type scales with
-   the viewport below ~1150px so it never runs into the gutter. */
-@media (min-width:901px){.hero-sub{max-width:none;white-space:nowrap;font-size:min(var(--text-lead),2.2vw)}}
+/* The sub-line carries the plain answer to "what do you sell", so it runs long and
+   breaks to two balanced lines rather than holding one. */
+.hero-sub{margin:var(--sp-6) auto 0;max-width:56ch;font-family:var(--font-serif);font-size:var(--text-lead);line-height:1.35;color:var(--text-secondary);text-wrap:balance}
+@media (max-width:900px){.hero-eyebrow{margin-bottom:var(--sp-5)}.hero-sub{margin-top:var(--sp-5);max-width:30ch;font-size:var(--text-body)}}
+/* Type scales with the viewport below ~1050px so the measure never runs into the gutter. */
+@media (min-width:901px){.hero-sub{font-size:min(var(--text-lead),2.1vw)}}
 .cap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp-12);align-items:start}
 /* Desktop only: Casting and content sits centre so the hero video lands mid-row.
    Mobile keeps DOM order (Casting and content first). */
@@ -263,6 +262,15 @@ footer a{color:var(--n-0)}footer a:hover{color:var(--block-acid)}
 .cap:hover p{color:var(--text-primary)}
 .cap .id{transition:color var(--dur-base) var(--ease-out)}
 .cap:hover .id{color:var(--block-ember)}
+/* Process — four steps on paper, numbered because the order is real. A hairline
+   opens the section (echoing the .cap rule) instead of a color change, and top
+   padding is tightened so it reads as still attached to what Capabilities set up. */
+.proc-sec{padding:clamp(48px,6vw,88px) 0 var(--section-y);border-top:1px solid var(--line-hairline)}
+.proc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--sp-10);margin-top:clamp(56px,7vw,104px)}
+.proc-step .step-n{display:block;margin-bottom:var(--sp-8)}
+.proc-step h3{margin:0 0 var(--sp-4);font-size:var(--text-title);font-weight:var(--fw-bold);letter-spacing:var(--ls-title)}
+@media (max-width:1100px){.proc-grid{grid-template-columns:repeat(2,1fr);gap:var(--sp-10) var(--sp-8)}}
+@media (max-width:640px){.proc-grid{grid-template-columns:1fr}}
 .model-dark{background:var(--block-ink);color:var(--n-0);padding:var(--section-y) 0}
 .model-inner{width:100%}
 .work-sec{padding:var(--section-y) 0;display:flex;flex-direction:column;gap:clamp(28px,4vw,56px)}
@@ -299,7 +307,7 @@ footer a{color:var(--n-0)}footer a:hover{color:var(--block-acid)}
 <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
 <script>
-/* @ds-bundle: {"format":4,"namespace":"TheNowMachineDesignSystem_5b6ea4","components":[{"name":"Button","sourcePath":"components/core/Button.jsx"},{"name":"DisplayHeading","sourcePath":"components/core/DisplayHeading.jsx"},{"name":"MonoLabel","sourcePath":"components/core/MonoLabel.jsx"},{"name":"SectionHeader","sourcePath":"components/core/SectionHeader.jsx"},{"name":"StatRow","sourcePath":"components/core/StatRow.jsx"},{"name":"ColorBlock","sourcePath":"components/layout/ColorBlock.jsx"},{"name":"SiteFooter","sourcePath":"components/layout/SiteFooter.jsx"},{"name":"ReelFrame","sourcePath":"components/media/ReelFrame.jsx"},{"name":"WorkCard","sourcePath":"components/media/WorkCard.jsx"},{"name":"WorkCarousel","sourcePath":"components/media/WorkCarousel.jsx"},{"name":"LiveDot","sourcePath":"components/navigation/LiveDot.jsx"},{"name":"NavBar","sourcePath":"components/navigation/NavBar.jsx"}],"sourceHashes":{"components/core/Button.jsx":"5135e6c59b37","components/core/DisplayHeading.jsx":"75ce002193b8","components/core/MonoLabel.jsx":"9c5d918f371d","components/core/SectionHeader.jsx":"3f2746d456d5","components/core/StatRow.jsx":"244a48055a1d","components/layout/ColorBlock.jsx":"fff8b7a378fa","components/layout/SiteFooter.jsx":"6a8cbc79ced7","components/media/ReelFrame.jsx":"de6af4843d08","components/media/WorkCard.jsx":"5fa52680f7e2","components/media/WorkCarousel.jsx":"27abc6e04e60","components/navigation/LiveDot.jsx":"053465494bf7","components/navigation/NavBar.jsx":"fdd388c9c8c5","ui_kits/website/Home.jsx":"9fd8a2d66061","ui_kits/website/WorkDetail.jsx":"9a01e631eb53"},"inlinedExternals":[],"unexposedExports":[]} */
+/* @ds-bundle: {"format":4,"namespace":"TheNowMachineDesignSystem_5b6ea4","components":[{"name":"Button","sourcePath":"components/core/Button.jsx"},{"name":"DisplayHeading","sourcePath":"components/core/DisplayHeading.jsx"},{"name":"MonoLabel","sourcePath":"components/core/MonoLabel.jsx"},{"name":"SiteFooter","sourcePath":"components/layout/SiteFooter.jsx"},{"name":"LiveDot","sourcePath":"components/navigation/LiveDot.jsx"},{"name":"NavBar","sourcePath":"components/navigation/NavBar.jsx"}],"sourceHashes":{"components/core/Button.jsx":"5135e6c59b37","components/core/DisplayHeading.jsx":"75ce002193b8","components/core/MonoLabel.jsx":"9c5d918f371d","components/layout/SiteFooter.jsx":"6a8cbc79ced7","components/navigation/LiveDot.jsx":"053465494bf7","components/navigation/NavBar.jsx":"fdd388c9c8c5"},"inlinedExternals":[],"unexposedExports":[]} */
 
 (() => {
 
@@ -491,107 +499,6 @@ function MonoLabel({
 Object.assign(__ds_scope, { MonoLabel });
 })(); } catch (e) { __ds_ns.__errors.push({ path: "components/core/MonoLabel.jsx", error: String((e && e.message) || e) }); }
 
-// components/core/SectionHeader.jsx
-try { (() => {
-function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
-function SectionHeader({
-  lead,
-  emphasis,
-  align = 'center',
-  tone = 'primary',
-  style,
-  ...rest
-}) {
-  return /*#__PURE__*/React.createElement("div", _extends({
-    style: {
-      textAlign: align,
-      fontFamily: 'var(--font-ui)',
-      fontSize: 'var(--text-title)',
-      fontWeight: 'var(--fw-bold)',
-      letterSpacing: 'var(--ls-title)',
-      color: tone === 'inverse' ? 'var(--n-0)' : 'var(--text-muted)',
-      ...style
-    }
-  }, rest), lead, " ", /*#__PURE__*/React.createElement("span", {
-    style: {
-      color: tone === 'inverse' ? 'var(--n-0)' : 'var(--text-primary)'
-    }
-  }, emphasis));
-}
-Object.assign(__ds_scope, { SectionHeader });
-})(); } catch (e) { __ds_ns.__errors.push({ path: "components/core/SectionHeader.jsx", error: String((e && e.message) || e) }); }
-
-// components/core/StatRow.jsx
-try { (() => {
-function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
-function StatRow({
-  items = [],
-  tone = 'primary',
-  style,
-  ...rest
-}) {
-  const color = tone === 'inverse' ? 'var(--n-0)' : 'var(--text-primary)';
-  return /*#__PURE__*/React.createElement("div", _extends({
-    style: {
-      display: 'grid',
-      gridTemplateColumns: `repeat(${Math.max(items.length, 1)},1fr)`,
-      gap: 'var(--sp-8)',
-      alignItems: 'end',
-      ...style
-    }
-  }, rest), items.map((s, i) => /*#__PURE__*/React.createElement("div", {
-    key: i,
-    style: {
-      textAlign: i === 0 ? 'left' : i === items.length - 1 ? 'right' : 'center',
-      color,
-      fontFamily: 'var(--font-ui)',
-      fontWeight: 'var(--fw-bold)',
-      fontSize: 'var(--text-body)',
-      letterSpacing: 'var(--ls-body)'
-    }
-  }, s)));
-}
-Object.assign(__ds_scope, { StatRow });
-})(); } catch (e) { __ds_ns.__errors.push({ path: "components/core/StatRow.jsx", error: String((e && e.message) || e) }); }
-
-// components/layout/ColorBlock.jsx
-try { (() => {
-function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
-function ColorBlock({
-  color = 'var(--block-signal)',
-  tone = 'inverse',
-  minHeight = '72vh',
-  wordmark,
-  children,
-  style,
-  ...rest
-}) {
-  return /*#__PURE__*/React.createElement("section", _extends({
-    style: {
-      background: color,
-      color: tone === 'inverse' ? 'var(--n-0)' : 'var(--text-primary)',
-      minHeight,
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'space-between',
-      padding: 'var(--sp-16) var(--gutter-lg)',
-      ...style
-    }
-  }, rest), /*#__PURE__*/React.createElement("div", null, children), wordmark && /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontFamily: 'var(--font-display)',
-      fontWeight: 'var(--fw-black)',
-      fontStretch: 'var(--display-stretch)',
-      textTransform: 'uppercase',
-      fontSize: 'var(--text-display-2)',
-      lineHeight: .9,
-      letterSpacing: 'var(--ls-display)'
-    }
-  }, wordmark));
-}
-Object.assign(__ds_scope, { ColorBlock });
-})(); } catch (e) { __ds_ns.__errors.push({ path: "components/layout/ColorBlock.jsx", error: String((e && e.message) || e) }); }
-
 // components/layout/SiteFooter.jsx
 try { (() => {
 function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
@@ -655,177 +562,6 @@ function SiteFooter({
 }
 Object.assign(__ds_scope, { SiteFooter });
 })(); } catch (e) { __ds_ns.__errors.push({ path: "components/layout/SiteFooter.jsx", error: String((e && e.message) || e) }); }
-
-// components/media/ReelFrame.jsx
-try { (() => {
-function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
-const PlayGlyph = () => /*#__PURE__*/React.createElement("span", {
-  style: {
-    display: 'inline-block',
-    width: 0,
-    height: 0,
-    borderStyle: 'solid',
-    borderWidth: '5px 0 5px 8px',
-    borderColor: 'transparent transparent transparent currentColor'
-  }
-});
-function ReelFrame({
-  src,
-  poster,
-  label = 'Play Reel',
-  progress = 0,
-  onPlay,
-  playing = false,
-  children,
-  style,
-  ...rest
-}) {
-  const inset = progress * 8;
-  return /*#__PURE__*/React.createElement("div", _extends({
-    style: {
-      width: `${100 - inset * 2}%`,
-      margin: '0 auto',
-      borderRadius: `calc(var(--r-lg) * ${progress})`,
-      overflow: 'hidden',
-      background: 'var(--n-1000)',
-      position: 'relative',
-      aspectRatio: '16 / 9',
-      boxShadow: progress > 0.4 ? 'var(--shadow-media)' : 'none',
-      transition: 'width var(--dur-slow) var(--ease-scroll),border-radius var(--dur-slow) var(--ease-scroll)',
-      ...style
-    }
-  }, rest), src ? /*#__PURE__*/React.createElement("video", {
-    src: src,
-    poster: poster,
-    autoPlay: true,
-    muted: !playing,
-    loop: true,
-    playsInline: true,
-    style: {
-      width: '100%',
-      height: '100%',
-      objectFit: 'cover'
-    }
-  }) : /*#__PURE__*/React.createElement("div", {
-    style: {
-      position: 'absolute',
-      inset: 0,
-      background: poster ? `center/cover no-repeat url(${poster})` : 'var(--n-1000)'
-    }
-  }, children), /*#__PURE__*/React.createElement("div", {
-    style: {
-      position: 'absolute',
-      inset: 0,
-      background: 'var(--scrim-bottom)',
-      pointerEvents: 'none',
-      opacity: playing ? 0 : 1,
-      transition: 'opacity var(--dur-base) var(--ease-out)'
-    }
-  }), /*#__PURE__*/React.createElement("div", {
-    style: {
-      position: 'absolute',
-      left: 0,
-      right: 0,
-      bottom: 'var(--sp-8)',
-      display: 'flex',
-      justifyContent: 'center'
-    }
-  }, /*#__PURE__*/React.createElement(__ds_scope.Button, {
-    variant: "scrim",
-    size: "md",
-    icon: /*#__PURE__*/React.createElement(PlayGlyph, null),
-    onClick: onPlay
-  }, playing ? 'Sound on' : label)));
-}
-Object.assign(__ds_scope, { ReelFrame });
-})(); } catch (e) { __ds_ns.__errors.push({ path: "components/media/ReelFrame.jsx", error: String((e && e.message) || e) }); }
-
-// components/media/WorkCard.jsx
-try { (() => {
-function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
-function WorkCard({
-  client,
-  outcome,
-  image,
-  color = 'var(--n-300)',
-  width = 380,
-  ratio = '4 / 5',
-  active = true,
-  showCaption = false,
-  onClick,
-  style,
-  ...rest
-}) {
-  return /*#__PURE__*/React.createElement("figure", _extends({
-    onClick: onClick,
-    style: {
-      margin: 0,
-      width,
-      flex: '0 0 auto',
-      cursor: onClick ? 'pointer' : 'default',
-      opacity: active ? 1 : .55,
-      transition: 'opacity var(--dur-base) var(--ease-out),transform var(--dur-base) var(--ease-out)',
-      ...style
-    }
-  }, rest), /*#__PURE__*/React.createElement("div", {
-    style: {
-      width: '100%',
-      aspectRatio: ratio,
-      borderRadius: 'var(--r-md)',
-      overflow: 'hidden',
-      background: image ? `center/cover no-repeat url(${image})` : color
-    }
-  }), showCaption && /*#__PURE__*/React.createElement("figcaption", {
-    style: {
-      display: 'flex',
-      gap: 'var(--sp-3)',
-      alignItems: 'baseline',
-      marginTop: 'var(--sp-4)',
-      paddingBottom: 'var(--sp-3)',
-      borderBottom: '1px solid var(--line-hairline)'
-    }
-  }, /*#__PURE__*/React.createElement(__ds_scope.MonoLabel, null, client), /*#__PURE__*/React.createElement(__ds_scope.MonoLabel, {
-    tone: "muted"
-  }, outcome)));
-}
-Object.assign(__ds_scope, { WorkCard });
-})(); } catch (e) { __ds_ns.__errors.push({ path: "components/media/WorkCard.jsx", error: String((e && e.message) || e) }); }
-
-// components/media/WorkCarousel.jsx
-try { (() => {
-function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
-function WorkCarousel({
-  items = [],
-  index = 0,
-  onSelect,
-  style,
-  ...rest
-}) {
-  return /*#__PURE__*/React.createElement("div", _extends({
-    style: {
-      overflow: 'hidden',
-      ...style
-    }
-  }, rest), /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      alignItems: 'center',
-      gap: 'var(--sp-10)',
-      transform: `translateX(calc(50% - ${index * 300}px - 190px))`,
-      transition: 'transform var(--dur-scroll) var(--ease-scroll)'
-    }
-  }, items.map((it, i) => /*#__PURE__*/React.createElement(__ds_scope.WorkCard, _extends({
-    key: i
-  }, it, {
-    active: i === index,
-    showCaption: i === index,
-    width: i === index ? 520 : it.width || 300,
-    ratio: i === index ? '1 / 1' : it.ratio || '4 / 5',
-    onClick: () => onSelect && onSelect(i)
-  })))));
-}
-Object.assign(__ds_scope, { WorkCarousel });
-})(); } catch (e) { __ds_ns.__errors.push({ path: "components/media/WorkCarousel.jsx", error: String((e && e.message) || e) }); }
 
 // components/navigation/LiveDot.jsx
 try { (() => {
@@ -948,398 +684,13 @@ function NavBar({
 Object.assign(__ds_scope, { NavBar });
 })(); } catch (e) { __ds_ns.__errors.push({ path: "components/navigation/NavBar.jsx", error: String((e && e.message) || e) }); }
 
-// ui_kits/website/Home.jsx
-try { (() => {
-const {
-  NavBar,
-  DisplayHeading,
-  StatRow,
-  ReelFrame,
-  SectionHeader,
-  WorkCarousel,
-  ColorBlock,
-  SiteFooter,
-  MonoLabel,
-  Button
-} = window.TheNowMachineDesignSystem_5b6ea4;
-const PROJECTS = [{
-  client: 'Northshore',
-  outcome: '$412M absorbed',
-  color: 'var(--n-900)',
-  width: 260,
-  ratio: '4 / 5'
-}, {
-  client: 'Harbor Point',
-  outcome: 'Sold out in 9 weeks',
-  color: 'var(--block-acid)',
-  width: 300,
-  ratio: '4 / 5'
-}, {
-  client: 'Vantage 42',
-  outcome: '2.1x qualified tours',
-  color: 'var(--block-ember)',
-  width: 300,
-  ratio: '4 / 5'
-}, {
-  client: 'Mira District',
-  outcome: 'Waitlist in 11 days',
-  color: 'var(--n-300)',
-  width: 280,
-  ratio: '4 / 5'
-}, {
-  client: 'Foundry Row',
-  outcome: '62% lower CPL',
-  color: 'var(--block-signal)',
-  width: 300,
-  ratio: '4 / 5'
-}];
-function useScrollProgress(ref, range = 700) {
-  const [p, setP] = React.useState(0);
-  React.useEffect(() => {
-    const el = ref.current ? ref.current.closest('[data-scroll]') || window : window;
-    const target = document.querySelector('[data-scroll]');
-    const onScroll = () => {
-      const y = target ? target.scrollTop : window.scrollY;
-      setP(Math.min(1, Math.max(0, y / range)));
-    };
-    (target || window).addEventListener('scroll', onScroll, {
-      passive: true
-    });
-    onScroll();
-    return () => (target || window).removeEventListener('scroll', onScroll);
-  }, [range]);
-  return p;
-}
-function Home({
-  onNavigate
-}) {
-  const ref = React.useRef(null);
-  const p = useScrollProgress(ref, 620);
-  const [playing, setPlaying] = React.useState(false);
-  const [idx, setIdx] = React.useState(1);
-  React.useEffect(() => {
-    const target = document.querySelector('[data-scroll]');
-    const onScroll = () => {
-      const y = target ? target.scrollTop : window.scrollY;
-      const start = 1400,
-        step = 380;
-      setIdx(Math.min(PROJECTS.length - 1, Math.max(0, Math.round((y - start) / step))));
-    };
-    (target || window).addEventListener('scroll', onScroll, {
-      passive: true
-    });
-    onScroll();
-    return () => (target || window).removeEventListener('scroll', onScroll);
-  }, []);
-  return /*#__PURE__*/React.createElement("div", {
-    ref: ref
-  }, /*#__PURE__*/React.createElement("section", {
-    style: {
-      minHeight: '92vh',
-      padding: 'var(--gutter)',
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'space-between'
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      height: '64px'
-    }
-  }), /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'grid',
-      gridTemplateColumns: '1fr 1fr',
-      alignItems: 'start',
-      marginTop: '-6vh'
-    }
-  }, /*#__PURE__*/React.createElement(DisplayHeading, {
-    as: "h1",
-    size: "hero"
-  }, "How you", /*#__PURE__*/React.createElement("br", null), "make them feel"), /*#__PURE__*/React.createElement(DisplayHeading, {
-    as: "div",
-    size: "hero",
-    align: "right",
-    style: {
-      marginTop: '0'
-    }
-  }, "is the only thing", /*#__PURE__*/React.createElement("br", null), "that matters")), /*#__PURE__*/React.createElement(StatRow, {
-    items: ['$1.4B in inventory moved', '38% faster absorption', '24 towers launched']
-  })), /*#__PURE__*/React.createElement("section", {
-    style: {
-      paddingBottom: 'var(--section-y)'
-    }
-  }, /*#__PURE__*/React.createElement(ReelFrame, {
-    progress: p,
-    playing: playing,
-    onPlay: () => setPlaying(v => !v)
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      position: 'absolute',
-      inset: 0,
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center'
-    }
-  }, /*#__PURE__*/React.createElement(MonoLabel, {
-    tone: "inverse",
-    style: {
-      opacity: .5
-    }
-  }, "Studio reel \u2014 video asset pending")))), /*#__PURE__*/React.createElement("section", {
-    style: {
-      padding: '0 var(--gutter) var(--section-y)'
-    }
-  }, /*#__PURE__*/React.createElement(SectionHeader, {
-    lead: "Make them feel",
-    emphasis: "certain",
-    style: {
-      marginBottom: 'var(--sp-20)'
-    }
-  }), /*#__PURE__*/React.createElement(WorkCarousel, {
-    items: PROJECTS,
-    index: idx,
-    onSelect: i => {
-      setIdx(i);
-      onNavigate && onNavigate('work', PROJECTS[i]);
-    }
-  })), /*#__PURE__*/React.createElement(ColorBlock, {
-    color: "var(--block-signal)",
-    wordmark: "The Now Machine"
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'grid',
-      gridTemplateColumns: '1.4fr 1fr',
-      gap: 'var(--sp-16)',
-      alignItems: 'start'
-    }
-  }, /*#__PURE__*/React.createElement(DisplayHeading, {
-    as: "p",
-    size: 2,
-    serif: true,
-    tone: "inverse"
-  }, "Independent by nature.", /*#__PURE__*/React.createElement("br", null), "Built for absorption."), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("p", {
-    style: {
-      margin: 0,
-      fontWeight: 'var(--fw-medium)',
-      maxWidth: '34ch'
-    }
-  }, "A studio that drives demand for developers' projects \u2014 content, paid media, and the funnels that carry a buyer from scroll to signature."), /*#__PURE__*/React.createElement(Button, {
-    variant: "onBlock",
-    size: "sm",
-    style: {
-      marginTop: 'var(--sp-8)'
-    },
-    onClick: () => onNavigate && onNavigate('approach')
-  }, "\u21B3 How we work")))), /*#__PURE__*/React.createElement("section", {
-    style: {
-      padding: 'var(--section-y) var(--gutter)'
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'grid',
-      gridTemplateColumns: '1.4fr 1fr',
-      gap: 'var(--sp-16)',
-      alignItems: 'start'
-    }
-  }, /*#__PURE__*/React.createElement(DisplayHeading, {
-    size: 1,
-    as: "h2"
-  }, "Feeling", /*#__PURE__*/React.createElement("br", null), "inevitable"), /*#__PURE__*/React.createElement("p", {
-    style: {
-      margin: 0,
-      fontFamily: 'var(--font-serif)',
-      fontSize: 'var(--text-lead)',
-      lineHeight: 1.35,
-      maxWidth: '34ch'
-    }
-  }, "Launch. Absorption. Close-out. We turn a floor plan into a decision buyers make before they tour."))), /*#__PURE__*/React.createElement(SiteFooter, {
-    wordmark: "THE NOW MACHINE",
-    note: "\xA9 2026 The Now Machine \u2014 Studio for demand",
-    columns: [{
-      title: 'Studio',
-      items: ['Work', 'Approach', 'About', 'News']
-    }, {
-      title: 'Services',
-      items: ['Content', 'Paid media', 'Funnels', 'Launch strategy']
-    }, {
-      title: 'Contact',
-      items: ['hello@thenowmachine.co', 'Instagram', 'LinkedIn']
-    }]
-  }));
-}
-Object.assign(window, {
-  Home,
-  PROJECTS
-});
-})(); } catch (e) { __ds_ns.__errors.push({ path: "ui_kits/website/Home.jsx", error: String((e && e.message) || e) }); }
-
-// ui_kits/website/WorkDetail.jsx
-try { (() => {
-function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
-const {
-  DisplayHeading,
-  MonoLabel,
-  StatRow,
-  ColorBlock,
-  SiteFooter,
-  Button,
-  WorkCard
-} = window.TheNowMachineDesignSystem_5b6ea4;
-function WorkDetail({
-  project,
-  onNavigate
-}) {
-  const p = project || {
-    client: 'Harbor Point',
-    outcome: 'Sold out in 9 weeks',
-    color: 'var(--block-acid)'
-  };
-  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("section", {
-    style: {
-      padding: 'calc(64px + var(--sp-16)) var(--gutter) var(--sp-16)'
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      justifyContent: 'space-between',
-      alignItems: 'baseline',
-      borderBottom: '1px solid var(--line-hairline)',
-      paddingBottom: 'var(--sp-4)'
-    }
-  }, /*#__PURE__*/React.createElement("a", {
-    href: "#work",
-    onClick: e => {
-      e.preventDefault();
-      onNavigate && onNavigate('home');
-    },
-    style: {
-      fontFamily: 'var(--font-ui)',
-      fontWeight: 'var(--fw-bold)',
-      fontSize: 'var(--text-title)',
-      letterSpacing: 'var(--ls-title)'
-    }
-  }, "\u21B3 All Work", /*#__PURE__*/React.createElement("sup", {
-    style: {
-      fontSize: '11px',
-      fontWeight: 'var(--fw-medium)'
-    }
-  }, PROJECTS.length)), /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      gap: 'var(--sp-6)'
-    }
-  }, /*#__PURE__*/React.createElement(MonoLabel, null, p.client), /*#__PURE__*/React.createElement(MonoLabel, {
-    tone: "muted"
-  }, p.outcome)))), /*#__PURE__*/React.createElement("section", {
-    style: {
-      padding: '0 var(--gutter) var(--section-y)'
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      width: '100%',
-      aspectRatio: '16 / 9',
-      borderRadius: 'var(--r-md)',
-      background: p.color,
-      display: 'flex',
-      alignItems: 'flex-end',
-      padding: 'var(--sp-8)'
-    }
-  }, /*#__PURE__*/React.createElement(MonoLabel, {
-    tone: p.color === 'var(--n-900)' ? 'inverse' : 'primary',
-    style: {
-      opacity: .6
-    }
-  }, "Case imagery pending")), /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'grid',
-      gridTemplateColumns: '1.4fr 1fr',
-      gap: 'var(--sp-16)',
-      marginTop: 'var(--sp-16)',
-      alignItems: 'start'
-    }
-  }, /*#__PURE__*/React.createElement(DisplayHeading, {
-    size: 1,
-    as: "h1"
-  }, p.client), /*#__PURE__*/React.createElement("p", {
-    style: {
-      margin: 0,
-      fontFamily: 'var(--font-serif)',
-      fontSize: 'var(--text-lead)',
-      lineHeight: 1.35,
-      maxWidth: '34ch'
-    }
-  }, "A 312-unit waterfront tower with no story and a hard close-out date. We built the narrative, then bought the attention to match."))), /*#__PURE__*/React.createElement(ColorBlock, {
-    color: p.color === 'var(--block-acid)' ? 'var(--block-acid)' : 'var(--block-signal)',
-    tone: p.color === 'var(--block-acid)' ? 'primary' : 'inverse',
-    minHeight: "52vh",
-    wordmark: p.client
-  }, /*#__PURE__*/React.createElement(StatRow, {
-    tone: p.color === 'var(--block-acid)' ? 'primary' : 'inverse',
-    items: ['9 weeks to sold out', '4,100 qualified leads', '62% lower cost per tour']
-  })), /*#__PURE__*/React.createElement("section", {
-    style: {
-      padding: 'var(--section-y) var(--gutter)'
-    }
-  }, /*#__PURE__*/React.createElement(MonoLabel, {
-    tone: "muted",
-    style: {
-      display: 'block',
-      marginBottom: 'var(--sp-8)'
-    }
-  }, "Next projects"), /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      gap: 'var(--sp-8)'
-    }
-  }, PROJECTS.slice(0, 4).map((it, i) => /*#__PURE__*/React.createElement(WorkCard, _extends({
-    key: i
-  }, it, {
-    width: 280,
-    showCaption: true,
-    onClick: () => onNavigate && onNavigate('work', it)
-  })))), /*#__PURE__*/React.createElement(Button, {
-    variant: "ghost",
-    size: "md",
-    style: {
-      marginTop: 'var(--sp-12)'
-    },
-    onClick: () => onNavigate && onNavigate('home')
-  }, "\u21B3 Back to home")), /*#__PURE__*/React.createElement(SiteFooter, {
-    wordmark: "THE NOW MACHINE",
-    note: "\xA9 2026 The Now Machine \u2014 Studio for demand",
-    columns: [{
-      title: 'Studio',
-      items: ['Work', 'Approach', 'About', 'News']
-    }, {
-      title: 'Contact',
-      items: ['hello@thenowmachine.co', 'LinkedIn']
-    }]
-  }));
-}
-Object.assign(window, {
-  WorkDetail
-});
-})(); } catch (e) { __ds_ns.__errors.push({ path: "ui_kits/website/WorkDetail.jsx", error: String((e && e.message) || e) }); }
-
 __ds_ns.Button = __ds_scope.Button;
 
 __ds_ns.DisplayHeading = __ds_scope.DisplayHeading;
 
 __ds_ns.MonoLabel = __ds_scope.MonoLabel;
 
-__ds_ns.SectionHeader = __ds_scope.SectionHeader;
-
-__ds_ns.StatRow = __ds_scope.StatRow;
-
-__ds_ns.ColorBlock = __ds_scope.ColorBlock;
-
 __ds_ns.SiteFooter = __ds_scope.SiteFooter;
-
-__ds_ns.ReelFrame = __ds_scope.ReelFrame;
-
-__ds_ns.WorkCard = __ds_scope.WorkCard;
-
-__ds_ns.WorkCarousel = __ds_scope.WorkCarousel;
 
 __ds_ns.LiveDot = __ds_scope.LiveDot;
 
@@ -1376,7 +727,7 @@ function useScroll(fn) {
 function useReveal() {
   React.useEffect(() => {
     const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { rootMargin: '0px 0px -12% 0px' });
-    document.querySelectorAll('.rev:not(.in), .rev-right:not(.in)').forEach(el => io.observe(el));
+    document.querySelectorAll('.rev:not(.in)').forEach(el => io.observe(el));
     return () => io.disconnect();
   }, []);
 }
@@ -1434,10 +785,10 @@ function Hero() {
     <header ref={wrap} id="top" data-screen-label="Hero" className="hero-plain">
       <Frame>
         <div className="hero-lockup">
-          <MonoLabel tone="muted" className="hero-eyebrow">Demand generation for multi-home developments</MonoLabel>
+          <MonoLabel tone="muted" className="hero-eyebrow">Demand generation studio</MonoLabel>
           <DisplayHeading as="h1" size={1}>Buyers trust people,</DisplayHeading>
           <DisplayHeading as="h2" size={1}>not floor plans.</DisplayHeading>
-          <p className="hero-sub">We cast the face of your development and build the demand engine around it.</p>
+          <p className="hero-sub">We move multi-home developments from launch to sell-out through content, campaigns, and paid media.</p>
         </div>
       </Frame>
       <div className="hero-media-holder">
@@ -1552,18 +903,7 @@ function ReelHandoff() {
   return <div className="reel-handoff-zone" aria-hidden="true" />;
 }
 
-/* ── 4. Manifesto — thin Signal band, lands as one line ── */
-function Manifesto() {
-  return (
-    <section className="signal-band" aria-label="Manifesto">
-      <Frame>
-        <DisplayHeading size={1} tone="inverse" className="rev-right tight oneline">We move people and metrics.</DisplayHeading>
-      </Frame>
-    </section>
-  );
-}
-
-/* ── 5. Capabilities ── */
+/* ── 4. Capabilities ── */
 const CAPS = [
   { id: 'C-02', mid: 'C-01', title: 'Casting and content', body: "We cast a host who experiences the development the way your buyer would, then build the content engine around them. Not an agent selling to them. Someone they see themselves in.", media: true },
   { id: 'C-01', mid: 'C-02', title: 'Paid advertising', body: 'Cross-platform advertising working as a single funnel, building your audience, then converting them into real leads.', poster: 'assets/paid-media-poster.jpg' },
@@ -1603,11 +943,38 @@ function Capabilities() {
   );
 }
 
-Object.assign(window, { Hero, ReelHandoff, Manifesto, Capabilities });
+Object.assign(window, { Hero, ReelHandoff, Capabilities });
 
 </script>
 <script type="text/babel">
 const { DisplayHeading, MonoLabel, Button, SiteFooter } = window.TheNowMachineDesignSystem_5b6ea4;
+
+/* ── 5. Process — the four steps, in the order they happen ── */
+const PROCESS = [
+  { n: 'P-01', title: 'Cast', body: 'We cast first. New talent, or someone already on your team. Whichever it is, that becomes the person your buyer relates to.' },
+  { n: 'P-02', title: 'Produce', body: 'The production engine runs top to bottom of the funnel, built for organic and paid at once. Renders become hyperrealistic footage, so the lifestyle sells while the site is still dirt.' },
+  { n: 'P-03', title: 'Distribute', body: 'Out through organic channels and paid advertising, with variations tailored to each channel and objective, so a lead sees what fits their stage of the buying process.' },
+  { n: 'P-04', title: 'Optimize', body: 'We learn from the data and feed it back into the engine. One operator is responsible for the outcome, and every month you get a report with the optimization plan attached.' }
+];
+
+function Process() {
+  return (
+    <section id="process" data-screen-label="How it runs" className="proc-sec">
+      <Frame>
+        <DisplayHeading size={1} className="rev">How it runs</DisplayHeading>
+        <div className="proc-grid">
+          {PROCESS.map(s => (
+            <article key={s.n} className="cap proc-step rev">
+              <MonoLabel className="id step-n" tone="muted">{s.n}</MonoLabel>
+              <h3>{s.title}</h3>
+              <p style={{ margin: 0, maxWidth: 'var(--measure)' }}>{s.body}</p>
+            </article>
+          ))}
+        </div>
+      </Frame>
+    </section>
+  );
+}
 
 /* ── 6. The model — four lines, each landing on scroll ── */
 function Model() {
@@ -1639,7 +1006,7 @@ function Model() {
 
 /* ── 7. Selected work — scroll-driven rail, centre poster prominent ── */
 const WORK = [
-  { id: 'W-01', client: 'Baia Vista', cat: 'Development', poster: 'assets/baia-vista-poster.jpg', video: 'assets/baia-vista-hover.mp4', body: 'A cast host, a content engine, and paid media running as one system for the 200-home Curaçao development. Roughly half the leads came from paid.' },
+  { id: 'W-01', client: 'Baia Vista', cat: 'Development', poster: 'assets/baia-vista-poster.jpg', video: 'assets/baia-vista-hover.mp4', body: 'A cast host, a content engine, and paid media running as one system for the 175-home Curaçao development. Roughly half the leads came from paid.' },
   { id: 'W-02', client: 'CoveCasa', cat: 'Built it from zero', poster: 'assets/covecasa-poster.jpg', video: 'assets/covecasa-hover.mp4', body: 'The Now Machine built paid media, funnels, and content production for a luxury vacation rental portfolio, scaling it to 20+ properties under management in year one.' }
 ];
 const GAP = 48;
@@ -1781,13 +1148,13 @@ function Footer() {
   );
 }
 
-Object.assign(window, { Model, Work, Founder, Contact, Footer });
+Object.assign(window, { Process, Model, Work, Founder, Contact, Footer });
 
 </script>
 <script type="text/babel">
 const { NavBar, LiveDot } = window.TheNowMachineDesignSystem_5b6ea4;
 
-const NAV = { 'What we run': 'capabilities', 'Work': 'work', 'Services': 'capabilities' };
+const NAV = { 'What we run': 'capabilities', 'How it runs': 'process', 'Work': 'work', 'Services': 'capabilities' };
 
 function Nav() {
   const gold = useInView('contact');
@@ -1801,7 +1168,7 @@ function Nav() {
   const go = l => { if (typeof l === 'string' && NAV[l]) scrollToId(NAV[l]); else if (l === 'home') window.scrollTo({ top: 0, behavior: 'smooth' }); else window.location.href = 'mailto:chris@thenowmachine.com'; };
   return (
     <div className={'tnm-nav' + (gold ? ' gold' : '')}>
-      <NavBar links={narrow ? ['Services'] : ['What we run', 'Work']} ctaLive={false} onNavigate={go}
+      <NavBar links={narrow ? ['Services'] : ['What we run', 'How it runs', 'Work']} ctaLive={false} onNavigate={go}
         wordmark={<img className="nav-logo" src="assets/logo-now.png" alt="The Now Machine" width="63" height="26" decoding="async" />}
         cta={narrow ? null : <span style={{ display: 'inline-flex', alignItems: 'center', gap: 'var(--sp-3)' }}>Start a conversation<LiveDot className="tnm-pulse" /></span>} />
     </div>
@@ -1816,6 +1183,7 @@ function Site() {
       <Hero />
       <ReelHandoff />
       <Capabilities />
+      <Process />
       <Work />
       <Model />
       <Founder />
