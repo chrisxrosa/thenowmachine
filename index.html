@@ -854,12 +854,14 @@ function ReelHandoff() {
       }
       const pinTop = pinEl.getBoundingClientRect().top + sy;
       const growFrom = hr.top + sy - (vh - hr.height) / 2;
-      const growTo = pinTop - vh * 0.35;
-      const scrollDivisor = 2.5; /* same start/end points, 2.5x less scroll to traverse them */
-      const growLen = Math.max(growTo - growFrom, 1) / scrollDivisor;
-      const shrinkLen = (vh * 0.85) / scrollDivisor;
+      const growDist0 = Math.max((pinTop - vh * 0.35) - growFrom, 1); /* original grow distance */
+      const holdDist0 = vh * 0.35; /* original hold distance, before shrink kicks in at pinTop */
+      const growLen = growDist0 / 2; /* grow 2x quicker */
+      const holdLen = holdDist0 / 10; /* hold 10x quicker — barely pauses before shrinking */
+      const shrinkStart = growFrom + growLen + holdLen;
+      const shrinkLen = vh * 0.85; /* shrink phase itself is unchanged */
       const g = clamp((sy - growFrom) / growLen, 0, 1);
-      const sp = clamp((sy - pinTop) / shrinkLen, 0, 1);
+      const sp = clamp((sy - shrinkStart) / shrinkLen, 0, 1);
       if (cue) cue.style.opacity = String(clamp((0.95 - sp) / 0.25, 0, 1));
       const caps = document.getElementById('capabilities');
       if (caps) caps.classList.toggle('lit', sp > 0.005);
