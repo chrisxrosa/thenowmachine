@@ -268,11 +268,27 @@ footer a{color:var(--n-0)}footer a:hover{color:var(--block-acid)}
    opens the section (echoing the .cap rule) instead of a color change, and top
    padding is tightened so it reads as still attached to what Capabilities set up. */
 .proc-sec{padding:clamp(48px,6vw,88px) 0 var(--section-y);border-top:1px solid var(--line-hairline)}
-.proc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp-12) var(--sp-10);margin-top:clamp(56px,7vw,104px)}
+/* Dark section, matching the Capabilities block above. */
+.proc-sec{background:var(--n-900);color:var(--n-50);padding:var(--section-y) 0}
 .proc-step .step-n{display:block;margin-bottom:var(--sp-8)}
 .proc-step h3{margin:0 0 var(--sp-4);font-size:var(--text-title);font-weight:var(--fw-bold);letter-spacing:var(--ls-title)}
-@media (max-width:1100px){.proc-grid{grid-template-columns:repeat(2,1fr);gap:var(--sp-10) var(--sp-8)}}
-@media (max-width:640px){.proc-grid{grid-template-columns:1fr}}
+.proc-sec .cap{border-top-color:var(--line-inverse)}
+.proc-sec .cap:hover{border-top-color:var(--n-50)}
+.proc-sec .cap p{color:var(--n-300)}
+/* All six stages sit on a wheel that turns clockwise with scroll. Nodes
+   counter-rotate so titles stay upright; the centre carries the description of
+   whichever stage is currently at 12 o'clock. */
+.wheel{position:relative;width:min(560px,92vw);aspect-ratio:1;margin:clamp(32px,5vw,64px) auto 0}
+.wheel-ring{position:absolute;inset:15%;border:1px solid var(--line-inverse);border-radius:var(--r-pill)}
+.wheel-node{position:absolute;left:50%;top:50%;width:160px;text-align:center;cursor:pointer;opacity:.4;transition:opacity var(--dur-base) var(--ease-out)}
+.wheel-node.on,.wheel-node:hover{opacity:1}
+.wheel-node:focus-visible{outline:2px solid var(--block-acid);outline-offset:6px;border-radius:var(--r-sm)}
+.wheel-node h3{display:inline-block;margin:var(--sp-2) 0 0;padding:0 .16em;font-size:clamp(1.125rem,1.5vw,1.25rem);font-weight:var(--fw-bold);letter-spacing:var(--ls-title)}
+.wheel-node.on h3{background:var(--block-acid);color:var(--n-900)}
+.wheel-core{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:36%;text-align:center}
+.wheel-core p{margin:0;font-size:var(--text-body-sm);line-height:1.5;color:var(--n-300);text-wrap:pretty}
+.proc-cycle-list{display:none}
+@media (max-width:900px){.wheel{display:none}.proc-cycle-list{display:grid;grid-template-columns:1fr;gap:var(--sp-10);margin-top:var(--sp-10)}}
 .model-dark{background:var(--block-ink);color:var(--n-0);padding:var(--section-y) 0}
 .model-inner{width:100%}
 .work-sec{padding:var(--section-y) 0;display:flex;flex-direction:column;gap:clamp(28px,4vw,56px)}
@@ -973,21 +989,89 @@ const { DisplayHeading, MonoLabel, Button, SiteFooter } = window.TheNowMachineDe
 /* ── 5. Process — the four steps, in the order they happen ── */
 const PROCESS = [
   { n: 'P-01', title: 'Audit', body: 'We start by reading what you already have. Buyer profile, positioning, the assets on hand, and what the market around you is running. You get the findings before anyone shoots anything.' },
-  { n: 'P-02', title: 'Cast', body: 'Then we cast. New talent, or someone already on your team. Whichever it is, that becomes the person your buyer relates to.' },
-  { n: 'P-03', title: 'Produce', body: 'The production engine runs top to bottom of the funnel, built for organic and paid at once. Renders become hyperrealistic footage, so the lifestyle sells while the site is still dirt.' },
-  { n: 'P-04', title: 'Build', body: 'The funnel goes up alongside production, not after it. Landing pages, lead magnets, and nurturing that warms a cold inquiry until it is ready for your sales team.' },
-  { n: 'P-05', title: 'Distribute', body: 'Out through organic channels and paid advertising, with variations tailored to each channel and objective, so a lead sees what fits their stage of the buying process.' },
-  { n: 'P-06', title: 'Optimize', body: 'We learn from the data and feed it back into the engine. One operator is responsible for the outcome, and every month you get a report with the optimization plan attached.' }
+  { n: 'P-02', title: 'Casting', body: 'New talent, or someone already on your team. Whichever it is, that becomes the person your buyer relates to.' },
+  { n: 'P-03', title: 'Funnel-building', body: 'Landing pages, lead magnets, and nurturing that warms a cold inquiry until it is ready for your sales team.' },
+  { n: 'P-04', title: 'Production', body: 'The production engine runs top to bottom of the funnel, built for organic and paid at once. Renders become hyperrealistic footage, so the lifestyle sells while the site is still dirt.' },
+  { n: 'P-05', title: 'Distribution', body: 'Out through organic channels and paid advertising, with variations tailored to each channel and objective, so a lead sees what fits their stage of the buying process.' },
+  { n: 'P-06', title: 'Optimization', body: 'We learn from the data and feed it back into the engine. One operator is responsible for the outcome, and every month you get a report with the optimization plan attached.' }
 ];
 
+const CYCLE = PROCESS;
+
 function Process() {
+  const wheelRef = React.useRef(null);
+  const headRef = React.useRef(null);
+  const [p, setP] = React.useState(0);
+  const [R, setR] = React.useState(196);
+  const [still, setStill] = React.useState(false);
+  const [peek, setPeek] = React.useState(null);
+  const timer = React.useRef(null);
+  React.useEffect(() => {
+    const fit = () => setR(Math.min(560, window.innerWidth * 0.92) * 0.35);
+    fit();
+    window.addEventListener('resize', fit);
+    setStill(window.matchMedia('(prefers-reduced-motion:reduce)').matches);
+    return () => { window.removeEventListener('resize', fit); clearTimeout(timer.current); };
+  }, []);
+  /* Progress runs between two anchors: p = 0 the moment the wheel is fully
+     visible (its bottom clears the viewport bottom), p = 1 just as the section
+     title slides up under the fixed nav. On short viewports those two points can
+     collapse, so a minimum spin distance is enforced by starting earlier — the
+     end anchor is preserved either way. */
+  useScroll(() => {
+    const el = wheelRef.current, head = headRef.current;
+    if (!el || !head) return;
+    const r = el.getBoundingClientRect();
+    if (!r.height) return;
+    const y = window.scrollY;
+    const to = (head.getBoundingClientRect().top + y) - 96;
+    let from = (r.bottom + y) - window.innerHeight;
+    if (to - from < 220) from = to - 220;
+    setP(clamp((y - from) / Math.max(to - from, 1), 0, 1));
+  });
+  /* Positive rotation is clockwise. Base angles run negative so that turning
+     clockwise brings the six nodes to 12 o'clock in array order. The sweep is
+     300deg, not 360 — that lands and holds on Optimization, the sixth node.
+     A full 360 would carry it back around to Audit. */
+  const turn = still ? 0 : p * 300;
+  /* floor, not round — the step switches at the instant a node reaches the top,
+     not when it is halfway there. */
+  const spun = Math.floor(turn / 60) % 6;
+  const shown = peek !== null ? peek : spun;
+  const tap = i => {
+    if (i === spun) return;
+    clearTimeout(timer.current);
+    setPeek(i);
+    timer.current = setTimeout(() => setPeek(null), 2600);
+  };
   return (
     <section id="process" data-screen-label="How it runs" className="proc-sec">
       <Frame>
-        <DisplayHeading size={1} className="rev">How it runs</DisplayHeading>
-        <div className="proc-grid">
-          {PROCESS.map(s => (
-            <article key={s.n} className="cap proc-step rev">
+        <div ref={headRef} className="rev"><DisplayHeading size={1} tone="inverse">How it runs</DisplayHeading></div>
+        <div className="wheel rev" ref={wheelRef}>
+          <div className="wheel-ring" />
+          {CYCLE.map((s, i) => {
+            const ang = -i * 60 + turn;
+            return (
+              <div key={s.n} className={'wheel-node' + (i === shown ? ' on' : '')}
+                role="button" tabIndex={0}
+                onClick={() => tap(i)}
+                onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); tap(i); } }}
+                style={{ transform: `translate(-50%,-50%) rotate(${ang}deg) translate(0,${-R}px) rotate(${-ang}deg)` }}>
+                <MonoLabel className="id" tone="muted">{s.n}</MonoLabel>
+                <h3>{s.title}</h3>
+              </div>
+            );
+          })}
+          <div className="wheel-core">
+            <p>{CYCLE[shown].body}</p>
+          </div>
+        </div>
+        {/* Below 900px the wheel is hidden and these read as a plain stack,
+            so nothing depends on the rotation to be legible. */}
+        <div className="proc-cycle-list">
+          {CYCLE.map(s => (
+            <article key={s.n} className="cap proc-step">
               <MonoLabel className="id step-n" tone="muted">{s.n}</MonoLabel>
               <h3>{s.title}</h3>
               <p style={{ margin: 0 }}>{s.body}</p>
