@@ -268,7 +268,7 @@ footer a{color:var(--n-0)}footer a:hover{color:var(--block-acid)}
    opens the section (echoing the .cap rule) instead of a color change, and top
    padding is tightened so it reads as still attached to what Capabilities set up. */
 .proc-sec{padding:clamp(48px,6vw,88px) 0 var(--section-y);border-top:1px solid var(--line-hairline)}
-.proc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--sp-10);margin-top:clamp(56px,7vw,104px)}
+.proc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp-12) var(--sp-10);margin-top:clamp(56px,7vw,104px)}
 .proc-step .step-n{display:block;margin-bottom:var(--sp-8)}
 .proc-step h3{margin:0 0 var(--sp-4);font-size:var(--text-title);font-weight:var(--fw-bold);letter-spacing:var(--ls-title)}
 @media (max-width:1100px){.proc-grid{grid-template-columns:repeat(2,1fr);gap:var(--sp-10) var(--sp-8)}}
@@ -927,7 +927,7 @@ function ReelHandoff() {
 /* ── 4. Capabilities ── */
 const CAPS = [
   { id: 'C-02', mid: 'C-01', title: 'Casting and content', body: "We cast a host who experiences the development the way your buyer would, then build the content engine around them. Not an agent selling to them. Someone they see themselves in.", media: true },
-  { id: 'C-01', mid: 'C-02', title: 'Paid advertising', body: 'Cross-platform advertising working as a single funnel, building your audience, then converting them into real leads.', poster: 'assets/paid-media-poster.jpg' },
+  { id: 'C-01', mid: 'C-02', title: 'Global advertising', body: 'Cross-platform campaigns that build your audience at home and abroad, then convert it into real leads and expo visits.', poster: 'assets/paid-media-poster.jpg' },
   { id: 'C-03', title: 'Funnel-building', body: 'An engine that warms cold inquiries while you sleep, and surfaces the ones ready to talk.', poster: 'assets/funnel-building-poster.jpg' }
 ];
 
@@ -972,10 +972,12 @@ const { DisplayHeading, MonoLabel, Button, SiteFooter } = window.TheNowMachineDe
 
 /* ── 5. Process — the four steps, in the order they happen ── */
 const PROCESS = [
-  { n: 'P-01', title: 'Cast', body: 'We cast first. New talent, or someone already on your team. Whichever it is, that becomes the person your buyer relates to.' },
-  { n: 'P-02', title: 'Produce', body: 'The production engine runs top to bottom of the funnel, built for organic and paid at once. Renders become hyperrealistic footage, so the lifestyle sells while the site is still dirt.' },
-  { n: 'P-03', title: 'Distribute', body: 'Out through organic channels and paid advertising, with variations tailored to each channel and objective, so a lead sees what fits their stage of the buying process.' },
-  { n: 'P-04', title: 'Optimize', body: 'We learn from the data and feed it back into the engine. One operator is responsible for the outcome, and every month you get a report with the optimization plan attached.' }
+  { n: 'P-01', title: 'Audit', body: 'We start by reading what you already have. Buyer profile, positioning, the assets on hand, and what the market around you is running. You get the findings before anyone shoots anything.' },
+  { n: 'P-02', title: 'Cast', body: 'Then we cast. New talent, or someone already on your team. Whichever it is, that becomes the person your buyer relates to.' },
+  { n: 'P-03', title: 'Produce', body: 'The production engine runs top to bottom of the funnel, built for organic and paid at once. Renders become hyperrealistic footage, so the lifestyle sells while the site is still dirt.' },
+  { n: 'P-04', title: 'Build', body: 'The funnel goes up alongside production, not after it. Landing pages, lead magnets, and nurturing that warms a cold inquiry until it is ready for your sales team.' },
+  { n: 'P-05', title: 'Distribute', body: 'Out through organic channels and paid advertising, with variations tailored to each channel and objective, so a lead sees what fits their stage of the buying process.' },
+  { n: 'P-06', title: 'Optimize', body: 'We learn from the data and feed it back into the engine. One operator is responsible for the outcome, and every month you get a report with the optimization plan attached.' }
 ];
 
 function Process() {
@@ -988,7 +990,7 @@ function Process() {
             <article key={s.n} className="cap proc-step rev">
               <MonoLabel className="id step-n" tone="muted">{s.n}</MonoLabel>
               <h3>{s.title}</h3>
-              <p style={{ margin: 0, maxWidth: 'var(--measure)' }}>{s.body}</p>
+              <p style={{ margin: 0 }}>{s.body}</p>
             </article>
           ))}
         </div>
