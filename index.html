@@ -211,9 +211,28 @@ a{color:var(--text-link)}a:hover{color:var(--text-link-hover)}
 .caps-pin{position:relative;background:var(--n-900)}
 .caps-spacer{height:45vh}
 .cap-media{position:relative;width:100%;aspect-ratio:16/10;border-radius:var(--r-lg);overflow:hidden;background:var(--n-1000);margin-bottom:var(--sp-8)}
-.cap-static{width:100%;height:100%;object-fit:cover;display:block}
 .poster-static{width:100%;height:100%;object-fit:cover;display:block}
-.cap-media-fill{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .25s linear}
+.cap-media-fill{position:absolute;inset:0;width:100%;height:100%;opacity:0;transition:opacity .25s linear}
+/* Capability line art. Strokes inherit currentColor so one colour change lights
+   the whole drawing, same approach as the gear. */
+.viz{width:100%;height:100%;display:block;color:var(--line-inverse);transition:color var(--dur-base) var(--ease-out)}
+.cap:hover .viz{color:var(--n-50)}
+.viz-br{transition:transform var(--dur-base) var(--ease-out)}
+.cap:hover .viz-br-tl{transform:translate(11px,9px)}
+.cap:hover .viz-br-tr{transform:translate(-11px,9px)}
+.cap:hover .viz-br-bl{transform:translate(11px,-9px)}
+.cap:hover .viz-br-br{transform:translate(-11px,-9px)}
+.viz-pulse{transform-box:view-box;transform-origin:160px 84px;transition:transform var(--dur-base) var(--ease-out)}
+.cap:hover .viz-pulse{transform:scale(1.09)}
+.viz-orbit{transform-box:view-box;transform-origin:160px 100px;animation:vizSpin 26s linear infinite}
+.cap:hover .viz-orbit{animation-duration:5s}
+@keyframes vizSpin{to{transform:rotate(360deg)}}
+.viz-drop{opacity:0}
+.cap:hover .viz-drop{animation:vizDrop 1.9s var(--ease-inout) infinite}
+.cap:hover .viz-drop.d2{animation-delay:.5s}
+.cap:hover .viz-drop.d3{animation-delay:1s}
+@keyframes vizDrop{0%{opacity:0;transform:translateY(0)}15%{opacity:1}72%{opacity:1}100%{opacity:0;transform:translateY(84px)}}
+@media (prefers-reduced-motion:reduce){.viz-orbit,.cap:hover .viz-drop{animation:none}.cap:hover .viz-br,.cap:hover .viz-pulse{transform:none}}
 .foot-mark{display:block;width:100%}
 /* SiteFooter wraps the wordmark in a shrink-to-fit box — open it up so % widths resolve. */
 div:has(>.foot-mark){width:100%;max-width:100%}
@@ -964,10 +983,47 @@ function ReelHandoff() {
 }
 
 /* ── 4. Capabilities ── */
+/* ── 4. Capability visuals — hairline line art in the gear's language.
+      Idle motion is slow; hover speeds it up or closes it in. ── */
+function Viz({ kind }) {
+  if (kind === 'globe') return (
+    <svg className="viz" viewBox="0 0 320 200" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.25">
+      <circle cx="160" cy="100" r="50" />
+      <ellipse cx="160" cy="100" rx="50" ry="19" />
+      <ellipse cx="160" cy="100" rx="21" ry="50" />
+      <path d="M110 100h100" />
+      <g className="viz-orbit">
+        <circle cx="160" cy="100" r="74" strokeDasharray="3 10" />
+        <circle cx="234" cy="100" r="3.5" fill="currentColor" stroke="none" />
+        <circle cx="86" cy="100" r="2.5" fill="currentColor" stroke="none" />
+      </g>
+    </svg>
+  );
+  if (kind === 'funnel') return (
+    <svg className="viz" viewBox="0 0 320 200" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.25">
+      <path d="M104 62h112l-40 52v42l-32 12v-54z" strokeLinejoin="round" />
+      <path d="M92 46h136" strokeDasharray="4 8" />
+      <circle className="viz-drop d1" cx="138" cy="30" r="3.5" fill="currentColor" stroke="none" />
+      <circle className="viz-drop d2" cx="160" cy="30" r="3.5" fill="currentColor" stroke="none" />
+      <circle className="viz-drop d3" cx="182" cy="30" r="3.5" fill="currentColor" stroke="none" />
+    </svg>
+  );
+  return (
+    <svg className="viz" viewBox="0 0 320 200" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.25">
+      <circle className="viz-pulse" cx="160" cy="84" r="25" />
+      <path d="M121 150c0-21 17-33 39-33s39 12 39 33" />
+      <path className="viz-br viz-br-tl" d="M98 72V52h20" strokeLinejoin="round" />
+      <path className="viz-br viz-br-tr" d="M222 72V52h-20" strokeLinejoin="round" />
+      <path className="viz-br viz-br-bl" d="M98 128v20h20" strokeLinejoin="round" />
+      <path className="viz-br viz-br-br" d="M222 128v20h-20" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
 const CAPS = [
-  { id: 'C-02', mid: 'C-01', title: 'Casting and content', body: "We cast a host who experiences the development the way your buyer would, then build the content engine around them.", media: true },
-  { id: 'C-01', mid: 'C-02', title: 'Global advertising', body: 'Cross-platform campaigns that build your audience at home and abroad, then convert it into real leads and expo visits.', poster: 'assets/paid-media-poster.jpg' },
-  { id: 'C-03', title: 'Funnel-building', body: 'An engine that warms cold inquiries while you sleep, and surfaces the ones ready to talk.', poster: 'assets/funnel-building-poster.jpg' }
+  { id: 'C-02', mid: 'C-01', title: 'Casting and content', body: "We cast a host who experiences the development the way your buyer would, then build the content engine around them.", media: true, viz: 'cast' },
+  { id: 'C-01', mid: 'C-02', title: 'Global advertising', body: 'Cross-platform campaigns that build your audience at home and abroad, then convert it into real leads and expo visits.', viz: 'globe' },
+  { id: 'C-03', title: 'Funnel-building', body: 'An engine that warms cold inquiries while you sleep, and surfaces the ones ready to talk.', viz: 'funnel' }
 ];
 
 function Capabilities() {
@@ -982,12 +1038,11 @@ function Capabilities() {
               <article key={c.id} className="cap">
                 {c.media ? (
                   <div id="cap-media-target" className="cap-media">
-                    <img id="cap-media-fill" className="cap-media-fill" src="assets/content-production-poster.jpg" alt="" decoding="async" />
+                    {/* Keeps the id the reel handoff cross-fades into. */}
+                    <div id="cap-media-fill" className="cap-media-fill"><Viz kind={c.viz} /></div>
                   </div>
                 ) : (
-                  <div className="cap-media">
-                    <img className="cap-static" src={c.poster} alt="" loading="lazy" decoding="async" />
-                  </div>
+                  <div className="cap-media"><Viz kind={c.viz} /></div>
                 )}
                 <MonoLabel className="id" tone="muted" style={{ display: 'block', marginBottom: 'var(--sp-8)' }}><span className="id-wide">{c.id}</span><span className="id-narrow">{c.mid || c.id}</span></MonoLabel>
                 <h3 style={{ margin: '0 0 var(--sp-5)', fontFamily: 'var(--font-display)', fontWeight: 'var(--fw-black)', fontSize: 'var(--text-display-3)', lineHeight: 'var(--lh-tight)', letterSpacing: 'var(--ls-title)' }}>{c.title}</h3>
