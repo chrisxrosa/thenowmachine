@@ -1,0 +1,76 @@
+name: Prerender and deploy to GitHub Pages
+
+# index.html itself never changes. This workflow takes a snapshot of what
+# React actually renders in a real browser and writes that into a copy of
+# index.html, so plain-HTTP crawlers (AI bots, some SEO tools, anything that
+# doesn't execute JavaScript) see the real page content instead of an empty
+# <div id="root"></div>. Real visitors still get the live, interactive site —
+# React mounts over the prerendered markup exactly as it does today.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:  # lets you trigger a re-render manually from the Actions tab
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Only one deployment in flight at a time; a newer push cancels an in-progress one.
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install Playwright (Chromium only)
+        run: |
+          npm init -y --silent
+          npm install --no-save playwright@1.47.0
+          npx playwright install --with-deps chromium
+
+      - name: Copy the site into dist/
+        # tar, not rsync — guaranteed present on the runner, no assumptions.
+        # Everything is copied as-is (assets/, CNAME, favicons, etc.) except
+        # the CI plumbing itself; dist/index.html gets overwritten below.
+        run: |
+          mkdir -p dist
+          tar --exclude='.git' --exclude='.github' --exclude='dist' \
+              --exclude='node_modules' --exclude='scripts' \
+              --exclude='package.json' --exclude='package-lock.json' \
+              -cf - . | (cd dist && tar xf -)
+
+      - name: Serve dist/ locally
+        run: |
+          npx --yes serve dist -l 8080 &
+          npx --yes wait-on http://localhost:8080/index.html
+
+      - name: Render index.html in a real browser and capture the output
+        run: node scripts/prerender.mjs
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
