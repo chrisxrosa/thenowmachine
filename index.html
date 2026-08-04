@@ -275,18 +275,24 @@ footer a{color:var(--n-0)}footer a:hover{color:var(--block-acid)}
 .proc-sec .cap{border-top-color:var(--line-inverse)}
 .proc-sec .cap:hover{border-top-color:var(--n-50)}
 .proc-sec .cap p{color:var(--n-300)}
-.proc-stage{display:grid;grid-template-columns:minmax(200px,0.5fr) minmax(0,1fr);gap:clamp(32px,5vw,72px);align-items:center;margin-top:clamp(32px,5vw,64px)}
-.rail{display:grid;gap:clamp(40px,6vw,72px);border-left:1px solid var(--line-inverse);padding-left:var(--sp-8)}
-.rail-item{cursor:pointer;opacity:.4;transition:opacity var(--dur-base) var(--ease-out)}
+.proc-stage{margin-top:clamp(32px,5vw,64px)}
+.rail{display:flex;align-items:center;gap:var(--sp-6);max-width:720px;margin:0 auto}
+.rail-item{flex:0 0 auto;text-align:center;cursor:pointer;opacity:.4;transition:opacity var(--dur-base) var(--ease-out)}
 .rail-item.on,.rail-item:hover{opacity:1}
 .rail-item:focus-visible{outline:2px solid var(--block-acid);outline-offset:6px;border-radius:var(--r-sm)}
 .rail-item .id{display:block}
 .rail-item h3{display:inline-block;margin:var(--sp-2) 0 0;padding:0 .16em;font-size:clamp(1.125rem,1.5vw,1.25rem);font-weight:var(--fw-bold);letter-spacing:var(--ls-title)}
 .rail-item.on h3{background:var(--block-acid);color:var(--n-900)}
+.rail-link{flex:1 1 auto;min-width:56px;height:1px;background:var(--line-inverse);position:relative}
+/* Shared chevron: a square with two borders, rotated to point along its line. */
+.chev{display:block;width:8px;height:8px;border-right:1.5px solid var(--n-500);border-bottom:1.5px solid var(--n-500)}
+.rail-link .chev{position:absolute;left:50%;top:50%;margin:-4px 0 0 -4px;transform:rotate(-45deg)}
+.rail-desc{margin:var(--sp-10) auto 0;max-width:56ch;text-align:center;font-size:var(--text-body-sm);line-height:1.5;color:var(--n-300);text-wrap:pretty}
+.wheel-chev{position:absolute;left:50%;top:50%;margin:-4px 0 0 -4px}
 /* Four repeatable stages on a wheel that turns clockwise with scroll. Nodes
    counter-rotate so titles stay upright; the centre carries the description of
-   whichever stage is currently highlighted, rail or wheel. */
-.wheel{position:relative;width:min(560px,92vw);aspect-ratio:1;margin:0 auto}
+   the stage at 12 o'clock, but only while the rail's own line is not showing. */
+.wheel{position:relative;width:min(560px,92vw);aspect-ratio:1;margin:clamp(24px,4vw,48px) auto 0}
 .wheel-ring{position:absolute;inset:15%;border:1px solid var(--line-inverse);border-radius:var(--r-pill)}
 .wheel-node{position:absolute;left:50%;top:50%;width:160px;text-align:center;cursor:pointer;opacity:.4;transition:opacity var(--dur-base) var(--ease-out)}
 .wheel-node.on,.wheel-node:hover{opacity:1}
@@ -1053,22 +1059,39 @@ function Process() {
     timer.current = setTimeout(() => setPeek(null), 2600);
   };
   const keys = (i) => e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); tap(i); } };
+  /* Exactly one description area is live at a time: the rail's own line while a
+     rail stage is highlighted, the wheel's centre once attention moves to the
+     wheel. They never both show. */
+  const onRail = shown < 2;
   return (
     <section id="process" data-screen-label="How it runs" className="proc-sec">
       <Frame>
         <div ref={headRef} className="rev"><DisplayHeading size={1} tone="inverse">How it runs</DisplayHeading></div>
         <div className="proc-stage rev">
           <div className="rail">
-            {SETUP.map((s, i) => (
-              <div key={s.n} className={'rail-item' + (i === shown ? ' on' : '')}
-                role="button" tabIndex={0} onClick={() => tap(i)} onKeyDown={keys(i)}>
-                <MonoLabel className="id" tone="muted">{s.n}</MonoLabel>
-                <h3>{s.title}</h3>
-              </div>
-            ))}
+            <div className={'rail-item' + (shown === 0 ? ' on' : '')}
+              role="button" tabIndex={0} onClick={() => tap(0)} onKeyDown={keys(0)}>
+              <MonoLabel className="id" tone="muted">{SETUP[0].n}</MonoLabel>
+              <h3>{SETUP[0].title}</h3>
+            </div>
+            <span className="rail-link"><i className="chev" /></span>
+            <div className={'rail-item' + (shown === 1 ? ' on' : '')}
+              role="button" tabIndex={0} onClick={() => tap(1)} onKeyDown={keys(1)}>
+              <MonoLabel className="id" tone="muted">{SETUP[1].n}</MonoLabel>
+              <h3>{SETUP[1].title}</h3>
+            </div>
           </div>
+          {onRail && <p className="rail-desc">{PROCESS[shown].body}</p>}
           <div className="wheel" ref={wheelRef}>
             <div className="wheel-ring" />
+            {/* Chevrons sit between the nodes and inherit the wheel's rotation.
+                They are not counter-rotated, so each one points along the ring
+                in the direction of travel. */}
+            {CYCLE.map((s, i) => {
+              const ang = 45 - i * 90 + turn;
+              return <i key={'c' + s.n} className="chev wheel-chev"
+                style={{ transform: `rotate(${ang}deg) translate(0,${-R}px) rotate(-45deg)` }} />;
+            })}
             {CYCLE.map((s, i) => {
               const ang = -i * 90 + turn;
               return (
@@ -1080,9 +1103,7 @@ function Process() {
                 </div>
               );
             })}
-            <div className="wheel-core">
-              <p>{PROCESS[shown].body}</p>
-            </div>
+            {!onRail && <div className="wheel-core"><p>{PROCESS[shown].body}</p></div>}
           </div>
         </div>
         {/* Below 900px the rail and wheel are hidden and all six read as a plain
