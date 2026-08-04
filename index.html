@@ -291,16 +291,19 @@ footer a{color:var(--n-0)}footer a:hover{color:var(--block-acid)}
 .rail-item h3,.wheel-node h3{display:inline-block;margin:0;padding:0 .1em;font-size:var(--text-display-3);line-height:var(--lh-tight);letter-spacing:var(--ls-title);color:var(--n-500);transition:color var(--dur-base) var(--ease-out),text-shadow var(--dur-base) var(--ease-out)}
 /* Selected stage glows white rather than taking a fill. */
 .rail-item.on h3,.wheel-node.on h3{color:var(--n-0);text-shadow:0 0 24px rgba(255,255,255,.55),0 0 60px rgba(255,255,255,.25)}
-.rail-link{flex:1 1 auto;min-width:56px;height:1px;background:var(--line-inverse);position:relative}
+.rail-link{flex:1 1 auto;min-width:56px;height:1px;background:var(--line-inverse);position:relative;transition:background var(--dur-base) var(--ease-out),box-shadow var(--dur-base) var(--ease-out)}
+.rail-link.on{background:var(--n-0);box-shadow:0 0 14px rgba(255,255,255,.6)}
 /* Shared chevron: a square with two borders, rotated to point along its line. */
-.chev{display:block;width:9px;height:9px;border-right:1.5px solid var(--n-500);border-bottom:1.5px solid var(--n-500)}
+.chev{display:block;width:9px;height:9px;color:var(--n-500);border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transition:color var(--dur-base) var(--ease-out),filter var(--dur-base) var(--ease-out)}
+.rail-link.on .chev{color:var(--n-0);filter:drop-shadow(0 0 8px rgba(255,255,255,.7))}
 .rail-link .chev{position:absolute;left:50%;top:50%;margin:-4px 0 0 -4px;transform:rotate(-45deg)}
 .rail-desc{margin:var(--sp-10) auto 0;max-width:56ch;min-height:4.5em;text-align:center;font-size:var(--text-body-sm);line-height:1.5;color:var(--n-300);text-wrap:pretty}
 /* Four repeatable stages float outside a turning gear. Nodes counter-rotate so
    titles stay upright; the centre carries the description of the stage at 12
    o'clock, but only while the rail's own line is not showing. */
 .wheel{position:relative;width:min(780px,92vw);aspect-ratio:1;margin:clamp(-32px,-2vw,-12px) auto 0}
-.wheel-gear{position:absolute;left:50%;top:50%;width:45%;aspect-ratio:1;transform-origin:50% 50%}
+.wheel-gear{position:absolute;left:50%;top:50%;width:45%;aspect-ratio:1;transform-origin:50% 50%;color:var(--line-inverse);transition:color var(--dur-base) var(--ease-out),filter var(--dur-base) var(--ease-out)}
+.wheel-gear.on{color:var(--n-0);filter:drop-shadow(0 0 12px rgba(255,255,255,.45))}
 .wheel-node{position:absolute;left:50%;top:50%;width:190px;text-align:center;cursor:pointer;opacity:.4;transition:opacity var(--dur-base) var(--ease-out)}
 .wheel-node.on,.wheel-node:hover{opacity:1}
 .wheel-node:focus-visible{outline:2px solid var(--n-0);outline-offset:6px;border-radius:var(--r-sm)}
@@ -1103,7 +1106,7 @@ function Process() {
             <div className="rail">
               {SETUP.map((s, i) => (
                 <React.Fragment key={s.n}>
-                  {i > 0 && <span className="rail-link"><i className="chev" /></span>}
+                  {i > 0 && <span className={'rail-link' + (shown === i - 1 ? ' on' : '')}><i className="chev" /></span>}
                   <div className={'rail-item' + (i === shown ? ' on' : '')}
                     role="button" tabIndex={0} onClick={() => tap(i)} onKeyDown={keys(i)}>
                     <MonoLabel className="id" tone="muted">{s.n}</MonoLabel>
@@ -1119,8 +1122,8 @@ function Process() {
           <div className="proc-band">
             <span className={'band-label' + (onRail ? '' : ' on')}>Repeated</span>
             <div className="wheel" ref={wheelRef}>
-            <svg className="wheel-gear" viewBox="0 0 400 400" aria-hidden="true" style={{ transform: `translate(-50%,-50%) rotate(${turn}deg)` }}>
-              <path d={GEAR} fill="none" stroke="var(--line-inverse)" strokeWidth="1.25" strokeLinejoin="round" />
+            <svg className={'wheel-gear' + (onRail ? '' : ' on')} viewBox="0 0 400 400" aria-hidden="true" style={{ transform: `translate(-50%,-50%) rotate(${turn}deg)` }}>
+              <path d={GEAR} fill="none" stroke="currentColor" strokeWidth="1.25" strokeLinejoin="round" />
             </svg>
             {CYCLE.map((s, i) => {
               const ang = -i * 90 + turn;
