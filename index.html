@@ -189,7 +189,6 @@ a{color:var(--text-link)}a:hover{color:var(--text-link-hover)}
 .acid-block h1::selection,.acid-block h2::selection,.acid-block h3::selection,.acid-block h1 *::selection,.acid-block h2 *::selection,.acid-block h3 *::selection{color:var(--n-50)}
 #founder .mark{background-position:0 62%}
 #founder .mark.on{color:var(--n-900)}
-.tight{line-height:.84!important;letter-spacing:-.03em!important;font-weight:900!important}
 .rev{opacity:0;transform:translateY(28px);transition:opacity 900ms var(--ease-scroll),transform 900ms var(--ease-scroll)}
 .rev.in{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){.rev{opacity:1;transform:none;transition:none}}
@@ -215,6 +214,9 @@ a{color:var(--text-link)}a:hover{color:var(--text-link-hover)}
 .caps-spacer{height:45vh}
 .cap-media{position:relative;width:100%;aspect-ratio:16/10;border-radius:var(--r-lg);overflow:hidden;background:var(--n-1000);margin-bottom:var(--sp-8);transition:background var(--dur-base) var(--ease-out)}
 .cap:hover .cap-media{background:var(--block-acid)}
+/* Same glow the process stage titles use. */
+.cap-title{transition:color var(--dur-base) var(--ease-out),text-shadow var(--dur-base) var(--ease-out)}
+.cap:hover .cap-title{color:var(--n-0);text-shadow:0 0 24px rgba(255,255,255,.55),0 0 60px rgba(255,255,255,.25)}
 .poster-static{width:100%;height:100%;object-fit:cover;display:block}
 .cap-media-fill{position:absolute;inset:0;width:100%;height:100%;opacity:0;transition:opacity .25s linear}
 /* Capability line art. Strokes inherit currentColor so one colour change lights
@@ -1049,7 +1051,7 @@ function Capabilities() {
                   <div className="cap-media"><Viz kind={c.viz} /></div>
                 )}
                 <MonoLabel className="id" tone="muted" style={{ display: 'block', marginBottom: 'var(--sp-8)' }}><span className="id-wide">{c.id}</span><span className="id-narrow">{c.mid || c.id}</span></MonoLabel>
-                <h3 style={{ margin: '0 0 var(--sp-5)', fontFamily: 'var(--font-display)', fontWeight: 'var(--fw-black)', fontSize: 'var(--text-display-3)', lineHeight: 'var(--lh-tight)', letterSpacing: 'var(--ls-title)' }}>{c.title}</h3>
+                <h3 className="cap-title" style={{ margin: '0 0 var(--sp-5)', fontFamily: 'var(--font-display)', fontWeight: 'var(--fw-black)', fontSize: 'var(--text-display-3)', lineHeight: 'var(--lh-tight)', letterSpacing: 'var(--ls-title)' }}>{c.title}</h3>
                 <p style={{ margin: 0 }}>{c.body}</p>
               </article>
             ))}
@@ -1224,13 +1226,13 @@ function Model() {
     <section ref={wrap} id="operator" data-screen-label="The model" className="model-dark">
       <div className="model-inner">
         <Frame style={{ width: '100%' }}>
-          <DisplayHeading size={1} tone="inverse" className="tight lines-wide">
+          <DisplayHeading size={1} tone="inverse" className="lines-wide">
             <span className="ln">Agile enough to</span>
             <span className="ln">outpace <span className={'mark' + on(0.45)}>agencies.</span></span>
             <span className="ln">Capable enough to</span>
             <span className="ln"><span>outperform </span><span className={'mark' + on(0.5)}>solo hires.</span></span>
           </DisplayHeading>
-          <DisplayHeading size={1} tone="inverse" className="tight lines-narrow">
+          <DisplayHeading size={1} tone="inverse" className="lines-narrow">
             <span className="ln">Agile enough</span>
             <span className="ln">to outpace <span className={'mark' + on(0.45)}>agencies.</span></span>
             <span className="ln">Capable enough</span>
