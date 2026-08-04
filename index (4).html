@@ -1003,12 +1003,12 @@ const { DisplayHeading, MonoLabel, Button, SiteFooter } = window.TheNowMachineDe
 /* ── 5. Process — the four steps, in the order they happen ── */
 const PROCESS = [
   { n: 'P-01', title: 'Audit', body: 'Analyze the current marketing and uncover opportunities.' },
-  { n: 'P-02', title: 'Cast', body: 'Onboard the face of the development. Whether it is new talent, or someone already on your team, they become the person your buyer relates to.' },
+  { n: 'P-02', title: 'Casting', body: 'Onboard the face of the development. Whether it is new talent, or someone already on your team, they become the person your buyer relates to.' },
   { n: 'P-03', title: 'Build', body: 'Landing pages, lead magnets, and nurturing that warms a cold inquiry until it is ready for your sales team.' },
-  { n: 'P-04', title: 'Produce', body: 'Plan, film, AI-generate, edit, and repurpose content for top to bottom of the funnel, built for organic channels and paid advertising.' },
-  { n: 'P-05', title: 'Distribute', body: "Distributed organically and amplified through international advertising, with intelligent retargeting that delivers the right message at every stage of the buyer's journey." },
-  { n: 'P-06', title: 'Report', body: 'Measure leads, engagement, qualified inquiries, and revenue attribution.' },
-  { n: 'P-07', title: 'Optimize', body: 'Improve creatives, funnels, CTAs, offers, and campaigns based on performance.' }
+  { n: 'P-04', title: 'Production', body: 'Plan, film, AI-generate, edit, and repurpose content for top to bottom of the funnel, built for organic channels and paid advertising.' },
+  { n: 'P-05', title: 'Distribution', body: "Distributed organically and amplified through international advertising, with intelligent retargeting that delivers the right message at every stage of the buyer's journey." },
+  { n: 'P-06', title: 'Reporting', body: 'Measure leads, engagement, qualified inquiries, and revenue attribution.' },
+  { n: 'P-07', title: 'Optimization', body: 'Improve creatives, funnels, CTAs, offers, and campaigns based on performance.' }
 ];
 
 const SETUP = PROCESS.slice(0, 3);
@@ -1036,15 +1036,6 @@ function Process() {
   const [R, setR] = React.useState(216);
   const [still, setStill] = React.useState(false);
   const [peek, setPeek] = React.useState(null);
-  const lock = React.useRef(0);
-  React.useEffect(() => {
-    /* The nav's "How it runs" link lands mid-window, where scroll position alone
-       would resolve to Cast. Select Audit on arrival, and hold it through the
-       smooth scroll so the programmatic movement does not clear it. */
-    const jump = () => { setPeek(0); lock.current = Date.now() + 1400; };
-    window.addEventListener('tnm:process-jump', jump);
-    return () => window.removeEventListener('tnm:process-jump', jump);
-  }, []);
   React.useEffect(() => {
     const fit = () => setR(Math.min(780, window.innerWidth * 0.92) * 0.375);
     fit();
@@ -1059,10 +1050,8 @@ function Process() {
      as the visitor scrolls on into the next section. */
   useScroll(() => {
     const y = window.scrollY;
-    /* A click holds its stage until the visitor scrolls again. While a nav jump
-       is settling, track position without clearing the selection. */
-    if (Date.now() < lock.current) { lastY.current = y; }
-    else if (Math.abs(y - lastY.current) > 2) { lastY.current = y; if (peek !== null) setPeek(null); }
+    /* A click holds its stage until the visitor scrolls again. */
+    if (Math.abs(y - lastY.current) > 2) { lastY.current = y; if (peek !== null) setPeek(null); }
     const el = wheelRef.current, head = headRef.current;
     if (!el || !head) return;
     const r = el.getBoundingClientRect();
@@ -1344,7 +1333,6 @@ function Nav() {
           return;
         }
       }
-      if (id === 'process') window.dispatchEvent(new CustomEvent('tnm:process-jump'));
       scrollToId(id);
     } else if (l === 'home') window.scrollTo({ top: 0, behavior: 'smooth' });
     else window.location.href = 'mailto:chris@thenowmachine.com';
