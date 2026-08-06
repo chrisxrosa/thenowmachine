@@ -215,7 +215,7 @@ a{color:var(--text-link)}a:hover{color:var(--text-link-hover)}
 
 .reel-handoff-zone{height:4vh}
 .caps-pin{position:relative;background:var(--n-900)}
-.caps-spacer{height:22vh}
+.caps-spacer{height:11vh}
 .cap-media{position:relative;width:100%;aspect-ratio:16/10;border-radius:var(--r-lg);overflow:hidden;background:var(--block-acid);margin-bottom:var(--sp-8)}
 /* Same glow the process stage titles use. */
 .cap-title{transition:color var(--dur-base) var(--ease-out),text-shadow var(--dur-base) var(--ease-out)}
@@ -312,9 +312,10 @@ footer a{color:var(--n-0)}footer a:hover{color:var(--block-acid)}
 /* Dark section, matching the Capabilities block above — no divider between them,
    they read as one continuous dark run. */
 .proc-sec{background:var(--n-900);color:var(--n-50);padding:clamp(56px,7vw,104px) 0}
-/* Full-screen on desktop, content centred vertically. Mobile keeps its natural
-   height, since the stacked list there is taller than a screen anyway. */
-@media (min-width:901px){.proc-sec{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:clamp(40px,5vh,80px) 0}}
+/* Full-height minus the amount the content was moved up — anchoring to the top
+   left the same dead space stranded at the bottom instead. Centring previously
+   cost ~130px above the title, so the section sheds an equivalent 12vh here. */
+@media (min-width:901px){.proc-sec{min-height:88vh;display:flex;flex-direction:column;justify-content:flex-start;padding:clamp(28px,3.5vh,52px) 0 clamp(40px,5vh,80px)}}
 .proc-step .step-n{display:block;margin-bottom:var(--sp-8)}
 .proc-step h3{margin:0 0 var(--sp-4);font-size:var(--text-title);font-weight:var(--fw-bold);letter-spacing:var(--ls-title)}
 .proc-sec .cap{border-top-color:var(--line-inverse)}
@@ -347,11 +348,13 @@ footer a{color:var(--n-0)}footer a:hover{color:var(--block-acid)}
 .model-dark{background:var(--block-ink);color:var(--n-0);padding:var(--section-y) 0}
 .model-inner{width:100%}
 .work-sec{padding:var(--section-y) 0;display:flex;flex-direction:column;gap:clamp(28px,4vw,56px)}
+/* Full screen on desktop, cards sized in JS to land inside it exactly. */
+@media (min-width:901px){.work-sec{min-height:100vh;justify-content:center;padding:clamp(40px,5vh,80px) 0}}
 .wrail{width:100%;overflow-x:auto;overflow-y:hidden;scrollbar-width:none;padding:0 24px}.wrail::-webkit-scrollbar{display:none}
 .wtrack{display:flex;gap:48px;align-items:flex-start;width:max-content;min-width:100%;margin:0 auto;justify-content:center}
 .wcard{flex:0 0 auto;opacity:.62;transition:width var(--dur-scroll) var(--ease-scroll),opacity var(--dur-base) var(--ease-out)}
 .wcard.on{opacity:1}
-.poster{width:100%;aspect-ratio:9/16;border-radius:var(--r-md);overflow:hidden;position:relative}
+.poster{width:100%;aspect-ratio:2/3;border-radius:var(--r-md);overflow:hidden;position:relative}
 .poster>*{display:block;width:100%;height:100%}
 .poster-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity var(--dur-base) var(--ease-out);pointer-events:none}
 .wcard:hover .poster-video,.wcard.on .poster-video{opacity:1}
@@ -937,7 +940,7 @@ function ReelHandoff() {
          layout — so the video visibly snaps to full-bleed and back down quickly,
          instead of tracking however tall the hero content happens to be. */
       const growLen = vh * 0.3;
-      const shrinkLen = vh * 0.15; /* must finish inside .caps-spacer (22vh) or the section releases mid-shrink */
+      const shrinkLen = vh * 0.08; /* must finish inside .caps-spacer (11vh) or the section releases mid-shrink */
       const g = clamp((sy - growFrom) / growLen, 0, 1);
       /* sp is still gated strictly on the real pinTop — the exact scroll position
          where .caps-hold's native CSS sticky engages. Shrink can never start before
@@ -1275,9 +1278,10 @@ function Work() {
     const fit = () => {
       const avail = Math.min(window.innerWidth, 1680) - 48 - GAP * (WORK.length - 1);
       const maxByW = avail / (WORK.length + 0.34);
-      /* Cards are 9:16 now, so height = width * 16/9. Solve for the width that
-         keeps the enlarged card (x1.34) inside the available vertical space. */
-      const maxByH = ((window.innerHeight - 280) * 9 / 16) / 1.34;
+      /* Cards are 2:3, so poster height = width * 3/2. 330px covers the rest of
+         the section: padding, heading, gap, caption and body. Solve for the width
+         that keeps the enlarged card (x1.34) inside what is left. */
+      const maxByH = ((window.innerHeight - 330) * 2 / 3) / 1.34;
       setCw(Math.round(Math.max(170, Math.min(340, maxByW, maxByH))));
     };
     fit();
