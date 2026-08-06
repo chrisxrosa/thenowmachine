@@ -20,7 +20,7 @@ permissions:
 # Only one deployment in flight at a time; a newer push cancels an in-progress one.
 concurrency:
   group: pages
-  cancel-in-progress: false
+  cancel-in-progress: false 
 
 jobs:
   build:
