@@ -322,6 +322,7 @@ footer a{color:var(--n-0)}footer a:hover{color:var(--block-acid)}
 .proc-sec .cap:hover{border-top-color:var(--n-50)}
 .proc-sec .cap p{color:var(--n-300)}
 /* Static list of every stage on the left, the gear and its descriptions right. */
+.proc-sec .rev{transition-duration:620ms}
 .proc-stage{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:clamp(24px,3vw,48px);margin:clamp(28px,4vh,64px) 0 0}
 .plist{justify-self:start}
 .plist{display:grid;gap:var(--sp-2);align-content:center}
@@ -362,10 +363,16 @@ footer a{color:var(--n-0)}footer a:hover{color:var(--block-acid)}
 
 .work-body{width:100%;margin:var(--sp-3) 0 0;opacity:0;transition:opacity var(--dur-base) var(--ease-out);font-size:14px;line-height:1.5;color:var(--text-secondary);text-wrap:pretty}
 .wcard.on .work-body{opacity:1}
+/* Full-screen operator section. The portrait is capped against viewport height
+   rather than column width — at 1/1 it was the single tallest element and what
+   pushed the section past one screen. */
+.founder-sec{padding:var(--section-y) 0}
+@media (min-width:901px){.founder-sec{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:clamp(40px,5vh,80px) 0}}
+.founder-portrait{width:min(100%,44vh);aspect-ratio:1/1;border-radius:var(--r-md);overflow:hidden}
 .founder-grid{display:grid;grid-template-columns:minmax(0,0.85fr) minmax(0,1.15fr);gap:clamp(32px,6vw,110px);align-items:start}
 /* Copy centres against the square portrait so the column reads balanced, not top-heavy. */
 .founder-copy{align-self:center}
-.track-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp-12);margin-top:clamp(56px,7vw,104px)}
+.track-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp-12);margin-top:clamp(40px,4vw,68px)}
 @media (max-width:1100px){.track-grid{gap:var(--sp-10)}}
 .contact-foot{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:var(--sp-10);margin-top:clamp(48px,6vw,96px)}
 @media (max-width:900px){
@@ -1119,7 +1126,18 @@ function Process() {
   const [prog, setProg] = React.useState({ stage: -1, rot: 0 });
   const [still, setStill] = React.useState(false);
   const [peek, setPeek] = React.useState(null);
+  const [shownIn, setShownIn] = React.useState(false);
+  const secRef = React.useRef(null);
   const lock = React.useRef(0);
+  React.useEffect(() => {
+    /* This section re-renders on every scroll tick, and React rewrites className
+       each time — which would strip the `in` class that useReveal adds
+       imperatively. So the reveal is held in state here instead. */
+    const el = secRef.current; if (!el) return;
+    const io = new IntersectionObserver(es => { if (es[0].isIntersecting) { setShownIn(true); io.disconnect(); } }, { rootMargin: '0px 0px -12% 0px' });
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
   React.useEffect(() => {
     /* The nav's "How it runs" link lands mid-window, where scroll position alone
        would resolve to a later stage. Select Audit on arrival, and hold it through
@@ -1169,31 +1187,36 @@ function Process() {
      highlighting are unaffected. */
   const turn = still ? 0 : -(prog.rot * 360 * 0.5);
   const tap = i => { if (i !== stage || peek !== null) setPeek(i); };
+  const rv = shownIn ? 'rev in' : 'rev';
   const keys = (i) => e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); tap(i); } };
   /* Exactly one description area is live at a time: the rail's own line while a
      rail stage is highlighted, the wheel's centre once attention moves to the
      wheel. They never both show. */
   return (
-    <section id="process" data-screen-label="How it runs" className="proc-sec">
+    <section id="process" data-screen-label="How it runs" className="proc-sec" ref={secRef}>
       <Frame style={{ width: '100%' }}>
-        <div ref={headRef} className="rev"><DisplayHeading size={1} tone="inverse">How it runs</DisplayHeading></div>
-        <div className="proc-stage rev">
+        <div ref={headRef} className={rv}><DisplayHeading size={1} tone="inverse">How it runs</DisplayHeading></div>
+        <div className="proc-stage">
           <div className="plist">
             {PROCESS.map((st, i) => (
               <React.Fragment key={st.n}>
-                {i === 0 && <span className={'band-label' + (lit && shown < 3 ? ' on' : '')}>One time</span>}
-                {i === 3 && <span className={'band-label' + (lit && shown >= 3 ? ' on' : '')}>Repeated</span>}
-                <div className={'pitem' + (lit && i === shown ? ' on' : '')}
-                  role="button" tabIndex={0} onClick={() => tap(i)} onKeyDown={keys(i)}>
-                  <MonoLabel className="id" tone="muted">{st.n}</MonoLabel>
-                  <h3>{st.title}</h3>
+                {i === 0 && <span className={'band-label ' + rv + (lit && shown < 3 ? ' on' : '')} style={{ transitionDelay: '60ms' }}>One time</span>}
+                {i === 3 && <span className={'band-label ' + rv + (lit && shown >= 3 ? ' on' : '')} style={{ transitionDelay: '265ms' }}>Repeated</span>}
+                {/* .pitem carries its own opacity for the dim/lit state, which would
+                    override .rev — so the reveal rides on a wrapper instead. */}
+                <div className={rv} style={{ transitionDelay: `${110 + i * 55}ms` }}>
+                  <div className={'pitem' + (lit && i === shown ? ' on' : '')}
+                    role="button" tabIndex={0} onClick={() => tap(i)} onKeyDown={keys(i)}>
+                    <MonoLabel className="id" tone="muted">{st.n}</MonoLabel>
+                    <h3>{st.title}</h3>
+                  </div>
                 </div>
               </React.Fragment>
             ))}
           </div>
           {/* Every stage shares the gear; it lights once the repeated stages
               take over. */}
-          <div className="wheel" ref={wheelRef}>
+          <div className={'wheel ' + rv} ref={wheelRef} style={{ transitionDelay: '200ms' }}>
             <svg className={'wheel-gear' + (lit ? ' on' : '')} viewBox="0 0 400 400" aria-hidden="true" style={{ transform: `translate(-50%,-50%) rotate(${turn}deg)` }}>
               <path d={GEAR} fill="none" stroke="currentColor" strokeWidth="1.25" strokeLinejoin="round" />
             </svg>
@@ -1336,29 +1359,41 @@ const TRACK = [
 
 function Founder() {
   const [lit, setLit] = React.useState(false);
+  const [shownIn, setShownIn] = React.useState(false);
   const head = React.useRef(null);
+  const secRef = React.useRef(null);
   useScroll(() => {
     const el = head.current; if (!el) return;
     setLit(el.getBoundingClientRect().top < window.innerHeight * 0.45);
   });
+  React.useEffect(() => {
+    /* `lit` flipping re-renders this section, and React would rewrite className
+       and strip the `in` class useReveal adds imperatively — making the content
+       vanish mid-scroll. Held in state for the same reason as the process section. */
+    const el = secRef.current; if (!el) return;
+    const io = new IntersectionObserver(es => { if (es[0].isIntersecting) { setShownIn(true); io.disconnect(); } }, { rootMargin: '0px 0px -12% 0px' });
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+  const rv = shownIn ? 'rev in' : 'rev';
   return (
-    <section id="founder" data-screen-label="The operator" style={{ paddingTop: 'var(--section-y)', paddingBottom: 'var(--section-y)' }}>
-      <Frame>
+    <section id="founder" data-screen-label="The operator" className="founder-sec" ref={secRef}>
+      <Frame style={{ width: '100%' }}>
         <div className="founder-grid">
-          <div className="rev" style={{ position: 'relative' }}>
-            <div style={{ width: '100%', aspectRatio: '1 / 1', borderRadius: 'var(--r-md)', overflow: 'hidden' }}>
+          <div className={rv} style={{ position: 'relative' }}>
+            <div className="founder-portrait">
               <img src="assets/operator-portrait.jpg" alt="Chris Rosa" loading="lazy" decoding="async" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
             </div>
             <MonoLabel tone="inverse" size="xs" style={{ position: 'absolute', left: 'var(--sp-4)', bottom: 'var(--sp-4)', background: 'var(--surface-scrim)', backdropFilter: 'var(--blur-chrome)', padding: '6px 10px', borderRadius: 'var(--r-pill)', pointerEvents: 'none' }}>OP-01 · Curaçao</MonoLabel>
           </div>
-          <div className="rev founder-copy">
+          <div className={rv + ' founder-copy'}>
             <div ref={head}><DisplayHeading size={2}><span className="lines-wide">Island born. Made in<br />Los Angeles. <span className={'mark' + (lit ? ' on' : '')}>Returned.</span></span><span className="lines-narrow">Island born.<br />Made in<br />Los Angeles.<br /><span className={'mark' + (lit ? ' on' : '')}>Returned.</span></span></DisplayHeading></div>
             <p style={{ maxWidth: 'none', marginTop: 'var(--sp-10)', color: 'var(--text-secondary)', textWrap: 'pretty' }}>The Now Machine is operator-led. One person owns your answers and your outcomes, with senior specialists behind every discipline. No juniors billed at agency rates.</p>
           </div>
         </div>
-        <div className="track-grid rev">
+        <div className={'track-grid ' + rv}>
           {TRACK.map(t => (
-            <article key={t.id} className="cap rev">
+            <article key={t.id} className={'cap ' + rv}>
               <MonoLabel className="id" tone="muted" style={{ display: 'block', marginBottom: 'var(--sp-8)' }}>{t.id}</MonoLabel>
               <h3 style={{ margin: '0 0 var(--sp-2)', fontSize: 'var(--text-title)', fontWeight: 'var(--fw-bold)', letterSpacing: 'var(--ls-title)' }}>{t.title}</h3>
               <MonoLabel tone="muted" style={{ display: 'block', marginBottom: 'var(--sp-5)' }}>{t.meta}</MonoLabel>
@@ -1389,7 +1424,7 @@ function Contact() {
 function Footer() {
   return (
     <SiteFooter wordmark={<span className="foot-mark"><img src="assets/foot-wordmark.png" alt="the now machine" width="941" height="94" loading="lazy" decoding="async" /></span>} columns={[]}
-      note={<span>Demand generation<br />for multi-home developments · <a href="mailto:hello@thenowmachine.com">Contact</a><span style={{ display: 'block', marginTop: 'var(--sp-4)', textAlign: 'center' }}>© 2026 The Now Machine. All rights reserved.</span></span>} />
+      note={<span>Demand generation<br />for multi-home developments · <a href="mailto:hello@thenowmachine.com">Contact</a><span style={{ display: 'block', marginTop: 'var(--sp-3)' }}>Veerstraat 9a, Willemstad, Curaçao</span><span style={{ display: 'block', marginTop: 'var(--sp-4)', textAlign: 'center' }}>© 2026 The Now Machine. All rights reserved.</span></span>} />
   );
 }
 
