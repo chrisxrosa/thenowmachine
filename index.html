@@ -58,7 +58,6 @@
   --line-hairline:var(--n-300);
   --line-strong:var(--n-900);
   --line-inverse:rgba(255,255,255,.28);
-  --menu-height:88px;
 }
 
 /* tokens/typography.css */
@@ -349,107 +348,32 @@ footer a{color:var(--n-0)}footer a:hover{color:var(--block-acid)}
 @media (max-width:900px){.proc-stage{display:none}.proc-cycle-list{display:grid;grid-template-columns:1fr;gap:var(--sp-10);margin-top:var(--sp-10)}}
 .model-dark{background:var(--block-ink);color:var(--n-0);padding:var(--section-y) 0}
 .model-inner{width:100%}
-.work-sec{
-  height:100vh;
-  display:flex;
-  flex-direction:column;
-  gap:clamp(24px,2.5vh,36px);
-  padding:clamp(96px,11vh,144px) 0 clamp(96px,11vh,144px) 0;
-  overflow:visible;
-}
-
-@media (min-width:901px){
-  .work-sec{
-    min-height:100vh;
-    height:100vh;
-    justify-content:flex-start;
-  }
-}
-.wrail{
-  flex:1;
-  width:100%;
-  overflow-x:auto;
-  overflow-y:visible;
-  scrollbar-width:none;
-  display:flex;
-  align-items:center;
-  padding:0 24px;
-}
-.wrail::-webkit-scrollbar{display:none}
-.wtrack{
-  display:flex;
-  gap:48px;
-  align-items:flex-start;
-  width:max-content;
-  min-width:100%;
-  margin:0 auto;
-  justify-content:center;
-}
-.wcard{flex:0 0 auto;opacity:.62;transition:width var(--dur-scroll) var(--ease-scroll),opacity var(--dur-base) var(--ease-out);position:relative;z-index:1}
-.wcard:hover,.wcard.on{z-index:20}
+.work-sec{padding:var(--section-y) 0;display:flex;flex-direction:column;gap:clamp(28px,4vw,56px)}
+/* Full screen on desktop, cards sized in JS to land inside it exactly. */
+@media (min-width:901px){.work-sec{min-height:100vh;justify-content:center;padding:clamp(16px,2vh,28px) 0 clamp(22px,2.75vh,44px)}}
+.wrail{width:100%;overflow-x:auto;overflow-y:hidden;scrollbar-width:none;padding:0 24px}.wrail::-webkit-scrollbar{display:none}
+.wtrack{display:flex;gap:48px;align-items:flex-start;width:max-content;min-width:100%;margin:0 auto;justify-content:center}
+.wcard{flex:0 0 auto;opacity:.62;transition:width var(--dur-scroll) var(--ease-scroll),opacity var(--dur-base) var(--ease-out)}
 .wcard.on{opacity:1}
 .poster{width:100%;aspect-ratio:2/3;border-radius:var(--r-md);overflow:hidden;position:relative}
 .poster>*{display:block;width:100%;height:100%}
-.poster-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity var(--dur-base) var(--ease-out);pointer-events:none;z-index:2}
+.poster-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity var(--dur-base) var(--ease-out);pointer-events:none}
 .wcard:hover .poster-video,.wcard.on .poster-video{opacity:1}
 .work-cap{display:flex;flex-wrap:wrap;align-items:baseline;gap:var(--sp-1) var(--sp-3);margin-top:var(--sp-4);padding-bottom:var(--sp-3);border-bottom:1px solid var(--line-hairline);opacity:1;transition:opacity var(--dur-base) var(--ease-out)}
 
-.work-body{
-  width:100%;
-  margin:var(--sp-3) 0 0;
-  opacity:0;
-  visibility:hidden;
-  transition:opacity var(--dur-base) var(--ease-out), visibility var(--dur-base) var(--ease-out);
-  font-size:14px;
-  line-height:1.5;
-  color:var(--text-secondary);
-  text-wrap:pretty;
-  position:relative;
-  z-index:30;
-  pointer-events:auto;
-}
-.wcard:hover .work-body, .wcard.on .work-body{
-  opacity:1;
-  visibility:visible;
-}
-/* Full-screen operator section vertical positioning and sizing adjustments */
-.founder-sec{
-  min-height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  overflow:hidden;
-  box-sizing: border-box;
-  padding-top: var(--menu-height);
-}
-@media (min-width:901px){
-  .founder-sec{
-    height:100vh;
-  }
-}
-.founder-content{
-  width: 100%;
-  transform: translateY(calc(var(--menu-height) * -0.4));
-}
-.founder-grid{
-  display:flex;
-  align-items:center;
-  gap:clamp(32px,6vw,110px);
-}
-.founder-portrait{
-  width: clamp(180px, 25vw, 380px);
-  max-height: calc(100vh - var(--menu-height) - 100px);
-  aspect-ratio:1/1;
-  border-radius: 50%;
-  overflow:hidden;
-  flex-shrink: 0;
-}
-.founder-copy{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  transform: translateY(-16px);
-}
+.work-body{width:100%;margin:var(--sp-3) 0 0;opacity:0;transition:opacity var(--dur-base) var(--ease-out);font-size:14px;line-height:1.5;color:var(--text-secondary);text-wrap:pretty}
+.wcard.on .work-body{opacity:1}
+/* Full-screen operator section. The portrait is capped against viewport height
+   rather than column width — grown from 44vh to 56vh, verified against the
+   section's actual height budget so it stays inside one screen at every size
+   checked. The copy column gets an explicit floor so growing the portrait
+   can't squeeze it narrow enough to break the title's fixed line breaks. */
+.founder-sec{padding:var(--section-y) 0}
+@media (min-width:901px){.founder-sec{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:clamp(40px,5vh,80px) 0}}
+.founder-portrait{width:min(100%,56vh);aspect-ratio:1/1;border-radius:var(--r-md);overflow:hidden}
+.founder-grid{display:grid;grid-template-columns:auto minmax(380px,1fr);gap:clamp(32px,6vw,110px);align-items:start}
+/* Copy centres against the square portrait so the column reads balanced, not top-heavy. */
+.founder-copy{align-self:center}
 .track-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp-12);margin-top:clamp(40px,4vw,68px)}
 @media (max-width:1100px){.track-grid{gap:var(--sp-10)}}
 .contact-foot{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:var(--sp-10);margin-top:clamp(48px,6vw,96px)}
@@ -462,9 +386,6 @@ footer a{color:var(--n-0)}footer a:hover{color:var(--block-acid)}
 .caps-spacer{display:none}
 .reel-handoff-zone{height:0}
 .wtrack{gap:24px}
-.founder-content{transform: none !important;}
-.founder-copy{transform: none !important;}
-.founder-portrait{border-radius: var(--r-md); width: clamp(220px, 28vw, 420px);}
 }
 </style>
 <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
@@ -1083,7 +1004,7 @@ function ReelHandoff() {
     tick();
     return () => { window.removeEventListener('scroll', onScroll); window.removeEventListener('resize', onScroll); };
   }, []);
-  return <div className="reel-handoff-zone" aria-hidden="true" />
+  return <div className="reel-handoff-zone" aria-hidden="true" />;
 }
 
 /* ── 4. Capabilities ── */
@@ -1380,20 +1301,25 @@ function Work() {
   const rail = React.useRef(null);
   React.useEffect(() => {
     const fit = () => {
-      const vh = window.innerHeight;
       const avail = Math.min(window.innerWidth, 1680) - 48 - GAP * (WORK.length - 1);
-      const maxByW = (avail / (WORK.length + 0.15)) * 0.75;
+      const maxByW = avail / (WORK.length + 0.34);
       const isDesktop = window.matchMedia('(min-width:901px)').matches;
       if (isDesktop && rail.current) {
+        /* "330" was a guessed constant that didn't track the section's actual,
+           responsive padding/heading/gap — off by up to 65px at some sizes,
+           either wasting space or letting the section run past one screen.
+           rail.top is measured live and already equals exactly that chrome,
+           whatever it happens to be at this viewport, no guessing required. */
+        const vh = window.innerHeight;
+        const chromeAbove = rail.current.getBoundingClientRect().top;
+        const bottomPad = Math.min(80, Math.max(40, 0.05 * vh)); // mirrors clamp(40px,5vh,80px)
         const captionBody = 92; // mono caption + body line(s) below the poster — low variance
-        const section = document.getElementById('work');
-        const sectionH = section ? section.clientHeight : vh;
-        const maxByH = ((sectionH - 230 - captionBody) / 1.5) * 0.75;
-        setCw(Math.round(Math.max(130, Math.min(450, maxByW, maxByH))));
+        const maxByH = ((vh - chromeAbove - bottomPad - captionBody) * 2 / 3) / 1.34;
+        setCw(Math.round(Math.max(170, Math.min(400, maxByW, maxByH))));
       } else {
         /* Mobile never claims a full-screen section, so cards there are sized
-           by available width only, scaled down by 25%. */
-        setCw(Math.round(Math.max(130, Math.min(450, maxByW))));
+           by available width only, same as before this fix on that axis. */
+        setCw(Math.round(Math.max(170, Math.min(400, maxByW))));
       }
     };
     fit();
@@ -1419,7 +1345,7 @@ function Work() {
   const stop = id => { const v = vids.current[id]; if (v) { v.pause(); v.currentTime = 0; } };
   const bigIdx = hov >= 0 ? hov : (below ? -1 : 0);
   React.useEffect(() => { WORK.forEach((w, n) => (n === bigIdx ? play(w.id) : stop(w.id))); }, [bigIdx]);
-  const bigW = Math.round(cw * 1.08);
+  const bigW = Math.round(cw * 1.34);
   return (
     <section id="work" data-screen-label="Selected work" className="work-sec">
       <Frame style={{ width: '100%' }}>
@@ -1467,32 +1393,30 @@ function Founder() {
   const rv = shownIn ? 'rev in' : 'rev';
   return (
     <section id="founder" data-screen-label="The operator" className="founder-sec" ref={secRef}>
-      <div className="founder-content">
-        <Frame style={{ width: '100%' }}>
-          <div className="founder-grid">
-            <div className={rv} style={{ position: 'relative' }}>
-              <div className="founder-portrait">
-                <img src="assets/operator-portrait.jpg" alt="Chris Rosa" loading="lazy" decoding="async" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
-              </div>
-              <MonoLabel tone="inverse" size="xs" style={{ position: 'absolute', left: 'var(--sp-4)', bottom: 'var(--sp-4)', background: 'var(--surface-scrim)', backdropFilter: 'var(--blur-chrome)', padding: '6px 10px', borderRadius: 'var(--r-pill)', pointerEvents: 'none' }}>OP-01 · Curaçao</MonoLabel>
+      <Frame style={{ width: '100%' }}>
+        <div className="founder-grid">
+          <div className={rv} style={{ position: 'relative' }}>
+            <div className="founder-portrait">
+              <img src="assets/operator-portrait.jpg" alt="Chris Rosa" loading="lazy" decoding="async" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
             </div>
-            <div className={rv + ' founder-copy'}>
-              <div ref={head}><DisplayHeading size={2}><span className="lines-wide">Island born. Made in<br />Los Angeles. <span className={'mark' + (lit ? ' on' : '')}>Returned.</span></span><span className="lines-narrow">Island born.<br />Made in<br />Los Angeles.<br /><span className={'mark' + (lit ? ' on' : '')}>Returned.</span></span></DisplayHeading></div>
-              <p style={{ maxWidth: 'none', marginTop: 'var(--sp-10)', color: 'var(--text-secondary)', textWrap: 'pretty' }}>The Now Machine is operator-led. One person owns your answers and your outcomes, with senior specialists behind every discipline. No juniors billed at agency rates.</p>
-            </div>
+            <MonoLabel tone="inverse" size="xs" style={{ position: 'absolute', left: 'var(--sp-4)', bottom: 'var(--sp-4)', background: 'var(--surface-scrim)', backdropFilter: 'var(--blur-chrome)', padding: '6px 10px', borderRadius: 'var(--r-pill)', pointerEvents: 'none' }}>OP-01 · Curaçao</MonoLabel>
           </div>
-          <div className={'track-grid ' + rv}>
-            {TRACK.map(t => (
-              <article key={t.id} className={'cap ' + rv}>
-                <MonoLabel className="id" tone="muted" style={{ display: 'block', marginBottom: 'var(--sp-8)' }}>{t.id}</MonoLabel>
-                <h3 style={{ margin: '0 0 var(--sp-2)', fontSize: 'var(--text-title)', fontWeight: 'var(--fw-bold)', letterSpacing: 'var(--ls-title)' }}>{t.title}</h3>
-                <MonoLabel tone="muted" style={{ display: 'block', marginBottom: 'var(--sp-5)' }}>{t.meta}</MonoLabel>
-                <p style={{ margin: 0, maxWidth: 'var(--measure)' }}>{t.body}</p>
-              </article>
-            ))}
+          <div className={rv + ' founder-copy'}>
+            <div ref={head}><DisplayHeading size={2}><span className="lines-wide">Island born. Made in<br />Los Angeles. <span className={'mark' + (lit ? ' on' : '')}>Returned.</span></span><span className="lines-narrow">Island born.<br />Made in<br />Los Angeles.<br /><span className={'mark' + (lit ? ' on' : '')}>Returned.</span></span></DisplayHeading></div>
+            <p style={{ maxWidth: 'none', marginTop: 'var(--sp-10)', color: 'var(--text-secondary)', textWrap: 'pretty' }}>The Now Machine is operator-led. One person owns your answers and your outcomes, with senior specialists behind every discipline. No juniors billed at agency rates.</p>
           </div>
-        </Frame>
-      </div>
+        </div>
+        <div className={'track-grid ' + rv}>
+          {TRACK.map(t => (
+            <article key={t.id} className={'cap ' + rv}>
+              <MonoLabel className="id" tone="muted" style={{ display: 'block', marginBottom: 'var(--sp-8)' }}>{t.id}</MonoLabel>
+              <h3 style={{ margin: '0 0 var(--sp-2)', fontSize: 'var(--text-title)', fontWeight: 'var(--fw-bold)', letterSpacing: 'var(--ls-title)' }}>{t.title}</h3>
+              <MonoLabel tone="muted" style={{ display: 'block', marginBottom: 'var(--sp-5)' }}>{t.meta}</MonoLabel>
+              <p style={{ margin: 0, maxWidth: 'var(--measure)' }}>{t.body}</p>
+            </article>
+          ))}
+        </div>
+      </Frame>
     </section>
   );
 }
