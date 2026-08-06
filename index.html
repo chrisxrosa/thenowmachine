@@ -215,7 +215,7 @@ a{color:var(--text-link)}a:hover{color:var(--text-link-hover)}
 
 .reel-handoff-zone{height:4vh}
 .caps-pin{position:relative;background:var(--n-900)}
-.caps-spacer{height:11vh}
+.caps-spacer{height:22vh}
 .cap-media{position:relative;width:100%;aspect-ratio:16/10;border-radius:var(--r-lg);overflow:hidden;background:var(--block-acid);margin-bottom:var(--sp-8)}
 /* Same glow the process stage titles use. */
 .cap-title{transition:color var(--dur-base) var(--ease-out),text-shadow var(--dur-base) var(--ease-out)}
@@ -350,7 +350,7 @@ footer a{color:var(--n-0)}footer a:hover{color:var(--block-acid)}
 .model-inner{width:100%}
 .work-sec{padding:var(--section-y) 0;display:flex;flex-direction:column;gap:clamp(28px,4vw,56px)}
 /* Full screen on desktop, cards sized in JS to land inside it exactly. */
-@media (min-width:901px){.work-sec{min-height:100vh;justify-content:center;padding:clamp(40px,5vh,80px) 0}}
+@media (min-width:901px){.work-sec{min-height:100vh;justify-content:center;padding:clamp(16px,2vh,28px) 0 clamp(22px,2.75vh,44px)}}
 .wrail{width:100%;overflow-x:auto;overflow-y:hidden;scrollbar-width:none;padding:0 24px}.wrail::-webkit-scrollbar{display:none}
 .wtrack{display:flex;gap:48px;align-items:flex-start;width:max-content;min-width:100%;margin:0 auto;justify-content:center}
 .wcard{flex:0 0 auto;opacity:.62;transition:width var(--dur-scroll) var(--ease-scroll),opacity var(--dur-base) var(--ease-out)}
@@ -364,12 +364,14 @@ footer a{color:var(--n-0)}footer a:hover{color:var(--block-acid)}
 .work-body{width:100%;margin:var(--sp-3) 0 0;opacity:0;transition:opacity var(--dur-base) var(--ease-out);font-size:14px;line-height:1.5;color:var(--text-secondary);text-wrap:pretty}
 .wcard.on .work-body{opacity:1}
 /* Full-screen operator section. The portrait is capped against viewport height
-   rather than column width — at 1/1 it was the single tallest element and what
-   pushed the section past one screen. */
+   rather than column width — grown from 44vh to 56vh, verified against the
+   section's actual height budget so it stays inside one screen at every size
+   checked. The copy column gets an explicit floor so growing the portrait
+   can't squeeze it narrow enough to break the title's fixed line breaks. */
 .founder-sec{padding:var(--section-y) 0}
 @media (min-width:901px){.founder-sec{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:clamp(40px,5vh,80px) 0}}
-.founder-portrait{width:min(100%,44vh);aspect-ratio:1/1;border-radius:var(--r-md);overflow:hidden}
-.founder-grid{display:grid;grid-template-columns:minmax(0,0.85fr) minmax(0,1.15fr);gap:clamp(32px,6vw,110px);align-items:start}
+.founder-portrait{width:min(100%,56vh);aspect-ratio:1/1;border-radius:var(--r-md);overflow:hidden}
+.founder-grid{display:grid;grid-template-columns:auto minmax(380px,1fr);gap:clamp(32px,6vw,110px);align-items:start}
 /* Copy centres against the square portrait so the column reads balanced, not top-heavy. */
 .founder-copy{align-self:center}
 .track-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp-12);margin-top:clamp(40px,4vw,68px)}
@@ -947,7 +949,7 @@ function ReelHandoff() {
          layout — so the video visibly snaps to full-bleed and back down quickly,
          instead of tracking however tall the hero content happens to be. */
       const growLen = vh * 0.3;
-      const shrinkLen = vh * 0.08; /* must finish inside .caps-spacer (11vh) or the section releases mid-shrink */
+      const shrinkLen = vh * 0.15; /* must finish inside .caps-spacer (22vh) or the section releases mid-shrink */
       const g = clamp((sy - growFrom) / growLen, 0, 1);
       /* sp is still gated strictly on the real pinTop — the exact scroll position
          where .caps-hold's native CSS sticky engages. Shrink can never start before
@@ -1094,13 +1096,13 @@ const { DisplayHeading, MonoLabel, Button, SiteFooter } = window.TheNowMachineDe
 
 /* ── 5. Process — the four steps, in the order they happen ── */
 const PROCESS = [
-  { n: 'P-01', title: 'Audit', body: 'Analyze the current marketing and uncover opportunities.' },
+  { n: 'P-01', title: 'Audit', body: 'Audit the current marketing, digital presence, and content, and find where value is being left on the table.' },
   { n: 'P-02', title: 'Cast', body: 'Onboard the face of the development. Whether it is new talent, or a team member, they become the person your buyer relates to.' },
-  { n: 'P-03', title: 'Funnel', body: 'Landing pages, lead magnets, and nurturing that warms a cold inquiry until it is ready for your sales team.' },
-  { n: 'P-04', title: 'Content', body: 'Plan, film, AI-generate, edit, and repurpose content for top to bottom of the funnel.' },
-  { n: 'P-05', title: 'Distribute', body: 'Distributed organically and amplified through international advertising, with intelligent retargeting.' },
-  { n: 'P-06', title: 'Report', body: 'Measure leads, engagement, qualified inquiries, and revenue attribution.' },
-  { n: 'P-07', title: 'Optimize', body: 'Data-driven improvements across creatives, funnels, CTAs, offers, and campaigns.' }
+  { n: 'P-03', title: 'Build', body: 'Build the pages and lead magnets that qualify inquiries, so your sales team only spends time on buyers ready to commit.' },
+  { n: 'P-04', title: 'Produce', body: 'Plan, film, AI-generate, edit, and repurpose content that sells the lifestyle before a single unit is built.' },
+  { n: 'P-05', title: 'Distribute', body: 'Distribute organically and amplify through advertising that reaches foreign buyers across North America, Europe, and the Gulf, with retargeting that keeps them in the funnel.' },
+  { n: 'P-06', title: 'Report', body: 'Measure leads, engagement, qualified inquiries, and revenue attribution — the numbers your investors and lenders expect.' },
+  { n: 'P-07', title: 'Optimize', body: 'Improve creatives, funnels, CTAs, offers, and campaigns to keep absorption on pace.' }
 ];
 
 const SETUP = PROCESS.slice(0, 3);
@@ -1301,11 +1303,24 @@ function Work() {
     const fit = () => {
       const avail = Math.min(window.innerWidth, 1680) - 48 - GAP * (WORK.length - 1);
       const maxByW = avail / (WORK.length + 0.34);
-      /* Cards are 2:3, so poster height = width * 3/2. 330px covers the rest of
-         the section: padding, heading, gap, caption and body. Solve for the width
-         that keeps the enlarged card (x1.34) inside what is left. */
-      const maxByH = ((window.innerHeight - 330) * 2 / 3) / 1.34;
-      setCw(Math.round(Math.max(170, Math.min(340, maxByW, maxByH))));
+      const isDesktop = window.matchMedia('(min-width:901px)').matches;
+      if (isDesktop && rail.current) {
+        /* "330" was a guessed constant that didn't track the section's actual,
+           responsive padding/heading/gap — off by up to 65px at some sizes,
+           either wasting space or letting the section run past one screen.
+           rail.top is measured live and already equals exactly that chrome,
+           whatever it happens to be at this viewport, no guessing required. */
+        const vh = window.innerHeight;
+        const chromeAbove = rail.current.getBoundingClientRect().top;
+        const bottomPad = Math.min(80, Math.max(40, 0.05 * vh)); // mirrors clamp(40px,5vh,80px)
+        const captionBody = 92; // mono caption + body line(s) below the poster — low variance
+        const maxByH = ((vh - chromeAbove - bottomPad - captionBody) * 2 / 3) / 1.34;
+        setCw(Math.round(Math.max(170, Math.min(400, maxByW, maxByH))));
+      } else {
+        /* Mobile never claims a full-screen section, so cards there are sized
+           by available width only, same as before this fix on that axis. */
+        setCw(Math.round(Math.max(170, Math.min(400, maxByW))));
+      }
     };
     fit();
     window.addEventListener('resize', fit);
