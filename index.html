@@ -246,9 +246,13 @@ a{color:var(--text-link)}a:hover{color:var(--text-link-hover)}
 .viz-drop.d1{--dx:22px}
 .viz-drop.d2{--dx:0px}
 .viz-drop.d3{--dx:-22px}
-.cap:hover .viz-drop{animation:vizDrop 2.3s var(--ease-inout) infinite}
-.cap:hover .viz-drop.d2{animation-delay:.55s}
-.cap:hover .viz-drop.d3{animation-delay:1.1s}
+/* Always running, like the globe's orbit — hover only speeds it up. Delays are
+   set once and left alone: changing them on hover restarts the cycle mid-fall,
+   whereas changing duration alone stays continuous (same approach as .viz-orbit). */
+.viz-drop{animation:vizDrop 5.4s var(--ease-inout) infinite}
+.viz-drop.d2{animation-delay:1.8s}
+.viz-drop.d3{animation-delay:3.6s}
+.cap:hover .viz-drop{animation-duration:2.2s}
 @keyframes vizDrop{
   0%{opacity:0;transform:translate(0,0)}
   12%{opacity:1;transform:translate(0,8px)}
@@ -256,7 +260,7 @@ a{color:var(--text-link)}a:hover{color:var(--text-link-hover)}
   78%{opacity:1;transform:translate(var(--dx),108px)}
   100%{opacity:0;transform:translate(var(--dx),132px)}
 }
-@media (prefers-reduced-motion:reduce){.viz-orbit,.cap:hover .viz-drop{animation:none}.cap:hover .viz-br,.cap:hover .viz-pulse{transform:none}}
+@media (prefers-reduced-motion:reduce){.viz-orbit,.viz-drop{animation:none}.cap:hover .viz-br,.cap:hover .viz-pulse{transform:none}}
 .foot-mark{display:block;width:100%}
 /* SiteFooter wraps the wordmark in a shrink-to-fit box — open it up so % widths resolve. */
 div:has(>.foot-mark){width:100%;max-width:100%}
@@ -1180,8 +1184,8 @@ const { DisplayHeading, MonoLabel, Button, SiteFooter } = window.TheNowMachineDe
 /* ── 5. Process — the four steps, in the order they happen ── */
 const PROCESS = [
   { n: 'P-01', title: 'Audit', body: 'Audit the current marketing, digital presence, and content, and find where value is being left on the table.' },
-  { n: 'P-02', title: 'Cast', body: 'Onboard the face of the development. Whether it is new talent, or a team member, they become the person your buyer relates to.' },
-  { n: 'P-03', title: 'Build', body: 'Build the pages and lead magnets that qualify inquiries, so your sales team only spends time on buyers ready to commit.' },
+  { n: 'P-02', title: 'Build', body: 'Build the pages and lead magnets that qualify inquiries, so your sales team only spends time on buyers ready to commit.' },
+  { n: 'P-03', title: 'Cast', body: 'Onboard the face of the development. Whether it is new talent, or a team member, they become the person your buyer relates to.' },
   { n: 'P-04', title: 'Produce', body: 'Plan, film, AI-generate, edit, and repurpose content that sells the lifestyle before a single unit is built.' },
   { n: 'P-05', title: 'Distribute', body: 'Distribute organically and amplify through advertising that reaches foreign buyers across North America, Europe, and the Gulf, with retargeting that keeps them in the funnel.' },
   { n: 'P-06', title: 'Report', body: 'Measure leads, engagement, qualified inquiries, and revenue attribution — the numbers your investors and lenders expect.' },
