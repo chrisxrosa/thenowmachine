@@ -384,6 +384,11 @@ footer a{color:var(--n-0)}footer a:hover{color:var(--block-acid)}
 .wpanel.dim{opacity:.55}
 .wpanel-still,.wpanel-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
 .wpanel-video{opacity:0;transition:opacity var(--dur-base) var(--ease-out);z-index:2}
+/* At rest the panels are near-square and crop the 2:3 stills hard. Baia Vista's
+   framing needs the top of the frame, so its still anchors there while idle and
+   eases back to centre as soon as either panel is hovered. Video is unaffected. */
+.wpanel-still{object-position:50% 50%;transition:object-position var(--dur-base) var(--ease-out)}
+.wdiptych.idle .wpanel[data-id="W-01"] .wpanel-still{object-position:50% 0%}
 .wpanel.on .wpanel-video{opacity:1}
 .wpanel-scrim{position:absolute;inset:0;z-index:3;pointer-events:none;background:linear-gradient(to top,rgba(13,13,13,.86) 0%,rgba(13,13,13,.45) 32%,rgba(13,13,13,0) 62%)}
 .wpanel-meta{
@@ -1368,7 +1373,7 @@ const WORK = [
 /* Diptych panel. Vertical 2:3 footage fills a full-height panel natively, so
    nothing gets cropped — which is why this shape suits the assets. */
 const WorkPanel = ({ w, active, dim, onEnter, onLeave, vref }) => (
-  <div className={'wpanel' + (active ? ' on' : '') + (dim ? ' dim' : '')}
+  <div className={'wpanel' + (active ? ' on' : '') + (dim ? ' dim' : '')} data-id={w.id}
     onMouseEnter={onEnter} onMouseLeave={onLeave}>
     <img className="wpanel-still" src={w.poster} alt={w.client} loading="lazy" decoding="async" />
     {w.video && <video className="wpanel-video" ref={vref} src={w.video} muted loop playsInline preload="none" />}
@@ -1399,7 +1404,7 @@ function Work() {
       <Frame style={{ width: '100%' }}>
         <DisplayHeading size={1}>Selected work</DisplayHeading>
       </Frame>
-      <div className="wdiptych" onMouseLeave={() => setHov(-1)}>
+      <div className={'wdiptych' + (hov < 0 ? ' idle' : '')} onMouseLeave={() => setHov(-1)}>
         {WORK.map((w, n) => (
           <WorkPanel key={w.id} w={w}
             active={hov === n}
