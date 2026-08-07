@@ -413,42 +413,46 @@ footer a{color:var(--n-0)}footer a:hover{color:var(--block-acid)}
   visibility:visible;
 }
 /* Full-screen operator section vertical positioning and sizing adjustments */
+/* Three defects removed here:
+   1) flex-shrink:0 was on .founder-portrait, but the flex item is the .rev
+      wrapper around it — so the guard never applied to the box that actually
+      shrinks, letting the photo's track drift out of step with the photo.
+   2) The copy's paragraph was maxWidth:'none', so its max-content width (the
+      whole sentence on one unwrapped line) drove flex base sizing and skewed
+      how space was split between photo and text.
+   3) width + aspect-ratio + max-height cannot all hold at once: when max-height
+      clamps, width does NOT shrink to preserve the ratio, so the box renders
+      wider than tall. A circle mask hides that; a square exposes it, and the
+      copy starts after the box's real width, not the photo's apparent edge.
+   A max-content grid track sizes the column to the photo itself, so the copy
+   always begins exactly one gap after it, with no dead space to the right. */
 .founder-sec{
   min-height:100vh;
   display:flex;
+  flex-direction:column;
   justify-content:center;
-  align-items:center;
-  overflow:hidden;
   box-sizing: border-box;
-  padding-top: var(--menu-height);
+  padding: calc(var(--menu-height) + 16px) 0 clamp(40px,5vh,80px);
 }
-@media (min-width:901px){
-  .founder-sec{
-    height:100vh;
-  }
-}
-.founder-content{
-  width: 100%;
-  transform: translateY(calc(var(--menu-height) * -0.4));
-}
+.founder-content{ width: 100%; }
 .founder-grid{
-  display:flex;
+  display:grid;
+  grid-template-columns:max-content minmax(0,1fr);
+  gap:clamp(32px,5vw,88px);
   align-items:center;
-  gap:clamp(32px,6vw,110px);
 }
 .founder-portrait{
-  width: clamp(180px, 25vw, 380px);
-  max-height: calc(100vh - var(--menu-height) - 100px);
+  width: min(46vh, 34vw);
+  max-width:100%;
   aspect-ratio:1/1;
-  border-radius: 50%;
+  border-radius: var(--r-md);
   overflow:hidden;
-  flex-shrink: 0;
 }
 .founder-copy{
   display: flex;
   flex-direction: column;
   justify-content: center;
-  transform: translateY(-16px);
+  min-width: 0;
 }
 .track-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp-12);margin-top:clamp(40px,4vw,68px)}
 @media (max-width:1100px){.track-grid{gap:var(--sp-10)}}
@@ -1478,7 +1482,7 @@ function Founder() {
             </div>
             <div className={rv + ' founder-copy'}>
               <div ref={head}><DisplayHeading size={2}><span className="lines-wide">Island born. Made in<br />Los Angeles. <span className={'mark' + (lit ? ' on' : '')}>Returned.</span></span><span className="lines-narrow">Island born.<br />Made in<br />Los Angeles.<br /><span className={'mark' + (lit ? ' on' : '')}>Returned.</span></span></DisplayHeading></div>
-              <p style={{ maxWidth: 'none', marginTop: 'var(--sp-10)', color: 'var(--text-secondary)', textWrap: 'pretty' }}>The Now Machine is operator-led. One person owns your answers and your outcomes, with senior specialists behind every discipline. No juniors billed at agency rates.</p>
+              <p style={{ maxWidth: '54ch', marginTop: 'var(--sp-10)', color: 'var(--text-secondary)', textWrap: 'pretty' }}>The Now Machine is operator-led. One person owns your answers and your outcomes, with senior specialists behind every discipline. No juniors billed at agency rates.</p>
             </div>
           </div>
           <div className={'track-grid ' + rv}>
