@@ -221,7 +221,6 @@ a{color:var(--text-link)}a:hover{color:var(--text-link-hover)}
 /* Same glow the process stage titles use. */
 .cap-title{transition:color var(--dur-base) var(--ease-out),text-shadow var(--dur-base) var(--ease-out)}
 .cap:hover .cap-title{color:var(--n-0);text-shadow:0 0 24px rgba(255,255,255,.55),0 0 60px rgba(255,255,255,.25)}
-.poster-static{width:100%;height:100%;object-fit:cover;display:block}
 .cap-media-fill{position:absolute;inset:0;width:100%;height:100%;opacity:0;transition:opacity .25s linear}
 /* Capability line art. Strokes inherit currentColor so one colour change lights
    the whole drawing, same approach as the gear. */
@@ -354,67 +353,66 @@ footer a{color:var(--n-0)}footer a:hover{color:var(--block-acid)}
 .model-dark{background:var(--block-ink);color:var(--n-0);padding:var(--section-y) 0}
 .model-inner{width:100%}
 .work-sec{
-  height:100vh;
+  min-height:100vh;
   display:flex;
   flex-direction:column;
   gap:clamp(24px,2.5vh,36px);
-  padding:clamp(96px,11vh,144px) 0 clamp(96px,11vh,144px) 0;
-  overflow:visible;
+  padding:clamp(96px,11vh,144px) 0 clamp(40px,5vh,72px);
+  box-sizing:border-box;
 }
-
-@media (min-width:901px){
-  .work-sec{
-    min-height:100vh;
-    height:100vh;
-    justify-content:flex-start;
-  }
-}
-.wrail{
+/* Two panels, edge to edge. Hovering one takes the majority share and the other
+   recedes; with nothing hovered they sit equal. Vertical 2:3 footage fills a
+   full-height panel without cropping, which is why the diptych suits the assets. */
+.wdiptych{
   flex:1;
-  width:100%;
-  overflow-x:auto;
-  overflow-y:visible;
-  scrollbar-width:none;
   display:flex;
-  align-items:center;
-  padding:0 24px;
+  gap:clamp(8px,1vw,16px);
+  padding:0 var(--gutter);
+  min-height:0;
 }
-.wrail::-webkit-scrollbar{display:none}
-.wtrack{
-  display:flex;
-  gap:48px;
-  align-items:flex-start;
-  width:max-content;
-  min-width:100%;
-  margin:0 auto;
-  justify-content:center;
-}
-.wcard{flex:0 0 auto;opacity:.62;transition:width var(--dur-scroll) var(--ease-scroll),opacity var(--dur-base) var(--ease-out);position:relative;z-index:1}
-.wcard:hover,.wcard.on{z-index:20}
-.wcard.on{opacity:1}
-.poster{width:100%;aspect-ratio:2/3;border-radius:var(--r-md);overflow:hidden;position:relative}
-.poster>*{display:block;width:100%;height:100%}
-.poster-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity var(--dur-base) var(--ease-out);pointer-events:none;z-index:2}
-.wcard:hover .poster-video,.wcard.on .poster-video{opacity:1}
-.work-cap{display:flex;flex-wrap:wrap;align-items:baseline;gap:var(--sp-1) var(--sp-3);margin-top:var(--sp-4);padding-bottom:var(--sp-3);border-bottom:1px solid var(--line-hairline);opacity:1;transition:opacity var(--dur-base) var(--ease-out)}
-
-.work-body{
-  width:100%;
-  margin:var(--sp-3) 0 0;
-  opacity:0;
-  visibility:hidden;
-  transition:opacity var(--dur-base) var(--ease-out), visibility var(--dur-base) var(--ease-out);
-  font-size:14px;
-  line-height:1.5;
-  color:var(--text-secondary);
-  text-wrap:pretty;
+.wpanel{
   position:relative;
-  z-index:30;
-  pointer-events:auto;
+  flex:1 1 0;
+  min-width:0;
+  border-radius:var(--r-md);
+  overflow:hidden;
+  background:var(--n-1000);
+  cursor:pointer;
+  transition:flex-grow var(--dur-slow) var(--ease-scroll),opacity var(--dur-base) var(--ease-out);
 }
-.wcard:hover .work-body, .wcard.on .work-body{
-  opacity:1;
-  visibility:visible;
+.wpanel.on{flex-grow:1.9}
+.wpanel.dim{opacity:.55}
+.wpanel-still,.wpanel-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.wpanel-video{opacity:0;transition:opacity var(--dur-base) var(--ease-out);z-index:2}
+.wpanel.on .wpanel-video{opacity:1}
+.wpanel-scrim{position:absolute;inset:0;z-index:3;pointer-events:none;background:linear-gradient(to top,rgba(13,13,13,.86) 0%,rgba(13,13,13,.45) 32%,rgba(13,13,13,0) 62%)}
+.wpanel-meta{
+  position:absolute;
+  left:0;right:0;bottom:0;
+  z-index:4;
+  display:flex;
+  flex-direction:column;
+  gap:var(--sp-2);
+  padding:clamp(20px,2.4vw,36px);
+  pointer-events:none;
+}
+/* Body copy is held back until hover so a resting panel reads as an image, not
+   a card with a paragraph on it. */
+.wpanel-body{
+  margin:var(--sp-2) 0 0;
+  max-width:46ch;
+  font-size:var(--text-body-sm);
+  line-height:1.5;
+  color:var(--n-300);
+  text-wrap:pretty;
+  opacity:0;
+  transform:translateY(8px);
+  transition:opacity var(--dur-base) var(--ease-out),transform var(--dur-base) var(--ease-out);
+}
+.wpanel.on .wpanel-body{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  .wpanel{transition:opacity var(--dur-base) var(--ease-out)}
+  .wpanel-body{transform:none}
 }
 /* Full-screen operator section vertical positioning and sizing adjustments */
 /* Three defects removed here:
@@ -469,7 +467,10 @@ footer a{color:var(--n-0)}footer a:hover{color:var(--block-acid)}
 .caps-hold{position:static;min-height:auto}
 .caps-spacer{display:none}
 .reel-handoff-zone{height:0}
-.wtrack{gap:24px}
+.wdiptych{flex-direction:column;gap:var(--sp-4)}
+.wpanel{min-height:58vh}
+.wpanel.on{flex-grow:1}
+.wpanel-body{opacity:1;transform:none}
 .founder-content{transform: none !important;}
 .founder-copy{transform: none !important;}
 .founder-portrait{border-radius: var(--r-md); width: clamp(220px, 28vw, 420px);}
@@ -1186,8 +1187,8 @@ const PROCESS = [
   { n: 'P-01', title: 'Audit', body: 'Audit the current marketing, digital presence, and content, and find where value is being left on the table.' },
   { n: 'P-02', title: 'Build', body: 'Build the pages and lead magnets that qualify inquiries, so your sales team only spends time on buyers ready to commit.' },
   { n: 'P-03', title: 'Cast', body: 'Onboard the face of the development. Whether it is new talent, or a team member, they become the person your buyer relates to.' },
-  { n: 'P-04', title: 'Produce', body: 'Plan, film, AI-generate, edit, and repurpose content that sells the lifestyle before a single unit is built.' },
-  { n: 'P-05', title: 'Distribute', body: 'Distribute organically and amplify through advertising that reaches foreign buyers across North America, Europe, and the Gulf, with retargeting that keeps them in the funnel.' },
+  { n: 'P-04', title: 'Produce', body: 'Produce static and video content that sells the lifestyle before a single unit is built, tailored to organic and paid channels at every funnel stage.' },
+  { n: 'P-05', title: 'Distribute', body: 'Distribute organically and amplify through advertising across the Caribbean, North America, and Europe, with retargeting that keeps buyers in the funnel.' },
   { n: 'P-06', title: 'Report', body: 'Measure leads, engagement, qualified inquiries, and revenue attribution — the numbers your investors and lenders expect.' },
   { n: 'P-07', title: 'Optimize', body: 'Improve creatives, funnels, CTAs, offers, and campaigns to keep absorption on pace.' }
 ];
@@ -1363,85 +1364,50 @@ const WORK = [
   { id: 'W-01', client: 'Baia Vista', cat: 'Development', poster: 'assets/baia-vista-poster.jpg', video: 'assets/baia-vista-hover.mp4', body: 'A cast host, a content engine, and paid media running as one system for the 175-home Curaçao development.' },
   { id: 'W-02', client: 'CoveCasa', cat: 'Built it from zero', poster: 'assets/covecasa-poster.jpg', video: 'assets/covecasa-hover.mp4', body: 'The Now Machine built paid media, funnels, and content production for a luxury vacation rental portfolio, scaling it to 20+ properties under management in year one.' }
 ];
-const GAP = 48;
 
-const WorkTile = ({ w, w1, big, onEnter, onLeave, vref }) => {
-  return (
-    <div className={'wcard' + (big ? ' on' : '')} onMouseEnter={onEnter} onMouseLeave={onLeave} style={{ width: w1 }}>
-      <div className="poster">
-        <img className="poster-static" src={w.poster} alt={w.client} loading="lazy" decoding="async" />
-        {w.video && <video className="poster-video" ref={vref} src={w.video} muted loop playsInline preload="none" />}
-      </div>
-      <div className="work-cap">
-        <MonoLabel>{w.client}</MonoLabel>
-        <MonoLabel tone="muted">{w.cat}</MonoLabel>
-      </div>
-      {w.body && <p className="work-body">{w.body}</p>}
+/* Diptych panel. Vertical 2:3 footage fills a full-height panel natively, so
+   nothing gets cropped — which is why this shape suits the assets. */
+const WorkPanel = ({ w, active, dim, onEnter, onLeave, vref }) => (
+  <div className={'wpanel' + (active ? ' on' : '') + (dim ? ' dim' : '')}
+    onMouseEnter={onEnter} onMouseLeave={onLeave}>
+    <img className="wpanel-still" src={w.poster} alt={w.client} loading="lazy" decoding="async" />
+    {w.video && <video className="wpanel-video" ref={vref} src={w.video} muted loop playsInline preload="none" />}
+    <div className="wpanel-scrim" aria-hidden="true" />
+    <div className="wpanel-meta">
+      <MonoLabel tone="inverse">{w.client}</MonoLabel>
+      <MonoLabel tone="inverse" style={{ opacity: .62 }}>{w.cat}</MonoLabel>
+      {w.body && <p className="wpanel-body">{w.body}</p>}
     </div>
-  );
-};
+  </div>
+);
 
 function Work() {
   const [hov, setHov] = React.useState(-1);
-  const [below, setBelow] = React.useState(false);
-  const [cw, setCw] = React.useState(240);
-  const rail = React.useRef(null);
-  React.useEffect(() => {
-    const fit = () => {
-      const vh = window.innerHeight;
-      const avail = Math.min(window.innerWidth, 1680) - 48 - GAP * (WORK.length - 1);
-      const maxByW = (avail / (WORK.length + 0.15)) * 0.75;
-      const isDesktop = window.matchMedia('(min-width:901px)').matches;
-      if (isDesktop && rail.current) {
-        const captionBody = 92; // mono caption + body line(s) below the poster — low variance
-        const section = document.getElementById('work');
-        const sectionH = section ? section.clientHeight : vh;
-        const maxByH = ((sectionH - 230 - captionBody) / 1.5) * 0.75;
-        setCw(Math.round(Math.max(130, Math.min(450, maxByW, maxByH))));
-      } else {
-        /* Mobile never claims a full-screen section, so cards there are sized
-           by available width only, scaled down by 25%. */
-        setCw(Math.round(Math.max(130, Math.min(450, maxByW))));
-      }
-    };
-    fit();
-    window.addEventListener('resize', fit);
-    return () => window.removeEventListener('resize', fit);
-  }, []);
-  React.useEffect(() => {
-    let raf = null;
-    const onMove = e => {
-      if (raf !== null) return;
-      const y = e.clientY;
-      raf = requestAnimationFrame(() => {
-        raf = null;
-        const el = rail.current; if (!el) return;
-        setBelow(y > el.getBoundingClientRect().bottom);
-      });
-    };
-    window.addEventListener('mousemove', onMove, { passive: true });
-    return () => { if (raf !== null) cancelAnimationFrame(raf); window.removeEventListener('mousemove', onMove); };
-  }, []);
   const vids = React.useRef({});
-  const play = id => { const v = vids.current[id]; if (v) v.play().catch(() => {}); };
-  const stop = id => { const v = vids.current[id]; if (v) { v.pause(); v.currentTime = 0; } };
-  const bigIdx = hov >= 0 ? hov : (below ? -1 : 0);
-  React.useEffect(() => { WORK.forEach((w, n) => (n === bigIdx ? play(w.id) : stop(w.id))); }, [bigIdx]);
-  const bigW = Math.round(cw * 1.08);
+  /* Stills until hover: two autoplaying videos at once is heavier and splits
+     attention, so only the hovered panel plays. */
+  React.useEffect(() => {
+    WORK.forEach((w, n) => {
+      const v = vids.current[w.id];
+      if (!v) return;
+      if (n === hov) { v.play().catch(() => {}); }
+      else { v.pause(); v.currentTime = 0; }
+    });
+  }, [hov]);
   return (
     <section id="work" data-screen-label="Selected work" className="work-sec">
       <Frame style={{ width: '100%' }}>
         <DisplayHeading size={1}>Selected work</DisplayHeading>
       </Frame>
-      <div className="wrail" ref={rail}>
-        <div className="wtrack">
-          {WORK.map((w, n) => (
-            <WorkTile key={w.id} w={w} w1={n === bigIdx ? bigW : cw} big={n === bigIdx}
-              onEnter={() => setHov(n)}
-              onLeave={() => setHov(h => (h === n ? -1 : h))}
-              vref={el => { vids.current[w.id] = el; }} />
-          ))}
-        </div>
+      <div className="wdiptych" onMouseLeave={() => setHov(-1)}>
+        {WORK.map((w, n) => (
+          <WorkPanel key={w.id} w={w}
+            active={hov === n}
+            dim={hov >= 0 && hov !== n}
+            onEnter={() => setHov(n)}
+            onLeave={() => {}}
+            vref={el => { vids.current[w.id] = el; }} />
+        ))}
       </div>
     </section>
   );
