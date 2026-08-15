@@ -899,11 +899,11 @@ function Hero() {
       <Frame>
         <div className="hero-lockup">
           <MonoLabel tone="muted" className="hero-eyebrow">DEMAND GENERATION STUDIO</MonoLabel>
-          <DisplayHeading as="h1" size={1}>The direct demand engine</DisplayHeading>
-          <DisplayHeading as="h2" size={1}>for resort developments.</DisplayHeading>
+          <DisplayHeading as="h1" size={1}>The Direct Demand Engine</DisplayHeading>
+          <DisplayHeading as="h2" size={1}>for Resort Developments.</DisplayHeading>
           <p className="hero-sub">We accelerate absorption velocity and maximize commission leverage through direct demand generation.</p>
           <div style={{ marginTop: 'var(--sp-8)' }}>
-            <Button size="lg" href="#contact" onClick={(e) => { e.preventDefault(); scrollToId('contact'); }}>Get in touch →</Button>
+            <Button size="lg" href="#contact" onClick={(e) => { e.preventDefault(); scrollToId('contact'); }}>Request a Pipeline Audit →</Button>
           </div>
         </div>
       </Frame>
@@ -1242,7 +1242,7 @@ function Founder() {
 
 /* ── 9. Contact Form Component ── */
 function ContactForm() {
-  const WEBHOOK_URL = 'https://hook.us2.make.com/ufdf98q1rfh1mih3whsj4fv17hhuqpqp';
+  const WEBHOOK_URL = 'YOUR_ZAPIER_OR_MAKE_WEBHOOK_URL_HERE';
   const [formData, setFormData] = React.useState({
     name: '',
     company: '',
@@ -1342,9 +1342,10 @@ function ContactForm() {
         />
       </div>
       <div>
-        <label style={labelStyle}>Message / Project Overview</label>
+        <label style={labelStyle}>Message / Project Overview *</label>
         <textarea
           name="message"
+          required
           rows={4}
           placeholder="Please tell us how we can help you."
           value={formData.message}
@@ -1354,7 +1355,7 @@ function ContactForm() {
       </div>
       <div style={{ marginTop: 'var(--sp-2)', display: 'flex', alignItems: 'center', gap: 'var(--sp-4)', flexWrap: 'wrap' }}>
         <Button size="lg" disabled={status === 'sending'}>
-          {status === 'sending' ? 'Submitting Request...' : 'Get in touch →'}
+          {status === 'sending' ? 'Submitting Request...' : 'Request a Pipeline Audit →'}
         </Button>
         {status === 'success' && (
           <span style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-caption)', fontWeight: 'var(--fw-bold)', color: 'var(--n-900)' }}>
@@ -1391,7 +1392,7 @@ function Contact() {
 function Footer() {
   return (
     <SiteFooter wordmark={<span className="foot-mark"><img src="assets/foot-wordmark.png" alt="the now machine" width="941" height="94" loading="lazy" decoding="async" /></span>} columns={[]}
-      note={<span>Developer demand and nurturing engine for resort developments · <a href="mailto:chris@thenowmachine.com">Contact</a><span style={{ display: 'block', marginTop: 'var(--sp-3)' }}>Veerstraat 9a, Willemstad, Curaçao</span><span style={{ display: 'block', marginTop: 'var(--sp-4)', textAlign: 'center' }}>© 2026 The Now Machine LLC. All rights reserved.</span></span>} />
+      note={<span>Developer demand and nurturing engine for resort developments · <a href="#contact" onClick={(e) => { e.preventDefault(); scrollToId('contact'); }}>Contact</a><span style={{ display: 'block', marginTop: 'var(--sp-3)' }}>Veerstraat 9a, Willemstad, Curaçao</span><span style={{ display: 'block', marginTop: 'var(--sp-4)', textAlign: 'center' }}>© 2026 The Now Machine LLC. All rights reserved.</span></span>} />
   );
 }
 
@@ -1401,7 +1402,7 @@ Object.assign(window, { Process, Model, Work, Founder, Contact, Footer });
 <script type="text/babel">
 const { NavBar, LiveDot } = window.TheNowMachineDesignSystem_5b6ea4;
 
-const NAV = { 'What we run': 'capabilities', 'How it runs': 'process', 'Work': 'work', 'Services': 'capabilities' };
+const NAV = { 'What we run': 'capabilities', 'How it runs': 'process', 'Work': 'work', 'Services': 'capabilities', 'Request an Audit': 'contact' };
 
 function Nav() {
   const gold = useInView('contact');
@@ -1426,13 +1427,13 @@ function Nav() {
       }
       scrollToId(id);
     } else if (l === 'home') window.scrollTo({ top: 0, behavior: 'smooth' });
-    else window.location.href = 'mailto:chris@thenowmachine.com';
+    else scrollToId('contact');
   };
   return (
     <div className={'tnm-nav' + (gold ? ' gold' : '')}>
       <NavBar links={narrow ? ['Services'] : ['What we run', 'How it runs', 'Work']} ctaLive={false} onNavigate={go}
         wordmark={<img className="nav-logo" src="assets/logo-now.png" alt="The Now Machine" width="63" height="26" decoding="async" />}
-        cta={narrow ? null : <span style={{ display: 'inline-flex', alignItems: 'center', gap: 'var(--sp-3)' }}>Get in touch<LiveDot className="tnm-pulse" /></span>} />
+        cta={narrow ? null : <span style={{ display: 'inline-flex', alignItems: 'center', gap: 'var(--sp-3)' }}>Request an Audit<LiveDot className="tnm-pulse" /></span>} />
     </div>
   );
 }
