@@ -957,9 +957,27 @@ function Viz({ kind }) {
 }
 
 const CAPS = [
-  { id: 'C-01', title: 'The Demand Engine', body: "Targeted ad campaigns and lead funnels designed to capture local and international buyers directly, protecting developer margins and enabling lead recyclability across the portfolio.", viz: 'globe' },
-  { id: 'C-02', title: 'The Nurture Engine', body: "Social media and email marketing that maintains strong brand momentum, turning inquiries into signed contracts and eliminating buyer distance anxiety.", viz: 'funnel' },
-  { id: 'C-03', title: 'The Fuel', body: "On-camera hosted storytelling, lifestyle media, and site progress updates that build tangible project credibility and feed both the demand and nurture engine.", viz: 'cast' }
+  { 
+    id: 'C-01', 
+    title: 'The Demand Engine', 
+    body: "Targeted ad campaigns and lead funnels designed to capture local and international buyers directly, protecting developer margins and enabling lead recyclability across the portfolio.", 
+    viz: 'globe',
+    bullets: ['Google Ads', 'Meta Ads']
+  },
+  { 
+    id: 'C-02', 
+    title: 'The Nurture Engine', 
+    body: "Social media and email marketing that maintains strong brand momentum, turning inquiries into signed contracts and eliminating buyer distance anxiety.", 
+    viz: 'funnel',
+    bullets: ['Social Media Management', 'Email Marketing', 'Lead Funnels']
+  },
+  { 
+    id: 'C-03', 
+    title: 'The Fuel', 
+    body: "On-camera hosted storytelling, lifestyle media, and site progress updates that build tangible project credibility and feed both the demand and nurture engine.", 
+    viz: 'cast',
+    bullets: ['Lifestyle Content', 'Construction Updates', 'Direct Response Content']
+  }
 ];
 
 function Capabilities() {
@@ -975,6 +993,13 @@ function Capabilities() {
                 <MonoLabel className="id" tone="muted" style={{ display: 'block', marginBottom: 'var(--sp-8)' }}>{c.id}</MonoLabel>
                 <h3 className="cap-title" style={{ margin: '0 0 var(--sp-5)', fontFamily: 'var(--font-display)', fontWeight: 'var(--fw-black)', fontSize: 'var(--text-display-3)', lineHeight: 'var(--lh-tight)', letterSpacing: 'var(--ls-title)' }}>{c.title}</h3>
                 <p style={{ margin: 0 }}>{c.body}</p>
+                {c.bullets && (
+                  <ul style={{ margin: 'var(--sp-6) 0 0', paddingLeft: '1.2em', color: 'var(--n-300)', fontSize: 'var(--text-body-sm)', display: 'grid', gap: 'var(--sp-2)' }}>
+                    {c.bullets.map((b, i) => (
+                      <li key={i}>{b}</li>
+                    ))}
+                  </ul>
+                )}
               </article>
             ))}
           </div>
