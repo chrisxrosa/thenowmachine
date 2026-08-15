@@ -291,8 +291,8 @@ footer a{color:var(--n-0)}footer a:hover{color:var(--block-acid)}
 .proc-sec .cap p{color:var(--n-300)}
 
 .proc-sec .rev{transition-duration:620ms}
-.proc-stage{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(24px,3vh,48px);margin:clamp(24px,3vh,52px) 0 0}
-.proc-row-block{display:flex;flex-direction:row;align-items:center;justify-content:center;gap:clamp(16px,2vw,32px);width:100%;flex-wrap:wrap}
+.proc-stage{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(32px,4vh,56px);margin:clamp(28px,4vh,64px) 0 0}
+.proc-row-block{display:flex;flex-direction:column;align-items:center;gap:var(--sp-4);width:100%}
 .proc-row-items{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:clamp(16px,3vw,40px)}
 .band-label{margin:0;font-family:var(--font-mono);font-size:var(--text-caption);font-weight:var(--fw-medium);letter-spacing:var(--ls-label);text-transform:uppercase;white-space:nowrap;color:var(--n-500);padding:4px 8px;transition:color var(--dur-base) var(--ease-out),background var(--dur-base) var(--ease-out)}
 .band-label.on{background:var(--block-acid);color:var(--n-900)}
@@ -1103,7 +1103,7 @@ function Process() {
                   <div key={st.n} className={rv} style={{ transitionDelay: `${110 + i * 55}ms` }}>
                     <div className={'pitem' + (lit && i === shown ? ' on' : '')}
                       role="button" tabIndex={0} onClick={() => tap(i)} onKeyDown={keys(i)}>
-                      <MonoLabel className="id" tone="muted">{s.n || st.n}</MonoLabel>
+                      <MonoLabel className="id" tone="muted">{st.n}</MonoLabel>
                       <h3>{st.title}</h3>
                     </div>
                   </div>
