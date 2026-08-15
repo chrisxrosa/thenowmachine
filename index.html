@@ -1,8 +1,8 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>THE NOW MACHINE · Demand Generation for Multi-Home Developments</title>
-<meta name="description" content="We move multi-home developments from launch to sell-out through content, campaigns, and paid media.">
-<meta property="og:title" content="THE NOW MACHINE · Demand Generation for Multi-Home Developments">
-<meta property="og:description" content="Buyers trust people, not floor plans. We move multi-home developments from launch to sell-out through content, campaigns, and paid media.">
+<title>THE NOW MACHINE · Developer Demand and Nurturing Engine</title>
+<meta name="description" content="We build direct acquisition and pipeline retention systems for real estate developers, keeping your inventory moving and your buyer data in-house.">
+<meta property="og:title" content="THE NOW MACHINE · Developer Demand and Nurturing Engine">
+<meta property="og:description" content="Creating direct demand for resort developments. We build direct acquisition and pipeline retention systems for real estate developers, keeping your inventory moving and your buyer data in-house.">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
 <meta property="og:image" content="assets/og-image.png">
@@ -13,7 +13,7 @@
 <meta name="theme-color" content="#0D0D0D">
 <link rel="canonical" href="https://thenowmachine.com/">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"ProfessionalService","name":"The Now Machine","url":"https://thenowmachine.com/","description":"Demand generation for multi-home real estate developments — content, campaigns, and paid media that move developments from launch to sell-out.","email":"hello@thenowmachine.com","areaServed":"Caribbean"}
+{"@context":"https://schema.org","@type":"ProfessionalService","name":"The Now Machine","url":"https://thenowmachine.com/","description":"Developer demand and nurturing engine — ad campaigns, pipeline retention, and hosted media that accelerate absorption velocity.","email":"chris@thenowmachine.com","areaServed":"Caribbean"}
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -68,15 +68,14 @@
   --font-serif:"Newsreader",Georgia,serif;
   --font-mono:"JetBrains Mono",ui-monospace,monospace;
 
-  --fw-regular:400; /* @kind font */
-  --fw-medium:500; /* @kind font */
-  --fw-semibold:600; /* @kind font */
-  --fw-bold:700; /* @kind font */
-  --fw-black:800; /* @kind font */
-  --fw-display:500; /* @kind font */
+  --fw-regular:400;
+  --fw-medium:500;
+  --fw-semibold:600;
+  --fw-bold:700;
+  --fw-black:800;
+  --fw-display:500;
 
-  /* Display — Poppins medium, sentence case. No width axis, so no stretch. */
-  --display-stretch:normal; /* @kind other */
+  --display-stretch:normal;
   --text-hero:clamp(2.75rem,7.2vw,8.5rem);
   --text-display-1:clamp(2.5rem,5.6vw,6.5rem);
   --text-display-2:clamp(2.25rem,4.4vw,5rem);
@@ -89,21 +88,20 @@
   --text-caption:0.8125rem;
   --text-micro:0.6875rem;
 
-  --lh-hero:0.9; /* @kind other */
-  --lh-display:0.94; /* @kind other */
-  --lh-title:1.15; /* @kind other */
-  --lh-body:1.45; /* @kind other */
-  --lh-tight:1.2; /* @kind other */
+  --lh-hero:0.9;
+  --lh-display:0.94;
+  --lh-title:1.15;
+  --lh-body:1.45;
+  --lh-tight:1.2;
 
-  --ls-hero:-0.022em; /* @kind other */
-  --ls-display:-0.018em; /* @kind other */
-  --ls-title:-0.02em; /* @kind other */
-  --ls-body:-0.005em; /* @kind other */
-  --ls-mono:0.02em; /* @kind other */
-  --ls-label:0.12em; /* @kind other */
+  --ls-hero:-0.022em;
+  --ls-display:-0.018em;
+  --ls-title:-0.02em;
+  --ls-body:-0.005em;
+  --ls-mono:0.02em;
+  --ls-label:0.12em;
 }
-/* Display normalization: components still ship uppercase Archivo 800 inline, so the
-   Poppins-medium sentence-case treatment is enforced here for every display heading. */
+
 h1,h2,h3,.ds-display{text-transform:none!important;font-family:var(--font-display)!important;font-weight:var(--fw-display)!important;font-stretch:normal!important}
 
 /* tokens/spacing.css */
@@ -123,12 +121,11 @@ h1,h2,h3,.ds-display{text-transform:none!important;font-family:var(--font-displa
   --sp-32:128px;
   --sp-40:160px;
 
-  /* Page frame — the reference sits type hard against a narrow gutter */
   --gutter:24px;
   --gutter-lg:40px;
-  --section-y:clamp(80px,10vw,160px); /* @kind spacing */
-  --max-content:1680px; /* @kind other */
-  --measure:34ch; /* @kind other */
+  --section-y:clamp(80px,10vw,160px);
+  --max-content:1680px;
+  --measure:34ch;
 }
 
 /* tokens/radius.css */
@@ -143,24 +140,23 @@ h1,h2,h3,.ds-display{text-transform:none!important;font-family:var(--font-displa
 
 /* tokens/elevation.css */
 :root{
-  /* Shadows are near-absent by design. Only floating chrome and lifted media get one. */
   --shadow-none:none;
   --shadow-chip:0 1px 2px rgba(13,13,13,.06);
   --shadow-media:0 24px 60px -24px rgba(13,13,13,.35);
   --shadow-inset-hairline:inset 0 0 0 1px var(--line-hairline);
-  --blur-chrome:blur(14px); /* @kind other */
-  --scrim-bottom:linear-gradient(to top,rgba(13,13,13,.55),rgba(13,13,13,0)); /* @kind other */
+  --blur-chrome:blur(14px);
+  --scrim-bottom:linear-gradient(to top,rgba(13,13,13,.55),rgba(13,13,13,0));
 }
 
 /* tokens/motion.css */
 :root{
-  --dur-fast:140ms; /* @kind other */
-  --dur-base:260ms; /* @kind other */
-  --dur-slow:520ms; /* @kind other */
-  --dur-scroll:900ms; /* @kind other */
-  --ease-out:cubic-bezier(.22,.61,.36,1); /* @kind other */
-  --ease-inout:cubic-bezier(.65,.05,.36,1); /* @kind other */
-  --ease-scroll:cubic-bezier(.16,1,.3,1); /* @kind other */
+  --dur-fast:140ms;
+  --dur-base:260ms;
+  --dur-slow:520ms;
+  --dur-scroll:900ms;
+  --ease-out:cubic-bezier(.22,.61,.36,1);
+  --ease-inout:cubic-bezier(.65,.05,.36,1);
+  --ease-scroll:cubic-bezier(.16,1,.3,1);
 }
 
 /* tokens/base.css */
@@ -180,13 +176,11 @@ a{color:var(--text-link)}a:hover{color:var(--text-link-hover)}
 .ln{display:block}
 .lines-narrow{display:none}
 @media (max-width:900px){.lines-wide{display:none}.lines-narrow{display:block}
-/* The five-line mobile break needs "to outpace agencies." to hold one line. */
 .model-inner .lines-narrow{font-size:clamp(1.9rem,8.4vw,2.5rem)}}
 .mark{background-image:linear-gradient(var(--block-acid),var(--block-acid));background-repeat:no-repeat;background-size:0% .9em;background-position:0 62%;padding:0 .08em;-webkit-box-decoration-break:clone;box-decoration-break:clone;transition:background-size 700ms var(--ease-scroll),color 260ms 320ms var(--ease-out)}
 .mark.on{background-size:100% .9em;color:var(--n-900)}
 ::selection{background:var(--block-acid);color:var(--n-900)}
-/* Titles: Chrome paints selection at the full font inline box (~1.4em), which hits the
-   line above. Suppress it and draw cap-height bands behind the glyphs (.selb). */
+
 #root h1::selection,#root h2::selection,#root h3::selection,#root h1 *::selection,#root h2 *::selection,#root h3 *::selection{background:transparent}
 #root h1,#root h2,#root h3{position:relative;isolation:isolate}
 .selb{position:absolute;z-index:-1;pointer-events:none;background:var(--block-acid)}
@@ -202,35 +196,26 @@ a{color:var(--text-link)}a:hover{color:var(--text-link-hover)}
 .tnm-nav.gold nav>div:last-child{background:var(--block-acid)!important}
 @keyframes tnmPulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(.72)}}
 .tnm-pulse{animation:tnmPulse 2.4s var(--ease-out) infinite}
-.hero-plain{background:var(--n-50);color:var(--n-900);display:flex;flex-direction:column;gap:clamp(44px,6.5vh,92px);padding:clamp(132px,15vh,196px) 0 0}
+.hero-plain{background:var(--n-50);color:var(--n-900);display:flex;flex-direction:column;gap:clamp(44px,6.5vh,92px);padding:clamp(132px,15vh,196px) 0 clamp(60px,8vh,100px)}
 .hero-plain>div{width:100%}
 .hero-plain>div.hero-media-holder{width:calc(100% - var(--gutter)*2)}
-.hero-media-holder{margin:0 auto;height:min(80vh,900px);position:relative}
-/* The stage is left fixed at z-index 30 over the Capabilities thumbnail after the
-   handoff. At opacity 0 it is invisible but would still swallow hover, so it never
-   takes pointer events — the video has no controls and needs none. */
-.hero-media{position:absolute;inset:0;border-radius:var(--r-lg);overflow:hidden;background:var(--n-1000);pointer-events:none}
-.hero-media video{width:100%;height:100%;object-fit:cover;display:block}
-.scroll-cue{position:absolute;left:0;right:0;bottom:0;height:clamp(90px,14vh,160px);display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:var(--sp-3);padding-bottom:var(--sp-6);background:var(--scrim-bottom);pointer-events:none;transition:opacity var(--dur-base) var(--ease-out)}
-.cue-chev{display:block;width:9px;height:9px;border-right:1.5px solid var(--n-0);border-bottom:1.5px solid var(--n-0);transform:rotate(45deg)}
+.hero-media-holder{margin:0 auto;height:min(75vh,850px);position:relative}
 
-.reel-handoff-zone{height:4vh}
-.caps-pin{position:relative;background:var(--n-900)}
-.caps-spacer{height:22vh}
+.hero-media{position:absolute;inset:0;border-radius:var(--r-lg);overflow:hidden;background:var(--n-1000)}
+.hero-media video{width:100%;height:100%;object-fit:cover;display:block}
+
 .cap-media{position:relative;width:100%;aspect-ratio:16/10;border-radius:var(--r-lg);overflow:hidden;background:var(--block-acid);margin-bottom:var(--sp-8)}
-/* Same glow the process stage titles use. */
+
 .cap-title{transition:color var(--dur-base) var(--ease-out),text-shadow var(--dur-base) var(--ease-out)}
 .cap:hover .cap-title{color:var(--n-0);text-shadow:0 0 24px rgba(255,255,255,.55),0 0 60px rgba(255,255,255,.25)}
-.cap-media-fill{position:absolute;inset:0;width:100%;height:100%;opacity:0;transition:opacity .25s linear}
-/* Capability line art. Strokes inherit currentColor so one colour change lights
-   the whole drawing, same approach as the gear. */
+
 .viz{width:100%;height:100%;display:block;color:var(--n-900)}
 .viz-br{transition:transform var(--dur-base) var(--ease-out)}
 .cap:hover .viz-br-tl{transform:translate(11px,9px)}
 .cap:hover .viz-br-tr{transform:translate(-11px,9px)}
 .cap:hover .viz-br-bl{transform:translate(11px,-9px)}
 .cap:hover .viz-br-br{transform:translate(-11px,-9px)}
-/* House sits back so the cast figure stays the subject. */
+
 .viz-house{opacity:.42;transition:opacity var(--dur-base) var(--ease-out)}
 .cap:hover .viz-house{opacity:.7}
 .viz-pulse{transform-box:view-box;transform-origin:160px 112px;transition:transform var(--dur-base) var(--ease-out)}
@@ -238,16 +223,12 @@ a{color:var(--text-link)}a:hover{color:var(--text-link-hover)}
 .viz-orbit{transform-box:view-box;transform-origin:160px 100px;animation:vizSpin 26s linear infinite}
 .cap:hover .viz-orbit{animation-duration:5s}
 @keyframes vizSpin{to{transform:rotate(360deg)}}
-/* Beads converge on the neck as they fall, then run down the stem, instead of
-   dropping straight through the funnel walls. --dx is the horizontal distance
-   each bead needs to reach the neck centre. */
+
 .viz-drop{opacity:0}
 .viz-drop.d1{--dx:22px}
 .viz-drop.d2{--dx:0px}
 .viz-drop.d3{--dx:-22px}
-/* Always running, like the globe's orbit — hover only speeds it up. Delays are
-   set once and left alone: changing them on hover restarts the cycle mid-fall,
-   whereas changing duration alone stays continuous (same approach as .viz-orbit). */
+
 .viz-drop{animation:vizDrop 5.4s var(--ease-inout) infinite}
 .viz-drop.d2{animation-delay:1.8s}
 .viz-drop.d3{animation-delay:3.6s}
@@ -261,24 +242,18 @@ a{color:var(--text-link)}a:hover{color:var(--text-link-hover)}
 }
 @media (prefers-reduced-motion:reduce){.viz-orbit,.viz-drop{animation:none}.cap:hover .viz-br,.cap:hover .viz-pulse{transform:none}}
 .foot-mark{display:block;width:100%}
-/* SiteFooter wraps the wordmark in a shrink-to-fit box — open it up so % widths resolve. */
+
 div:has(>.foot-mark){width:100%;max-width:100%}
-/* No link columns, so let the wordmark row span the full footer width. */
+
 div:has(>div>.foot-mark){grid-template-columns:1fr!important}
-/* 60% of the footer width on desktop, growing to full content width (equal gutters) at mobile. */
+
 .foot-mark img{width:clamp(60%,295px + 21.9vw,100%);max-width:100%;height:auto;display:block}
-/* Desktop clamps to 60% of the footer width (mobile still grows to 100% via the clamp
-   above). Bring it down closer to the surrounding headline scale. */
+
 @media (min-width:901px){.foot-mark img{width:48%}}
-.caps-hold{background:var(--n-900);color:var(--n-50);display:flex;align-items:center;padding:var(--section-y) 0;min-height:100vh;position:sticky;top:0}
+.caps-hold{background:var(--n-900);color:var(--n-50);padding:var(--section-y) 0}
 .caps-inner{width:100%}
 .caps-hold .cap{border-top-color:var(--line-inverse)}
-/* The section holds its content back until the video begins shrinking, so it fades in
-   behind the reel instead of visibly sliding up out of the hero. */
-/* Driven every frame by JS via --reveal (0→1), tied to the video's own shrink
-   progress. No CSS transition — a transition here would lag behind scroll and
-   break the sync that makes the handoff read as one continuous motion. */
-.caps-hold .cap,.caps-hold h1,.caps-hold h2{opacity:var(--reveal,0);transform:translateY(calc(14px * (1 - var(--reveal,0))))}
+
 .caps-hold .cap p{color:var(--n-300);text-wrap:pretty}
 .caps-hold .cap:hover{border-top-color:var(--n-50)}
 .caps-hold .cap:hover p{color:var(--n-50)}
@@ -290,42 +265,31 @@ footer{background:var(--block-ink);color:var(--n-0);border-top:none!important}
 footer a{color:var(--n-0)}footer a:hover{color:var(--block-acid)}
 .hero-lockup{display:grid;gap:0;justify-items:center;text-align:center}
 .hero-lockup>*{text-align:center!important}
-/* Eyebrow carries the category so the display lines are free to carry the thesis. */
+
 .hero-eyebrow{display:block;margin-bottom:var(--sp-6)}
-/* The sub-line carries the plain answer to "what do you sell", so it runs long and
-   breaks to two balanced lines rather than holding one. */
+
 .hero-sub{margin:var(--sp-6) auto 0;max-width:56ch;font-family:var(--font-serif);font-size:var(--text-lead);line-height:1.35;color:var(--text-secondary);text-wrap:balance}
 @media (max-width:900px){.hero-eyebrow{margin-bottom:var(--sp-5)}.hero-sub{margin-top:var(--sp-5);max-width:30ch;font-size:var(--text-body)}}
-/* Type scales with the viewport below ~1050px so the measure never runs into the gutter. */
+
 @media (min-width:901px){.hero-sub{font-size:min(var(--text-lead),2.1vw)}}
 .cap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp-12);align-items:start}
-/* Desktop only: Casting and content sits centre so the hero video lands mid-row.
-   Mobile keeps DOM order (Casting and content first). */
-@media (min-width:901px){.cap-grid>.cap:nth-child(1){order:2}.cap-grid>.cap:nth-child(2){order:1}.cap-grid>.cap:nth-child(3){order:3}}
-.id-narrow{display:none}
-@media (max-width:900px){.id-wide{display:none}.id-narrow{display:inline}}
+
 .cap{border-top:1px solid var(--line-hairline);padding-top:var(--sp-6);transition:border-color var(--dur-base) var(--ease-out)}
 .cap:hover{border-top-color:var(--line-strong)}
 .cap p{color:var(--text-secondary);transition:color var(--dur-base) var(--ease-out)}
 .cap:hover p{color:var(--text-primary)}
 .cap .id{transition:color var(--dur-base) var(--ease-out)}
 .cap:hover .id{color:var(--block-ember)}
-/* Process — four steps on paper, numbered because the order is real. A hairline
-   opens the section (echoing the .cap rule) instead of a color change, and top
-   padding is tightened so it reads as still attached to what Capabilities set up. */
-/* Dark section, matching the Capabilities block above — no divider between them,
-   they read as one continuous dark run. */
+
 .proc-sec{background:var(--n-900);color:var(--n-50);padding:clamp(56px,7vw,104px) 0}
-/* Full-height minus the amount the content was moved up — anchoring to the top
-   left the same dead space stranded at the bottom instead. Centring previously
-   cost ~130px above the title, so the section sheds an equivalent 12vh here. */
+
 @media (min-width:901px){.proc-sec{min-height:88vh;display:flex;flex-direction:column;justify-content:flex-start;padding:clamp(28px,3.5vh,52px) 0 clamp(40px,5vh,80px)}}
 .proc-step .step-n{display:block;margin-bottom:var(--sp-8)}
 .proc-step h3{margin:0 0 var(--sp-4);font-size:var(--text-title);font-weight:var(--fw-bold);letter-spacing:var(--ls-title)}
 .proc-sec .cap{border-top-color:var(--line-inverse)}
 .proc-sec .cap:hover{border-top-color:var(--n-50)}
 .proc-sec .cap p{color:var(--n-300)}
-/* Static list of every stage on the left, the gear and its descriptions right. */
+
 .proc-sec .rev{transition-duration:620ms}
 .proc-stage{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:clamp(24px,3vw,48px);margin:clamp(28px,4vh,64px) 0 0}
 .plist{justify-self:start}
@@ -339,10 +303,7 @@ footer a{color:var(--n-0)}footer a:hover{color:var(--block-acid)}
 .pitem .id{flex:0 0 auto}
 .pitem h3{margin:0;font-size:var(--text-display-3);line-height:1.2;letter-spacing:var(--ls-title);color:var(--n-500);transition:color var(--dur-base) var(--ease-out),text-shadow var(--dur-base) var(--ease-out)}
 .pitem.on h3{color:var(--n-0);text-shadow:0 0 24px rgba(255,255,255,.55),0 0 60px rgba(255,255,255,.25)}
-/* No orbiting labels now, so the gear needs no clearance and can nearly fill
-   its box — which is what brings the section height down. */
-/* Width must not use % here: this sits in an `auto` grid column, so a percentage
-   would depend on the column that depends on it, and collapse to zero. */
+
 .wheel{position:relative;width:min(560px,58vh,40vw);aspect-ratio:1;margin:0 auto}
 .wheel-gear{position:absolute;left:50%;top:50%;width:92%;aspect-ratio:1;transform-origin:50% 50%;color:var(--line-inverse);transition:color var(--dur-base) var(--ease-out),filter var(--dur-base) var(--ease-out)}
 .wheel-gear.on{color:var(--n-0);filter:drop-shadow(0 0 12px rgba(255,255,255,.45))}
@@ -360,9 +321,7 @@ footer a{color:var(--n-0)}footer a:hover{color:var(--block-acid)}
   padding:clamp(96px,11vh,144px) 0 clamp(40px,5vh,72px);
   box-sizing:border-box;
 }
-/* Two panels, edge to edge. Hovering one takes the majority share and the other
-   recedes; with nothing hovered they sit equal. Vertical 2:3 footage fills a
-   full-height panel without cropping, which is why the diptych suits the assets. */
+
 .wdiptych{
   flex:1;
   display:flex;
@@ -384,9 +343,7 @@ footer a{color:var(--n-0)}footer a:hover{color:var(--block-acid)}
 .wpanel.dim{opacity:.55}
 .wpanel-still,.wpanel-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
 .wpanel-video{opacity:0;transition:opacity var(--dur-base) var(--ease-out);z-index:2}
-/* At rest the panels are near-square and crop the 2:3 stills hard. Baia Vista's
-   framing needs the top of the frame, so its still anchors there while idle and
-   eases back to centre as soon as either panel is hovered. Video is unaffected. */
+
 .wpanel-still{object-position:50% 50%;transition:object-position var(--dur-base) var(--ease-out)}
 .wdiptych.idle .wpanel[data-id="W-01"] .wpanel-still{object-position:50% 0%}
 .wpanel.on .wpanel-video{opacity:1}
@@ -401,8 +358,7 @@ footer a{color:var(--n-0)}footer a:hover{color:var(--block-acid)}
   padding:clamp(20px,2.4vw,36px);
   pointer-events:none;
 }
-/* Body copy is held back until hover so a resting panel reads as an image, not
-   a card with a paragraph on it. */
+
 .wpanel-body{
   margin:var(--sp-2) 0 0;
   max-width:46ch;
@@ -419,20 +375,7 @@ footer a{color:var(--n-0)}footer a:hover{color:var(--block-acid)}
   .wpanel{transition:opacity var(--dur-base) var(--ease-out)}
   .wpanel-body{transform:none}
 }
-/* Full-screen operator section vertical positioning and sizing adjustments */
-/* Three defects removed here:
-   1) flex-shrink:0 was on .founder-portrait, but the flex item is the .rev
-      wrapper around it — so the guard never applied to the box that actually
-      shrinks, letting the photo's track drift out of step with the photo.
-   2) The copy's paragraph was maxWidth:'none', so its max-content width (the
-      whole sentence on one unwrapped line) drove flex base sizing and skewed
-      how space was split between photo and text.
-   3) width + aspect-ratio + max-height cannot all hold at once: when max-height
-      clamps, width does NOT shrink to preserve the ratio, so the box renders
-      wider than tall. A circle mask hides that; a square exposes it, and the
-      copy starts after the box's real width, not the photo's apparent edge.
-   A max-content grid track sizes the column to the photo itself, so the copy
-   always begins exactly one gap after it, with no dead space to the right. */
+
 .founder-sec{
   min-height:100vh;
   display:flex;
@@ -466,12 +409,8 @@ footer a{color:var(--n-0)}footer a:hover{color:var(--block-acid)}
 .contact-foot{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:var(--sp-10);margin-top:clamp(48px,6vw,96px)}
 @media (max-width:900px){
 .hero-media-holder{height:auto;aspect-ratio:16/9}
-/* Paper continues below the video by the same measure as the headline-to-video gap. */
-.hero-plain{padding-bottom:clamp(44px,6.5vh,92px)}
+
 .cap-grid,.track-grid,.founder-grid{grid-template-columns:1fr;gap:var(--sp-10)}
-.caps-hold{position:static;min-height:auto}
-.caps-spacer{display:none}
-.reel-handoff-zone{height:0}
 .wdiptych{flex-direction:column;gap:var(--sp-4)}
 .wpanel{min-height:58vh}
 .wpanel.on{flex-grow:1}
@@ -485,8 +424,6 @@ footer a{color:var(--n-0)}footer a:hover{color:var(--block-acid)}
 <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
 <script>
-/* @ds-bundle: {"format":4,"namespace":"TheNowMachineDesignSystem_5b6ea4","components":[{"name":"Button","sourcePath":"components/core/Button.jsx"},{"name":"DisplayHeading","sourcePath":"components/core/DisplayHeading.jsx"},{"name":"MonoLabel","sourcePath":"components/core/MonoLabel.jsx"},{"name":"SiteFooter","sourcePath":"components/layout/SiteFooter.jsx"},{"name":"LiveDot","sourcePath":"components/navigation/LiveDot.jsx"},{"name":"NavBar","sourcePath":"components/navigation/NavBar.jsx"}],"sourceHashes":{"components/core/Button.jsx":"5135e6c59b37","components/core/DisplayHeading.jsx":"75ce002193b8","components/core/MonoLabel.jsx":"9c5d918f371d","components/layout/SiteFooter.jsx":"6a8cbc79ced7","components/navigation/LiveDot.jsx":"053465494bf7","components/navigation/NavBar.jsx":"fdd388c9c8c5"},"inlinedExternals":[],"unexposedExports":[]} */
-
 (() => {
 
 const __ds_ns = (window.TheNowMachineDesignSystem_5b6ea4 = window.TheNowMachineDesignSystem_5b6ea4 || {});
@@ -880,13 +817,14 @@ __ds_ns.NavBar = __ds_scope.NavBar;
 </head><body>
 <div id="root"></div>
 <script type="text/babel">
+const { Button } = window.TheNowMachineDesignSystem_5b6ea4;
+
 const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
 
 function Frame({ children, style, wide, ...rest }) {
   return <div style={{ maxWidth: 'var(--max-content)', margin: '0 auto', paddingLeft: wide ? 'var(--gutter-lg)' : 'var(--gutter)', paddingRight: wide ? 'var(--gutter-lg)' : 'var(--gutter)', ...style }} {...rest}>{children}</div>;
 }
 
-/* Scroll/resize driver, coalesced into one rAF per frame. */
 function useScroll(fn) {
   const cb = React.useRef(fn);
   cb.current = fn;
@@ -901,7 +839,6 @@ function useScroll(fn) {
   }, []);
 }
 
-/* Scroll-reveal: adds .in once the element crosses into view. */
 function useReveal() {
   React.useEffect(() => {
     const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { rootMargin: '0px 0px -12% 0px' });
@@ -910,7 +847,6 @@ function useReveal() {
   }, []);
 }
 
-/* True when the named element occupies the middle of the viewport. */
 function useInView(id) {
   const [seen, setSeen] = React.useState(false);
   React.useEffect(() => {
@@ -923,13 +859,12 @@ function useInView(id) {
   return seen;
 }
 
-function scrollToId(id) {
+function scrollToId(id, offset = 96) {
   const el = document.getElementById(id);
   if (!el) return;
-  window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 96, behavior: 'smooth' });
+  window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - offset, behavior: 'smooth' });
 }
 
-/* Scroll progress 0→1 as an element crosses the viewport top→bottom, independent of its own height. */
 function useCrossProgress(ref) {
   const [p, setP] = React.useState(0);
   useScroll(() => {
@@ -945,9 +880,9 @@ Object.assign(window, { clamp, Frame, useScroll, useReveal, useInView, scrollToI
 
 </script>
 <script type="text/babel">
-const { DisplayHeading, MonoLabel } = window.TheNowMachineDesignSystem_5b6ea4;
+const { DisplayHeading, MonoLabel, Button } = window.TheNowMachineDesignSystem_5b6ea4;
 
-/* ── 2. Hero — centered title on paper, wide video below the fold ── */
+/* ── 2. Hero ── */
 function Hero() {
   const wrap = React.useRef(null);
   React.useEffect(() => {
@@ -963,146 +898,25 @@ function Hero() {
     <header ref={wrap} id="top" data-screen-label="Hero" className="hero-plain">
       <Frame>
         <div className="hero-lockup">
-          <MonoLabel tone="muted" className="hero-eyebrow">Demand generation studio</MonoLabel>
-          <DisplayHeading as="h1" size={1}>Buyers trust people,</DisplayHeading>
-          <DisplayHeading as="h2" size={1}>not floor plans.</DisplayHeading>
-          <p className="hero-sub">We move multi-home developments from launch to sell-out through content, campaigns, and paid media.</p>
+          <MonoLabel tone="muted" className="hero-eyebrow">Developer DEMAND AND NURTURING ENGINE</MonoLabel>
+          <DisplayHeading as="h1" size={1}>Creating direct demand</DisplayHeading>
+          <DisplayHeading as="h2" size={1}>for resort developments.</DisplayHeading>
+          <p className="hero-sub">We build direct acquisition and pipeline retention systems for real estate developers, keeping your inventory moving and your buyer data in-house.</p>
+          <div style={{ marginTop: 'var(--sp-8)' }}>
+            <Button size="lg" href="#contact" onClick={(e) => { e.preventDefault(); scrollToId('contact'); }}>Request a Pipeline Audit →</Button>
+          </div>
         </div>
       </Frame>
       <div className="hero-media-holder">
-        <div id="hero-reel-stage" className="hero-media">
+        <div className="hero-media">
           <video src="assets/hero-video.mp4" poster="assets/hero-poster.jpg" autoPlay muted loop playsInline preload="metadata" />
-          <div id="scroll-cue" className="scroll-cue"><MonoLabel tone="inverse">Scroll</MonoLabel><i className="cue-chev" /></div>
         </div>
       </div>
     </header>
   );
 }
 
-/* ── 3. Reel handoff — video grows edge-to-edge, holds while "What we run" arrives
-      behind it, then shrinks into the Content production thumbnail (desktop only) ── */
-function ReelHandoff() {
-  React.useEffect(() => {
-    const stage = document.getElementById('hero-reel-stage');
-    if (!stage) return;
-    const mq = window.matchMedia('(min-width:901px)');
-    const R = 14;
-    let raf = null;
-    const reset = () => {
-      stage.style.position = stage.style.left = stage.style.top = '';
-      stage.style.width = stage.style.height = stage.style.zIndex = '';
-      stage.style.opacity = stage.style.borderRadius = '';
-      const f = document.getElementById('cap-media-fill');
-      if (f) f.style.opacity = '0';
-      const hc = document.querySelector('.hero-lockup');
-      if (hc) hc.style.opacity = '';
-      const c = document.getElementById('capabilities');
-      if (c) c.style.removeProperty('--reveal');
-    };
-    const tick = () => {
-      raf = null;
-      const holder = stage.parentElement;
-      const pinEl = document.getElementById('caps-pin');
-      const target = document.getElementById('cap-media-target');
-      const fill = document.getElementById('cap-media-fill');
-      const cue = document.getElementById('scroll-cue');
-      if (!holder || !pinEl || !target) return reset();
-      const sy = window.scrollY || window.pageYOffset;
-      const vh = window.innerHeight, vw = window.innerWidth;
-      const hr = holder.getBoundingClientRect();
-      if (!mq.matches) {
-        /* Mobile keeps the original handoff: pin near the top, shrink straight
-           into the thumbnail as the page scrolls. No full-bleed, no sticky hold. */
-        const caps0 = document.getElementById('capabilities');
-        const pin = 96;
-        const t0 = target.getBoundingClientRect();
-        const from = hr.top + sy - pin + hr.height / 2;
-        const to = (t0.top + sy + t0.height / 2) - vh * 0.55;
-        const p = clamp((sy - from) / Math.max(to - from, 1), 0, 1);
-        if (cue) cue.style.opacity = String(clamp((0.95 - p) / 0.25, 0, 1));
-        if (caps0) caps0.style.setProperty('--reveal', String(p));
-        const heroCopy0 = document.querySelector('.hero-lockup');
-        if (heroCopy0) heroCopy0.style.opacity = String(clamp(1 - p * 1.6, 0, 1));
-        if (hr.top >= pin && p <= 0.001) return reset();
-        const st = { left: hr.left, width: hr.width, height: hr.height, top: Math.max(hr.top, pin) };
-        stage.style.position = 'fixed';
-        stage.style.left = (st.left + (t0.left - st.left) * p) + 'px';
-        stage.style.top = (st.top + (t0.top - st.top) * p) + 'px';
-        stage.style.width = (st.width + (t0.width - st.width) * p) + 'px';
-        stage.style.height = (st.height + (t0.height - st.height) * p) + 'px';
-        stage.style.borderRadius = R + 'px';
-        stage.style.zIndex = 30;
-        stage.style.opacity = p > 0.94 ? String(Math.max(0, (1 - p) / 0.06)) : '1';
-        if (fill) fill.style.opacity = p > 0.9 ? String(Math.min(1, (p - 0.9) / 0.1)) : '0';
-        return;
-      }
-      const pinTop = pinEl.getBoundingClientRect().top + sy;
-      const growFrom = hr.top + sy - (vh - hr.height) / 2;
-      /* Grow and shrink are both fixed, fast distances now — independent of hero
-         layout — so the video visibly snaps to full-bleed and back down quickly,
-         instead of tracking however tall the hero content happens to be. */
-      const growLen = vh * 0.3;
-      const shrinkLen = vh * 0.15; /* must finish inside .caps-spacer (22vh) or the section releases mid-shrink */
-      const g = clamp((sy - growFrom) / growLen, 0, 1);
-      /* sp is still gated strictly on the real pinTop — the exact scroll position
-         where .caps-hold's native CSS sticky engages. Shrink can never start before
-         the dark section is truly locked full-screen behind the video, or the white
-         background underneath would show through as it shrinks. Once grow finishes
-         early (fast), the video just sits full-bleed and static for whatever short
-         gap remains until pinTop, then shrink fires immediately. */
-      const sp = clamp((sy - pinTop) / shrinkLen, 0, 1);
-      if (cue) cue.style.opacity = String(clamp((0.95 - sp) / 0.25, 0, 1));
-      const caps = document.getElementById('capabilities');
-      if (caps) caps.style.setProperty('--reveal', String(sp));
-      /* Hero copy dissolves out as the video grows over it, instead of just
-         being covered outright — this is the seam the cross-fade closes. */
-      const heroCopy = document.querySelector('.hero-lockup');
-      if (heroCopy) heroCopy.style.opacity = String(clamp(1 - g, 0, 1));
-      if (g <= 0) return reset();
-      const base = { left: hr.left, top: (vh - hr.height) / 2, width: hr.width, height: hr.height };
-      const full = { left: 0, top: 0, width: vw, height: vh };
-      let box, rad;
-      if (sp > 0) {
-        const t = target.getBoundingClientRect();
-        const tgt = { left: t.left, top: t.top, width: t.width, height: t.height };
-        box = {
-          left: full.left + (tgt.left - full.left) * sp,
-          top: full.top + (tgt.top - full.top) * sp,
-          width: full.width + (tgt.width - full.width) * sp,
-          height: full.height + (tgt.height - full.height) * sp
-        };
-        rad = R * sp;
-      } else {
-        box = {
-          left: base.left + (full.left - base.left) * g,
-          top: base.top + (full.top - base.top) * g,
-          width: base.width + (full.width - base.width) * g,
-          height: base.height + (full.height - base.height) * g
-        };
-        rad = R * (1 - g);
-      }
-      stage.style.position = 'fixed';
-      stage.style.left = box.left + 'px';
-      stage.style.top = box.top + 'px';
-      stage.style.width = box.width + 'px';
-      stage.style.height = box.height + 'px';
-      stage.style.borderRadius = rad + 'px';
-      stage.style.zIndex = 30;
-      stage.style.opacity = sp > 0.94 ? String(Math.max(0, (1 - sp) / 0.06)) : '1';
-      if (fill) fill.style.opacity = sp > 0.86 ? String(Math.min(1, (sp - 0.86) / 0.12)) : '0';
-    };
-    const onScroll = () => { if (!raf) raf = requestAnimationFrame(tick); };
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll);
-    tick();
-    return () => { window.removeEventListener('scroll', onScroll); window.removeEventListener('resize', onScroll); };
-  }, []);
-  return <div className="reel-handoff-zone" aria-hidden="true" />
-}
-
 /* ── 4. Capabilities ── */
-/* ── 4. Capability visuals — hairline line art in the gear's language.
-      Idle motion is slow; hover speeds it up or closes it in. ── */
 function Viz({ kind }) {
   if (kind === 'globe') return (
     <svg className="viz" viewBox="0 0 320 200" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.25">
@@ -1128,7 +942,6 @@ function Viz({ kind }) {
   );
   return (
     <svg className="viz" viewBox="0 0 320 200" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.25">
-      {/* The development itself, sitting behind the person cast to front it. */}
       <g className="viz-house">
         <path d="M92 94 L160 48 L228 94" strokeLinejoin="round" />
         <path d="M106 92v66h108V92" strokeLinejoin="round" />
@@ -1143,15 +956,20 @@ function Viz({ kind }) {
   );
 }
 
+/*
+   Sequence (Desktop & Mobile):
+   1. C-01 The Demand Engine
+   2. C-02 The Nurture Engine
+   3. C-03 The Fuel
+*/
 const CAPS = [
-  { id: 'C-02', mid: 'C-01', title: 'Casting and content', body: "We cast a host who experiences the development the way your buyer would, then build the content engine around them.", media: true, viz: 'cast' },
-  { id: 'C-01', mid: 'C-02', title: 'Global advertising', body: 'Cross-platform campaigns that build your audience at home and abroad, then convert it into real leads and expo visits.', viz: 'globe' },
-  { id: 'C-03', title: 'Funnel-building', body: 'An engine that warms cold inquiries while you sleep, and surfaces the ones ready to talk.', viz: 'funnel' }
+  { id: 'C-01', title: 'The Demand Engine', body: "Targeted ad campaigns and lead funnels designed to capture local and international buyers directly, giving developers commission leverage and lead recyclability across the portfolio.", viz: 'globe' },
+  { id: 'C-02', title: 'The Nurture Engine', body: "Social media and email marketing that maintains strong brand momentum, turning inquiries into signed contracts and eliminating buyer distance anxiety.", viz: 'funnel' },
+  { id: 'C-03', title: 'The Fuel', body: "On-camera hosted storytelling, lifestyle media, and site progress updates that build tangible project credibility and feed both the demand and nurture engine.", viz: 'cast' }
 ];
 
 function Capabilities() {
   return (
-    <div id="caps-pin" className="caps-pin">
     <section id="capabilities" data-screen-label="Capabilities" className="caps-hold">
       <div className="caps-inner">
         <Frame style={{ width: '100%' }}>
@@ -1159,15 +977,8 @@ function Capabilities() {
           <div className="cap-grid">
             {CAPS.map(c => (
               <article key={c.id} className="cap">
-                {c.media ? (
-                  <div id="cap-media-target" className="cap-media">
-                    {/* Keeps the id the reel handoff cross-fades into. */}
-                    <div id="cap-media-fill" className="cap-media-fill"><Viz kind={c.viz} /></div>
-                  </div>
-                ) : (
-                  <div className="cap-media"><Viz kind={c.viz} /></div>
-                )}
-                <MonoLabel className="id" tone="muted" style={{ display: 'block', marginBottom: 'var(--sp-8)' }}><span className="id-wide">{c.id}</span><span className="id-narrow">{c.mid || c.id}</span></MonoLabel>
+                <div className="cap-media"><Viz kind={c.viz} /></div>
+                <MonoLabel className="id" tone="muted" style={{ display: 'block', marginBottom: 'var(--sp-8)' }}>{c.id}</MonoLabel>
                 <h3 className="cap-title" style={{ margin: '0 0 var(--sp-5)', fontFamily: 'var(--font-display)', fontWeight: 'var(--fw-black)', fontSize: 'var(--text-display-3)', lineHeight: 'var(--lh-tight)', letterSpacing: 'var(--ls-title)' }}>{c.title}</h3>
                 <p style={{ margin: 0 }}>{c.body}</p>
               </article>
@@ -1176,32 +987,26 @@ function Capabilities() {
         </Frame>
       </div>
     </section>
-    <div className="caps-spacer" aria-hidden="true" />
-    </div>
   );
 }
 
-Object.assign(window, { Hero, ReelHandoff, Capabilities });
+Object.assign(window, { Hero, Capabilities });
 
 </script>
 <script type="text/babel">
 const { DisplayHeading, MonoLabel, Button, SiteFooter } = window.TheNowMachineDesignSystem_5b6ea4;
 
-/* ── 5. Process — the four steps, in the order they happen ── */
+/* ── 5. Process ── */
 const PROCESS = [
-  { n: 'P-01', title: 'Audit', body: 'Audit the current marketing, digital presence, and content, and find where value is being left on the table.' },
-  { n: 'P-02', title: 'Build', body: 'Build the pages and lead magnets that qualify inquiries, so your sales team only spends time on buyers ready to commit.' },
-  { n: 'P-03', title: 'Cast', body: 'Onboard the face of the development. Whether it is new talent, or a team member, they become the person your buyer relates to.' },
-  { n: 'P-04', title: 'Produce', body: 'Produce static and video content that sells the lifestyle before a single unit is built, tailored to organic and paid channels at every funnel stage.' },
-  { n: 'P-05', title: 'Distribute', body: 'Distribute organically and amplify through advertising across the Caribbean, North America, and Europe, with retargeting that keeps buyers in the funnel.' },
-  { n: 'P-06', title: 'Report', body: 'Measure leads, engagement, qualified inquiries, and revenue attribution — the numbers your investors and lenders expect.' },
-  { n: 'P-07', title: 'Optimize', body: 'Improve creatives, funnels, CTAs, offers, and campaigns to keep absorption on pace.' }
+  { n: 'P-01', title: 'Audit', body: 'Review current absorption targets, digital touchpoints, and lead capture workflows to identify immediate margin and pipeline opportunities.' },
+  { n: 'P-02', title: 'Build', body: 'Deploy landing pages, lead capture systems and auto-routing infrastructure that log prospects into developer main records alongside brokerage channels.' },
+  { n: 'P-03', title: 'Cast', body: 'Onboard an on-camera host to give local and international buyers transparent, human proof of project momentum.' },
+  { n: 'P-04', title: 'Produce', body: 'Produce hosted site progress updates, aerial passes, and lifestyle media that eliminate distance anxiety during reservation holds.' },
+  { n: 'P-05', title: 'Distribute', body: 'Launch targeted campaigns across key local and foreign buyer markets, scaling high-intent inquiry volume straight into your direct funnel.' },
+  { n: 'P-06', title: 'Nurture', body: 'Maintain continuous touchpoints through reservation holds and multi-year construction cycles to convert temporary holds into signed contracts.' },
+  { n: 'P-07', title: 'Recycle', body: 'Cross-promote non-converting leads into upcoming off-plan projects across your portfolio at zero additional acquisition cost.' }
 ];
 
-const SETUP = PROCESS.slice(0, 3);
-const CYCLE = PROCESS.slice(3);
-/* Gear outline: alternating root and outer radii, one pair per tooth. Few, wide,
-   flat-topped teeth — a high count with narrow teeth reads as a flower. */
 const GEAR = (() => {
   const N = 9, root = 148, out = 175, c = 200;
   const pt = (r, a) => { const t = (a - 90) * Math.PI / 180; return (c + Math.cos(t) * r).toFixed(1) + ',' + (c + Math.sin(t) * r).toFixed(1); };
@@ -1225,18 +1030,12 @@ function Process() {
   const secRef = React.useRef(null);
   const lock = React.useRef(0);
   React.useEffect(() => {
-    /* This section re-renders on every scroll tick, and React rewrites className
-       each time — which would strip the `in` class that useReveal adds
-       imperatively. So the reveal is held in state here instead. */
     const el = secRef.current; if (!el) return;
     const io = new IntersectionObserver(es => { if (es[0].isIntersecting) { setShownIn(true); io.disconnect(); } }, { rootMargin: '0px 0px -12% 0px' });
     io.observe(el);
     return () => io.disconnect();
   }, []);
   React.useEffect(() => {
-    /* The nav's "How it runs" link lands mid-window, where scroll position alone
-       would resolve to a later stage. Select Audit on arrival, and hold it through
-       the smooth scroll so the programmatic movement does not clear it. */
     const jump = () => { setPeek(0); lock.current = Date.now() + 1400; };
     window.addEventListener('tnm:process-jump', jump);
     return () => window.removeEventListener('tnm:process-jump', jump);
@@ -1245,16 +1044,9 @@ function Process() {
     lastY.current = window.scrollY;
     setStill(window.matchMedia('(prefers-reduced-motion:reduce)').matches);
   }, []);
-  /* Three anchors, all measured off what has actually cleared the bottom of the
-     viewport:
-       a0  description fully visible  -> Audit lights, gear lights, gear starts turning
-       a1  gear fully visible         -> Cast, then the remaining stages
-       end the title meeting the nav, or a readable window, whichever is later
-     Before a0 nothing is highlighted and the gear sits dim and still. */
+
   useScroll(() => {
     const y = window.scrollY;
-    /* A click holds its stage until the visitor scrolls again. While a nav jump
-       is settling, track position without clearing the selection. */
     if (Date.now() < lock.current) { lastY.current = y; }
     else if (Math.abs(y - lastY.current) > 2) { lastY.current = y; if (peek !== null) setPeek(null); }
     const el = wheelRef.current, head = headRef.current, core = coreRef.current;
@@ -1263,7 +1055,6 @@ function Process() {
     if (!r.height) return;
     const vh = window.innerHeight;
     const a0 = (core.getBoundingClientRect().bottom + y) - vh;
-    /* The gear is 92% of the box and centred, so its bottom edge sits at 96%. */
     const a1 = (r.top + r.height * 0.96 + y) - vh;
     const end = Math.max((head.getBoundingClientRect().top + y) - 96, a1 + 420);
     let stage = -1;
@@ -1273,20 +1064,13 @@ function Process() {
     setProg(v => (v.stage === stage && Math.abs(v.rot - rot) < 0.002) ? v : { stage, rot });
   });
   const stage = prog.stage;
-  /* Nothing lights until the description has cleared the fold. A click lights it
-     early. */
   const lit = peek !== null || stage >= 0;
   const shown = peek !== null ? peek : Math.max(stage, 0);
-  /* Rotation starts with Audit and runs anti-clockwise. The 0.5 only slows the
-     gear — stage timing is driven by the anchors above, so scroll distance and
-     highlighting are unaffected. */
   const turn = still ? 0 : -(prog.rot * 360 * 0.5);
   const tap = i => { if (i !== stage || peek !== null) setPeek(i); };
   const rv = shownIn ? 'rev in' : 'rev';
   const keys = (i) => e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); tap(i); } };
-  /* Exactly one description area is live at a time: the rail's own line while a
-     rail stage is highlighted, the wheel's centre once attention moves to the
-     wheel. They never both show. */
+
   return (
     <section id="process" data-screen-label="How it runs" className="proc-sec" ref={secRef}>
       <Frame style={{ width: '100%' }}>
@@ -1297,8 +1081,6 @@ function Process() {
               <React.Fragment key={st.n}>
                 {i === 0 && <span className={'band-label ' + rv + (lit && shown < 3 ? ' on' : '')} style={{ transitionDelay: '60ms' }}>One time</span>}
                 {i === 3 && <span className={'band-label ' + rv + (lit && shown >= 3 ? ' on' : '')} style={{ transitionDelay: '265ms' }}>Repeated</span>}
-                {/* .pitem carries its own opacity for the dim/lit state, which would
-                    override .rev — so the reveal rides on a wrapper instead. */}
                 <div className={rv} style={{ transitionDelay: `${110 + i * 55}ms` }}>
                   <div className={'pitem' + (lit && i === shown ? ' on' : '')}
                     role="button" tabIndex={0} onClick={() => tap(i)} onKeyDown={keys(i)}>
@@ -1309,19 +1091,14 @@ function Process() {
               </React.Fragment>
             ))}
           </div>
-          {/* Every stage shares the gear; it lights once the repeated stages
-              take over. */}
           <div className={'wheel ' + rv} ref={wheelRef} style={{ transitionDelay: '200ms' }}>
             <svg className={'wheel-gear' + (lit ? ' on' : '')} viewBox="0 0 400 400" aria-hidden="true" style={{ transform: `translate(-50%,-50%) rotate(${turn}deg)` }}>
               <path d={GEAR} fill="none" stroke="currentColor" strokeWidth="1.25" strokeLinejoin="round" />
             </svg>
             <div className="wheel-core" ref={coreRef}><p>{PROCESS[shown].body}</p></div>
           </div>
-          {/* Mirrors the list column so the gear lands on the page centre. */}
           <div aria-hidden="true" />
         </div>
-        {/* Below 900px the rail and wheel are hidden and all six read as a plain
-            stack, so nothing depends on the rotation to be legible. */}
         <div className="proc-cycle-list">
           {PROCESS.map(s => (
             <article key={s.n} className="cap proc-step">
@@ -1336,7 +1113,7 @@ function Process() {
   );
 }
 
-/* ── 6. The model — four lines, each landing on scroll ── */
+/* ── 6. The model ── */
 function Model() {
   const wrap = React.useRef(null);
   const p = useCrossProgress(wrap);
@@ -1346,17 +1123,17 @@ function Model() {
       <div className="model-inner">
         <Frame style={{ width: '100%' }}>
           <DisplayHeading size={1} tone="inverse" className="lines-wide">
-            <span className="ln">Agile enough to</span>
-            <span className="ln">outpace <span className={'mark' + on(0.45)}>agencies.</span></span>
-            <span className="ln">Capable enough to</span>
-            <span className="ln"><span>outperform </span><span className={'mark' + on(0.5)}>solo hires.</span></span>
+            <span className="ln">Built for developers,</span>
+            <span className="ln">not <span className={'mark' + on(0.45)}>general brokerages.</span></span>
+            <span className="ln">Focused on absorption,</span>
+            <span className="ln">not <span className={'mark' + on(0.5)}>vanity metrics.</span></span>
           </DisplayHeading>
           <DisplayHeading size={1} tone="inverse" className="lines-narrow">
-            <span className="ln">Agile enough</span>
-            <span className="ln">to outpace <span className={'mark' + on(0.45)}>agencies.</span></span>
-            <span className="ln">Capable enough</span>
-            <span className="ln">to outperform</span>
-            <span className="ln"><span className={'mark' + on(0.5)}>solo hires.</span></span>
+            <span className="ln">Engineered for</span>
+            <span className="ln">developers, not <span className={'mark' + on(0.45)}>brokerages.</span></span>
+            <span className="ln">Focused on</span>
+            <span className="ln">absorption, not</span>
+            <span className="ln"><span className={'mark' + on(0.5)}>vanity metrics.</span></span>
           </DisplayHeading>
         </Frame>
       </div>
@@ -1364,14 +1141,12 @@ function Model() {
   );
 }
 
-/* ── 7. Selected work — scroll-driven rail, centre poster prominent ── */
+/* ── 7. Selected work ── */
 const WORK = [
-  { id: 'W-01', client: 'Baia Vista', cat: 'Development', poster: 'assets/baia-vista-poster.jpg', video: 'assets/baia-vista-hover.mp4', body: 'A cast host, a content engine, and paid media running as one system for the 175-home Curaçao development.' },
-  { id: 'W-02', client: 'CoveCasa', cat: 'Built it from zero', poster: 'assets/covecasa-poster.jpg', video: 'assets/covecasa-hover.mp4', body: 'The Now Machine built paid media, funnels, and content production for a luxury vacation rental portfolio, scaling it to 20+ properties under management in year one.' }
+  { id: 'W-01', client: 'Baia Vista', cat: '175-Unit Development', poster: 'assets/baia-vista-poster.jpg', video: 'assets/baia-vista-hover.mp4', body: 'Direct demand and nurturing engine running as one system for the 175-unit Curaçao development, driving absorption velocity.' },
+  { id: 'W-02', client: 'CoveCasa', cat: 'Vacation Rental Portfolio', poster: 'assets/covecasa-poster.jpg', video: 'assets/covecasa-hover.mp4', body: 'Built paid media, funnels, and content production for a luxury rental portfolio, scaling it to 30 properties under management in year one.' }
 ];
 
-/* Diptych panel. Vertical 2:3 footage fills a full-height panel natively, so
-   nothing gets cropped — which is why this shape suits the assets. */
 const WorkPanel = ({ w, active, dim, onEnter, onLeave, vref }) => (
   <div className={'wpanel' + (active ? ' on' : '') + (dim ? ' dim' : '')} data-id={w.id}
     onMouseEnter={onEnter} onMouseLeave={onLeave}>
@@ -1389,8 +1164,6 @@ const WorkPanel = ({ w, active, dim, onEnter, onLeave, vref }) => (
 function Work() {
   const [hov, setHov] = React.useState(-1);
   const vids = React.useRef({});
-  /* Stills until hover: two autoplaying videos at once is heavier and splits
-     attention, so only the hovered panel plays. */
   React.useEffect(() => {
     WORK.forEach((w, n) => {
       const v = vids.current[w.id];
@@ -1420,9 +1193,9 @@ function Work() {
 
 /* ── 8. The operator ── */
 const TRACK = [
-  { id: 'EX-01', title: 'BuzzFeed', meta: 'Hosted formats at scale', body: 'Built lifestyle formats for the digital media leader, putting a face on categories that never had one. Same playbook, different product.' },
+  { id: 'EX-01', title: 'BuzzFeed', meta: 'Hosted formats at scale', body: 'Built lifestyle formats for the digital media leader, putting a face on categories that never had one. Same playbook, applied to developer pipeline retention.' },
   { id: 'EX-02', title: 'Airbnb Luxe', meta: 'Premium property vetting', body: "Designated Airbnb Luxe consultant for Aruba, Bonaire, and Curaçao, vetting high-end real estate against the standards Airbnb's most demanding guest-tier pays for." },
-  { id: 'EX-03', title: 'The Now Machine', meta: 'Real estate media', body: 'Specialist bench: $2M+ in real estate ad spend, and pre-construction sold to buyers across North America, Europe, and the Gulf.' }
+  { id: 'EX-03', title: 'The Now Machine', meta: 'Developer Demand Systems', body: 'Running direct demand generation and nurturing engines for Caribbean resort developments, helping them increase commision leverage and sales velocity.' }
 ];
 
 function Founder() {
@@ -1435,9 +1208,6 @@ function Founder() {
     setLit(el.getBoundingClientRect().top < window.innerHeight * 0.45);
   });
   React.useEffect(() => {
-    /* `lit` flipping re-renders this section, and React would rewrite className
-       and strip the `in` class useReveal adds imperatively — making the content
-       vanish mid-scroll. Held in state for the same reason as the process section. */
     const el = secRef.current; if (!el) return;
     const io = new IntersectionObserver(es => { if (es[0].isIntersecting) { setShownIn(true); io.disconnect(); } }, { rootMargin: '0px 0px -12% 0px' });
     io.observe(el);
@@ -1457,7 +1227,7 @@ function Founder() {
             </div>
             <div className={rv + ' founder-copy'}>
               <div ref={head}><DisplayHeading size={2}><span className="lines-wide">Island born. Made in<br />Los Angeles. <span className={'mark' + (lit ? ' on' : '')}>Returned.</span></span><span className="lines-narrow">Island born.<br />Made in<br />Los Angeles.<br /><span className={'mark' + (lit ? ' on' : '')}>Returned.</span></span></DisplayHeading></div>
-              <p style={{ maxWidth: '54ch', marginTop: 'var(--sp-10)', color: 'var(--text-secondary)', textWrap: 'pretty' }}>The Now Machine is operator-led. One person owns your answers and your outcomes, with senior specialists behind every discipline. No juniors billed at agency rates.</p>
+              <p style={{ maxWidth: '54ch', marginTop: 'var(--sp-10)', color: 'var(--text-secondary)', textWrap: 'pretty' }}>The Now Machine acts as your fractional marketing function. One operator owns your pipeline outcomes with senior specialists behind every discipline, aligning 100% with developer P&L objectives.</p>
             </div>
           </div>
           <div className={'track-grid ' + rv}>
@@ -1481,9 +1251,9 @@ function Contact() {
   return (
     <section id="contact" data-screen-label="Contact" className="acid-block">
       <Frame>
-        <DisplayHeading className="rev" size={1} style={{ maxWidth: '18ch' }}>Let's create demand before you build it.</DisplayHeading>
+        <DisplayHeading className="rev" size={1} style={{ maxWidth: '18ch' }}>Let's create direct demand for your portfolio.</DisplayHeading>
         <div className="contact-foot rev">
-          <Button size="lg" href="mailto:chris@thenowmachine.com">Start a conversation →</Button>
+          <Button size="lg" href="mailto:chris@thenowmachine.com">Request a Pipeline Audit →</Button>
         </div>
       </Frame>
     </section>
@@ -1494,7 +1264,7 @@ function Contact() {
 function Footer() {
   return (
     <SiteFooter wordmark={<span className="foot-mark"><img src="assets/foot-wordmark.png" alt="the now machine" width="941" height="94" loading="lazy" decoding="async" /></span>} columns={[]}
-      note={<span>Demand generation<br />for multi-home developments · <a href="mailto:hello@thenowmachine.com">Contact</a><span style={{ display: 'block', marginTop: 'var(--sp-3)' }}>Veerstraat 9a, Willemstad, Curaçao</span><span style={{ display: 'block', marginTop: 'var(--sp-4)', textAlign: 'center' }}>© 2026 The Now Machine. All rights reserved.</span></span>} />
+      note={<span>Developer demand and nurturing engine for resort developments · <a href="mailto:chris@thenowmachine.com">Contact</a><span style={{ display: 'block', marginTop: 'var(--sp-3)' }}>Veerstraat 9a, Willemstad, Curaçao</span><span style={{ display: 'block', marginTop: 'var(--sp-4)', textAlign: 'center' }}>© 2026 The Now Machine LLC. All rights reserved.</span></span>} />
   );
 }
 
@@ -1518,18 +1288,15 @@ function Nav() {
   const go = l => {
     if (typeof l === 'string' && NAV[l]) {
       const id = NAV[l];
-      /* #capabilities starts at the exact scroll position where the reel is still
-         full-bleed and the section's content is at opacity 0 (sp = 0). Jumping to
-         the element top would land on that frame. On desktop, offset past the
-         shrink distance so the video has collapsed and --reveal has hit 1. */
-      if (id === 'capabilities' && window.matchMedia('(min-width:901px)').matches) {
-        const pin = document.getElementById('caps-pin');
-        if (pin) {
-          window.scrollTo({ top: pin.getBoundingClientRect().top + window.scrollY + window.innerHeight * 0.3 + 24, behavior: 'smooth' });
-          return;
-        }
+      if (id === 'capabilities') {
+        scrollToId(id, 80);
+        return;
       }
-      if (id === 'process') window.dispatchEvent(new CustomEvent('tnm:process-jump'));
+      if (id === 'process') {
+        window.dispatchEvent(new CustomEvent('tnm:process-jump'));
+        scrollToId(id, 180);
+        return;
+      }
       scrollToId(id);
     } else if (l === 'home') window.scrollTo({ top: 0, behavior: 'smooth' });
     else window.location.href = 'mailto:chris@thenowmachine.com';
@@ -1538,7 +1305,7 @@ function Nav() {
     <div className={'tnm-nav' + (gold ? ' gold' : '')}>
       <NavBar links={narrow ? ['Services'] : ['What we run', 'How it runs', 'Work']} ctaLive={false} onNavigate={go}
         wordmark={<img className="nav-logo" src="assets/logo-now.png" alt="The Now Machine" width="63" height="26" decoding="async" />}
-        cta={narrow ? null : <span style={{ display: 'inline-flex', alignItems: 'center', gap: 'var(--sp-3)' }}>Start a conversation<LiveDot className="tnm-pulse" /></span>} />
+        cta={narrow ? null : <span style={{ display: 'inline-flex', alignItems: 'center', gap: 'var(--sp-3)' }}>Request an Audit<LiveDot className="tnm-pulse" /></span>} />
     </div>
   );
 }
@@ -1549,7 +1316,6 @@ function Site() {
     <React.Fragment>
       <Nav />
       <Hero />
-      <ReelHandoff />
       <Capabilities />
       <Process />
       <Work />
