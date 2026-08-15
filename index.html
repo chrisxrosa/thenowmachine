@@ -291,13 +291,12 @@ footer a{color:var(--n-0)}footer a:hover{color:var(--block-acid)}
 .proc-sec .cap p{color:var(--n-300)}
 
 .proc-sec .rev{transition-duration:620ms}
-.proc-stage{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:clamp(24px,3vw,48px);margin:clamp(28px,4vh,64px) 0 0}
-.plist{justify-self:start}
-.plist{display:grid;gap:var(--sp-2);align-content:center}
-.band-label{justify-self:start;margin:var(--sp-5) 0 var(--sp-3);font-family:var(--font-mono);font-size:var(--text-caption);font-weight:var(--fw-medium);letter-spacing:var(--ls-label);text-transform:uppercase;white-space:nowrap;color:var(--n-500);padding:4px 8px;transition:color var(--dur-base) var(--ease-out),background var(--dur-base) var(--ease-out)}
-.plist>.band-label:first-child{margin-top:0}
+.proc-stage{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(24px,3vh,48px);margin:clamp(24px,3vh,52px) 0 0}
+.proc-row-block{display:flex;flex-direction:row;align-items:center;justify-content:center;gap:clamp(16px,2vw,32px);width:100%;flex-wrap:wrap}
+.proc-row-items{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:clamp(16px,3vw,40px)}
+.band-label{margin:0;font-family:var(--font-mono);font-size:var(--text-caption);font-weight:var(--fw-medium);letter-spacing:var(--ls-label);text-transform:uppercase;white-space:nowrap;color:var(--n-500);padding:4px 8px;transition:color var(--dur-base) var(--ease-out),background var(--dur-base) var(--ease-out)}
 .band-label.on{background:var(--block-acid);color:var(--n-900)}
-.pitem{display:flex;align-items:baseline;gap:var(--sp-4);cursor:pointer;opacity:.4;transition:opacity var(--dur-base) var(--ease-out)}
+.pitem{display:flex;align-items:baseline;gap:var(--sp-3);cursor:pointer;opacity:.4;transition:opacity var(--dur-base) var(--ease-out)}
 .pitem.on,.pitem:hover{opacity:1}
 .pitem:focus-visible{outline:2px solid var(--n-0);outline-offset:6px;border-radius:var(--r-sm)}
 .pitem .id{flex:0 0 auto}
@@ -901,7 +900,7 @@ function Hero() {
           <MonoLabel tone="muted" className="hero-eyebrow">DEMAND GENERATION STUDIO</MonoLabel>
           <DisplayHeading as="h1" size={1}>The direct demand engine</DisplayHeading>
           <DisplayHeading as="h2" size={1}>for resort developments.</DisplayHeading>
-          <p className="hero-sub">We accelerate absorption velocity and maximize commission leverage through direct demand generation.</p>
+          <p className="hero-sub">We act as your direct marketing engine, driving qualified demand to clear resort inventory faster while protecting your margins.</p>
           <div style={{ marginTop: 'var(--sp-8)' }}>
             <Button size="lg" href="#contact" onClick={(e) => { e.preventDefault(); scrollToId('contact'); }}>Get in touch →</Button>
           </div>
@@ -957,7 +956,7 @@ function Viz({ kind }) {
 }
 
 const CAPS = [
-  { id: 'C-01', title: 'The Demand Engine', body: "Targeted ad campaigns and lead funnels designed to capture local and international buyers directly, giving developers commission leverage and lead recyclability across the portfolio.", viz: 'globe' },
+  { id: 'C-01', title: 'The Demand Engine', body: "Targeted ad campaigns and lead funnels designed to capture local and international buyers directly, protecting developer margins and enabling lead recyclability across the portfolio.", viz: 'globe' },
   { id: 'C-02', title: 'The Nurture Engine', body: "Social media and email marketing that maintains strong brand momentum, turning inquiries into signed contracts and eliminating buyer distance anxiety.", viz: 'funnel' },
   { id: 'C-03', title: 'The Fuel', body: "On-camera hosted storytelling, lifestyle media, and site progress updates that build tangible project credibility and feed both the demand and nurture engine.", viz: 'cast' }
 ];
@@ -1070,28 +1069,48 @@ function Process() {
       <Frame style={{ width: '100%' }}>
         <div ref={headRef} className={rv}><DisplayHeading size={1} tone="inverse">How it runs</DisplayHeading></div>
         <div className="proc-stage">
-          <div className="plist">
-            {PROCESS.map((st, i) => (
-              <React.Fragment key={st.n}>
-                {i === 0 && <span className={'band-label ' + rv + (lit && shown < 3 ? ' on' : '')} style={{ transitionDelay: '60ms' }}>One time</span>}
-                {i === 3 && <span className={'band-label ' + rv + (lit && shown >= 3 ? ' on' : '')} style={{ transitionDelay: '265ms' }}>Repeated</span>}
-                <div className={rv} style={{ transitionDelay: `${110 + i * 55}ms` }}>
+          {/* Top Row: One Time */}
+          <div className={'proc-row-block ' + rv} style={{ transitionDelay: '60ms' }}>
+            <span className={'band-label' + (lit && shown < 3 ? ' on' : '')}>One time</span>
+            <div className="proc-row-items">
+              {PROCESS.slice(0, 3).map((st, i) => (
+                <div key={st.n} className={rv} style={{ transitionDelay: `${110 + i * 55}ms` }}>
                   <div className={'pitem' + (lit && i === shown ? ' on' : '')}
                     role="button" tabIndex={0} onClick={() => tap(i)} onKeyDown={keys(i)}>
                     <MonoLabel className="id" tone="muted">{st.n}</MonoLabel>
                     <h3>{st.title}</h3>
                   </div>
                 </div>
-              </React.Fragment>
-            ))}
+              ))}
+            </div>
           </div>
+
+          {/* Middle: Wheel Gear */}
           <div className={'wheel ' + rv} ref={wheelRef} style={{ transitionDelay: '200ms' }}>
             <svg className={'wheel-gear' + (lit ? ' on' : '')} viewBox="0 0 400 400" aria-hidden="true" style={{ transform: `translate(-50%,-50%) rotate(${turn}deg)` }}>
               <path d={GEAR} fill="none" stroke="currentColor" strokeWidth="1.25" strokeLinejoin="round" />
             </svg>
             <div className="wheel-core" ref={coreRef}><p>{PROCESS[shown].body}</p></div>
           </div>
-          <div aria-hidden="true" />
+
+          {/* Bottom Row: Repeated */}
+          <div className={'proc-row-block ' + rv} style={{ transitionDelay: '265ms' }}>
+            <span className={'band-label' + (lit && shown >= 3 ? ' on' : '')}>Repeated</span>
+            <div className="proc-row-items">
+              {PROCESS.slice(3).map((st, idx) => {
+                const i = idx + 3;
+                return (
+                  <div key={st.n} className={rv} style={{ transitionDelay: `${110 + i * 55}ms` }}>
+                    <div className={'pitem' + (lit && i === shown ? ' on' : '')}
+                      role="button" tabIndex={0} onClick={() => tap(i)} onKeyDown={keys(i)}>
+                      <MonoLabel className="id" tone="muted">{s.n || st.n}</MonoLabel>
+                      <h3>{st.title}</h3>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
         </div>
         <div className="proc-cycle-list">
           {PROCESS.map(s => (
@@ -1189,7 +1208,7 @@ function Work() {
 const TRACK = [
   { id: 'EX-01', title: 'BuzzFeed', meta: 'Hosted formats at scale', body: 'Built lifestyle formats for the digital media leader, putting a face on categories that never had one. Same playbook, applied to developer pipeline retention.' },
   { id: 'EX-02', title: 'Airbnb Luxe', meta: 'Premium property vetting', body: "Designated Airbnb Luxe consultant for Aruba, Bonaire, and Curaçao, vetting high-end real estate against the standards Airbnb's most demanding guest-tier pays for." },
-  { id: 'EX-03', title: 'The Now Machine', meta: 'Developer Demand Systems', body: 'Running direct demand generation and nurturing engines for Caribbean resort developments, helping them increase commision leverage and sales velocity.' }
+  { id: 'EX-03', title: 'The Now Machine', meta: 'Developer Demand Systems', body: 'Running direct demand generation and nurturing engines for Caribbean resort developments, helping them protect margins and increase sales velocity.' }
 ];
 
 function Founder() {
