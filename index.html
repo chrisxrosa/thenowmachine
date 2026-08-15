@@ -1,7 +1,7 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>THE NOW MACHINE · Demand Generation Studio for Resort Developments</title>
 <meta name="description" content="We accelerate absorption velocity and maximize commission leverage through direct demand generation.">
-<meta property="og:title" content="THE NOW MACHINE · The Direct Demand Engine for Resort Developments">
+<meta property="og:title" content="THE NOW MACHINE · The direct demand engine for resort developments">
 <meta property="og:description" content="We accelerate absorption velocity and maximize commission leverage through direct demand generation.">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
@@ -899,11 +899,11 @@ function Hero() {
       <Frame>
         <div className="hero-lockup">
           <MonoLabel tone="muted" className="hero-eyebrow">DEMAND GENERATION STUDIO</MonoLabel>
-          <DisplayHeading as="h1" size={1}>The Direct Demand Engine</DisplayHeading>
-          <DisplayHeading as="h2" size={1}>for Resort Developments.</DisplayHeading>
+          <DisplayHeading as="h1" size={1}>The direct demand engine</DisplayHeading>
+          <DisplayHeading as="h2" size={1}>for resort developments.</DisplayHeading>
           <p className="hero-sub">We accelerate absorption velocity and maximize commission leverage through direct demand generation.</p>
           <div style={{ marginTop: 'var(--sp-8)' }}>
-            <Button size="lg" href="#contact" onClick={(e) => { e.preventDefault(); scrollToId('contact'); }}>Request a Pipeline Audit →</Button>
+            <Button size="lg" href="#contact" onClick={(e) => { e.preventDefault(); scrollToId('contact'); }}>Get in touch →</Button>
           </div>
         </div>
       </Frame>
@@ -1355,7 +1355,7 @@ function ContactForm() {
       </div>
       <div style={{ marginTop: 'var(--sp-2)', display: 'flex', alignItems: 'center', gap: 'var(--sp-4)', flexWrap: 'wrap' }}>
         <Button size="lg" disabled={status === 'sending'}>
-          {status === 'sending' ? 'Submitting Request...' : 'Request a Pipeline Audit →'}
+          {status === 'sending' ? 'Submitting Request...' : 'Get in touch →'}
         </Button>
         {status === 'success' && (
           <span style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-caption)', fontWeight: 'var(--fw-bold)', color: 'var(--n-900)' }}>
@@ -1402,7 +1402,7 @@ Object.assign(window, { Process, Model, Work, Founder, Contact, Footer });
 <script type="text/babel">
 const { NavBar, LiveDot } = window.TheNowMachineDesignSystem_5b6ea4;
 
-const NAV = { 'What we run': 'capabilities', 'How it runs': 'process', 'Work': 'work', 'Services': 'capabilities', 'Request an Audit': 'contact' };
+const NAV = { 'What we run': 'capabilities', 'How it runs': 'process', 'Work': 'work', 'Services': 'capabilities', 'Get in touch': 'contact' };
 
 function Nav() {
   const gold = useInView('contact');
@@ -1433,7 +1433,7 @@ function Nav() {
     <div className={'tnm-nav' + (gold ? ' gold' : '')}>
       <NavBar links={narrow ? ['Services'] : ['What we run', 'How it runs', 'Work']} ctaLive={false} onNavigate={go}
         wordmark={<img className="nav-logo" src="assets/logo-now.png" alt="The Now Machine" width="63" height="26" decoding="async" />}
-        cta={narrow ? null : <span style={{ display: 'inline-flex', alignItems: 'center', gap: 'var(--sp-3)' }}>Request an Audit<LiveDot className="tnm-pulse" /></span>} />
+        cta={narrow ? null : <span style={{ display: 'inline-flex', alignItems: 'center', gap: 'var(--sp-3)' }}>Get in touch<LiveDot className="tnm-pulse" /></span>} />
     </div>
   );
 }
