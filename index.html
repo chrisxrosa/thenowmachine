@@ -281,9 +281,9 @@ footer a{color:var(--n-0)}footer a:hover{color:var(--block-acid)}
 .cap .id{transition:color var(--dur-base) var(--ease-out)}
 .cap:hover .id{color:var(--block-ember)}
 
-.proc-sec{background:var(--n-900);color:var(--n-50);padding:clamp(56px,7vw,104px) 0}
+.proc-sec{background:var(--n-900);color:var(--n-50);padding:clamp(56px,7vw,104px) 0 clamp(80px,10vh,140px)}
 
-@media (min-width:901px){.proc-sec{min-height:88vh;display:flex;flex-direction:column;justify-content:flex-start;padding:clamp(28px,3.5vh,52px) 0 clamp(40px,5vh,80px)}}
+@media (min-width:901px){.proc-sec{min-height:88vh;display:flex;flex-direction:column;justify-content:flex-start;padding:clamp(28px,3.5vh,52px) 0 clamp(80px,10vh,140px)}}
 .proc-step .step-n{display:block;margin-bottom:var(--sp-8)}
 .proc-step h3{margin:0 0 var(--sp-4);font-size:var(--text-title);font-weight:var(--fw-bold);letter-spacing:var(--ls-title)}
 .proc-sec .cap{border-top-color:var(--line-inverse)}
@@ -293,6 +293,7 @@ footer a{color:var(--n-0)}footer a:hover{color:var(--block-acid)}
 .proc-sec .rev{transition-duration:620ms}
 .proc-stage{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(20px,3vh,40px);margin:clamp(28px,4vh,64px) 0 0}
 .proc-row-block{display:flex;flex-direction:row;flex-wrap:wrap;align-items:center;justify-content:center;gap:clamp(12px,2vw,28px);width:100%}
+.proc-row-block.repeated-row{margin-bottom:clamp(40px, 6vh, 80px)}
 .proc-row-items{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:clamp(16px,2.5vw,36px)}
 .band-label{margin:0;font-family:var(--font-mono);font-size:var(--text-caption);font-weight:var(--fw-medium);letter-spacing:var(--ls-label);text-transform:uppercase;white-space:nowrap;color:var(--n-500);padding:4px 8px;transition:color var(--dur-base) var(--ease-out),background var(--dur-base) var(--ease-out)}
 .band-label.on{background:var(--block-acid);color:var(--n-900)}
@@ -1094,7 +1095,7 @@ function Process() {
           </div>
 
           {/* Bottom Row: Repeated */}
-          <div className={'proc-row-block ' + rv} style={{ transitionDelay: '265ms' }}>
+          <div className={'proc-row-block repeated-row ' + rv} style={{ transitionDelay: '265ms' }}>
             <span className={'band-label' + (lit && shown >= 3 ? ' on' : '')}>Repeated</span>
             <div className="proc-row-items">
               {PROCESS.slice(3).map((st, idx) => {
