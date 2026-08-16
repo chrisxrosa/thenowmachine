@@ -1166,13 +1166,14 @@ function Model() {
         <Frame style={{ width: '100%' }}>
           <DisplayHeading size={1} tone="inverse" className="lines-wide">
             <span className="ln">Built for <span className={'mark' + on(0.45)}>developers,</span></span>
-            <span className="ln">not brokerages.</span>
+            <span className="ln">not general brokerages.</span>
             <span className="ln">Focused on <span className={'mark' + on(0.5)}>absorption,</span></span>
             <span className="ln">not vanity metrics.</span>
           </DisplayHeading>
           <DisplayHeading size={1} tone="inverse" className="lines-narrow">
             <span className="ln">Engineered for</span>
-            <span className="ln"><span className={'mark' + on(0.45)}>developers,</span> not brokerages.</span>
+            <span className="ln"><span className={'mark' + on(0.45)}>developers,</span> not</span>
+            <span className="ln">general brokerages.</span>
             <span className="ln">Focused on</span>
             <span className="ln"><span className={'mark' + on(0.5)}>absorption,</span> not</span>
             <span className="ln">vanity metrics.</span>
@@ -1425,9 +1426,9 @@ function Contact() {
   return (
     <section id="contact" data-screen-label="Contact" className="acid-block">
       <Frame>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 'clamp(40px, 6vw, 80px)', alignItems: 'start' }}>
-          <DisplayHeading className="rev" size={1} style={{ maxWidth: '22ch' }}>Let's create direct demand for your portfolio.</DisplayHeading>
-          <div className="rev">
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 'clamp(40px, 6vw, 80px)', alignItems: 'start' }}>
+          <DisplayHeading className="rev" size={1} style={{ maxWidth: '28ch' }}>Let's create direct demand for your portfolio.</DisplayHeading>
+          <div className="rev" style={{ justifySelf: 'end', width: '100%' }}>
             <ContactForm />
           </div>
         </div>
