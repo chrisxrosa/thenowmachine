@@ -1427,7 +1427,7 @@ function Contact() {
     <section id="contact" data-screen-label="Contact" className="acid-block">
       <Frame>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 'clamp(40px, 6vw, 80px)', alignItems: 'start' }}>
-          <DisplayHeading className="rev" size={1} style={{ maxWidth: '28ch' }}>Let's create direct demand for your portfolio.</DisplayHeading>
+          <DisplayHeading className="rev" size={1} style={{ maxWidth: '36ch' }}>Let's create direct demand for your portfolio.</DisplayHeading>
           <div className="rev" style={{ justifySelf: 'end', width: '100%' }}>
             <ContactForm />
           </div>
@@ -1522,7 +1522,7 @@ if(t===rg.endContainer&&rg.endOffset<sub.endOffset)sub.setEnd(t,rg.endOffset);
 var fs=parseFloat(getComputedStyle(t.parentElement).fontSize),hb=h.getBoundingClientRect(),rects=sub.getClientRects();
 for(var i=0;i<rects.length;i++){var q=rects[i];if(q.width<1)continue;
 var top=q.bottom-fs*1.15,key=Math.round(q.left)+':'+Math.round(top)+':'+Math.round(q.width);if(seen[key])continue;seen[key]=1;
-var b=document.createAttribute('i');b.className='selb';b.style.left=(q.left-hb.left)+'px';b.style.width=q.width+'px';b.style.height=(fs*.9)+'px';b.style.top=(top-hb.top)+'px';h.appendChild(b);}}}}
+var b=document.className='selb';b.style.left=(q.left-hb.left)+'px';b.style.width=q.width+'px';b.style.height=(fs*.9)+'px';b.style.top=(top-hb.top)+'px';h.appendChild(b);}}}}
 document.addEventListener('selectionchange',draw);addEventListener('resize',draw);})();
 </script>
 </body></html>
