@@ -410,8 +410,8 @@ footer a{color:var(--n-0)}footer a:hover{color:var(--block-acid)}
 /* Contact Section Grid Split */
 .contact-grid-wrap {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(480px, 580px);
-  gap: clamp(32px, 4vw, 80px);
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(32px, 4vw, 64px);
   align-items: start;
 }
 
@@ -1448,21 +1448,21 @@ function Contact() {
         <div className="contact-grid-wrap">
           <div>
             <div className="lines-wide">
-              <DisplayHeading className="rev" size={2} style={{ fontSize: 'clamp(2.2rem, 3.8vw, 4.5rem)', maxWidth: '100%' }}>
+              <DisplayHeading className="rev" size={1}>
                 Let's create<br />
                 direct demand<br />
                 for your portfolio.
               </DisplayHeading>
             </div>
             <div className="lines-narrow">
-              <DisplayHeading className="rev" size={2} style={{ fontSize: 'clamp(2rem, 7vw, 3.2rem)' }}>
+              <DisplayHeading className="rev" size={1}>
                 Let's create<br />
                 direct demand<br />
                 for your portfolio.
               </DisplayHeading>
             </div>
           </div>
-          <div className="rev" style={{ justifySelf: 'end', width: '100%' }}>
+          <div className="rev" style={{ width: '100%' }}>
             <ContactForm />
           </div>
         </div>
