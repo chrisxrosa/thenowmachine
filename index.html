@@ -193,7 +193,6 @@ a{color:var(--text-link)}a:hover{color:var(--text-link-hover)}
 @media (prefers-reduced-motion:reduce){.rev{opacity:1;transform:none;transition:none}}
 .tnm-nav{position:fixed;top:var(--sp-6);left:var(--gutter);right:var(--gutter);z-index:60}
 .tnm-nav nav>div{transition:background var(--dur-base) var(--ease-out)}
-.tnm-nav.gold nav>div:last-child{background:var(--block-acid)!important}
 @keyframes tnmPulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(.72)}}
 .tnm-pulse{animation:tnmPulse 2.4s var(--ease-out) infinite}
 .hero-plain{background:var(--n-50);color:var(--n-900);display:flex;flex-direction:column;gap:clamp(44px,6.5vh,92px);padding:clamp(132px,15vh,196px) 0 clamp(60px,8vh,100px)}
@@ -407,6 +406,15 @@ footer a{color:var(--n-0)}footer a:hover{color:var(--block-acid)}
 .track-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp-12);margin-top:clamp(40px,4vw,68px)}
 @media (max-width:1100px){.track-grid{gap:var(--sp-10)}}
 .contact-foot{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:var(--sp-10);margin-top:clamp(48px,6vw,96px)}
+
+/* Contact Section Grid Split */
+.contact-grid-wrap {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(480px, 580px);
+  gap: clamp(32px, 4vw, 80px);
+  align-items: start;
+}
+
 @media (max-width:900px){
 .hero-media-holder{height:auto;aspect-ratio:16/9}
 
@@ -417,7 +425,8 @@ footer a{color:var(--n-0)}footer a:hover{color:var(--block-acid)}
 .wpanel-body{opacity:1;transform:none}
 .founder-content{transform: none !important;}
 .founder-copy{transform: none !important;}
-.founder-portrait{border-radius: var(--r-md); width: clamp(220px, 28vw, 420px);}
+.founder-portrait{border-radius: var(--r-md); width: 100%; max-width: 100%;}
+.contact-grid-wrap{grid-template-columns: 1fr;}
 }
 </style>
 <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
@@ -899,8 +908,17 @@ function Hero() {
       <Frame>
         <div className="hero-lockup">
           <MonoLabel tone="muted" className="hero-eyebrow">DEMAND GENERATION STUDIO</MonoLabel>
-          <DisplayHeading as="h1" size={1}>Demand engine for</DisplayHeading>
-          <DisplayHeading as="h2" size={1}>real estate developments.</DisplayHeading>
+          <div className="lines-wide">
+            <DisplayHeading as="h1" size={1} align="center">Demand engine for</DisplayHeading>
+            <DisplayHeading as="h2" size={1} align="center">real estate developments.</DisplayHeading>
+          </div>
+          <div className="lines-narrow">
+            <DisplayHeading as="h1" size={1} align="center" style={{ fontSize: 'clamp(1.8rem, 7.2vw, 2.6rem)', textAlign: 'center' }}>
+              Demand engine<br />
+              for real estate<br />
+              developments.
+            </DisplayHeading>
+          </div>
           <p className="hero-sub">We act as your direct demand engine, helping you clear your inventory faster while protecting your margins.</p>
           <div style={{ marginTop: 'var(--sp-8)' }}>
             <Button size="lg" href="#contact" onClick={(e) => { e.preventDefault(); scrollToId('contact'); }}>Get in touch →</Button>
@@ -1172,8 +1190,9 @@ function Model() {
           </DisplayHeading>
           <DisplayHeading size={1} tone="inverse" className="lines-narrow">
             <span className="ln">Engineered for</span>
-            <span className="ln"><span className={'mark' + on(0.45)}>developers,</span> not</span>
-            <span className="ln">general brokerages.</span>
+            <span className="ln"><span className={'mark' + on(0.45)}>developers,</span></span>
+            <span className="ln">not general</span>
+            <span className="ln">brokerages.</span>
             <span className="ln">Focused on</span>
             <span className="ln"><span className={'mark' + on(0.5)}>absorption,</span> not</span>
             <span className="ln">vanity metrics.</span>
@@ -1426,8 +1445,23 @@ function Contact() {
   return (
     <section id="contact" data-screen-label="Contact" className="acid-block">
       <Frame>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 'clamp(40px, 6vw, 80px)', alignItems: 'start' }}>
-          <DisplayHeading className="rev" size={1} style={{ maxWidth: '36ch' }}>Let's create direct demand for your portfolio.</DisplayHeading>
+        <div className="contact-grid-wrap">
+          <div>
+            <div className="lines-wide">
+              <DisplayHeading className="rev" size={2} style={{ fontSize: 'clamp(2.2rem, 3.8vw, 4.5rem)', maxWidth: '100%' }}>
+                Let's create<br />
+                direct demand<br />
+                for your portfolio.
+              </DisplayHeading>
+            </div>
+            <div className="lines-narrow">
+              <DisplayHeading className="rev" size={2} style={{ fontSize: 'clamp(2rem, 7vw, 3.2rem)' }}>
+                Let's create<br />
+                direct demand<br />
+                for your portfolio.
+              </DisplayHeading>
+            </div>
+          </div>
           <div className="rev" style={{ justifySelf: 'end', width: '100%' }}>
             <ContactForm />
           </div>
@@ -1454,7 +1488,6 @@ const { NavBar, LiveDot } = window.TheNowMachineDesignSystem_5b6ea4;
 const NAV = { 'What we run': 'capabilities', 'How it runs': 'process', 'Work': 'work', 'Services': 'capabilities', 'Get in touch': 'contact' };
 
 function Nav() {
-  const gold = useInView('contact');
   const [narrow, setNarrow] = React.useState(() => window.matchMedia('(max-width:900px)').matches);
   React.useEffect(() => {
     const mq = window.matchMedia('(max-width:900px)');
@@ -1479,7 +1512,7 @@ function Nav() {
     else scrollToId('contact');
   };
   return (
-    <div className={'tnm-nav' + (gold ? ' gold' : '')}>
+    <div className="tnm-nav">
       <NavBar links={narrow ? ['Services'] : ['What we run', 'How it runs', 'Work']} ctaLive={false} onNavigate={go}
         wordmark={<img className="nav-logo" src="assets/logo-now.png" alt="The Now Machine" width="63" height="26" decoding="async" />}
         cta={narrow ? null : <span style={{ display: 'inline-flex', alignItems: 'center', gap: 'var(--sp-3)' }}>Get in touch<LiveDot className="tnm-pulse" /></span>} />
@@ -1522,7 +1555,7 @@ if(t===rg.endContainer&&rg.endOffset<sub.endOffset)sub.setEnd(t,rg.endOffset);
 var fs=parseFloat(getComputedStyle(t.parentElement).fontSize),hb=h.getBoundingClientRect(),rects=sub.getClientRects();
 for(var i=0;i<rects.length;i++){var q=rects[i];if(q.width<1)continue;
 var top=q.bottom-fs*1.15,key=Math.round(q.left)+':'+Math.round(top)+':'+Math.round(q.width);if(seen[key])continue;seen[key]=1;
-var b=document.className='selb';b.style.left=(q.left-hb.left)+'px';b.style.width=q.width+'px';b.style.height=(fs*.9)+'px';b.style.top=(top-hb.top)+'px';h.appendChild(b);}}}}
+var b=document.createElement('i');b.className='selb';b.style.left=(q.left-hb.left)+'px';b.style.width=q.width+'px';b.style.height=(fs*.9)+'px';b.style.top=(top-hb.top)+'px';h.appendChild(b);}}}}
 document.addEventListener('selectionchange',draw);addEventListener('resize',draw);})();
 </script>
 </body></html>
