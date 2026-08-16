@@ -249,7 +249,7 @@ div:has(>div>.foot-mark){grid-template-columns:1fr!important}
 .foot-mark img{width:clamp(60%,295px + 21.9vw,100%);max-width:100%;height:auto;display:block}
 
 @media (min-width:901px){.foot-mark img{width:48%}}
-.caps-hold{background:var(--n-900);color:var(--n-50);padding:var(--section-y) 0}
+.caps-hold{background:var(--n-900);color:var(--n-50);padding:clamp(110px, 12vh, 160px) 0 var(--section-y)}
 .caps-inner{width:100%}
 .caps-hold .cap{border-top-color:var(--line-inverse)}
 
@@ -280,9 +280,9 @@ footer a{color:var(--n-0)}footer a:hover{color:var(--block-acid)}
 .cap .id{transition:color var(--dur-base) var(--ease-out)}
 .cap:hover .id{color:var(--block-ember)}
 
-.proc-sec{background:var(--n-900);color:var(--n-50);padding:clamp(56px,7vw,104px) 0 clamp(80px,10vh,140px)}
+.proc-sec{background:var(--n-900);color:var(--n-50);padding:clamp(110px,10vh,130px) 0 clamp(40px,5vh,60px)}
 
-@media (min-width:901px){.proc-sec{min-height:88vh;display:flex;flex-direction:column;justify-content:flex-start;padding:clamp(28px,3.5vh,52px) 0 clamp(80px,10vh,140px)}}
+@media (min-width:901px){.proc-sec{min-height:100vh;display:flex;flex-direction:column;justify-content:center;box-sizing:border-box;padding:clamp(110px,10vh,130px) 0 clamp(40px,5vh,60px)}}
 .proc-step .step-n{display:block;margin-bottom:var(--sp-8)}
 .proc-step h3{margin:0 0 var(--sp-4);font-size:var(--text-title);font-weight:var(--fw-bold);letter-spacing:var(--ls-title)}
 .proc-sec .cap{border-top-color:var(--line-inverse)}
@@ -290,9 +290,9 @@ footer a{color:var(--n-0)}footer a:hover{color:var(--block-acid)}
 .proc-sec .cap p{color:var(--n-300)}
 
 .proc-sec .rev{transition-duration:620ms}
-.proc-stage{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(20px,3vh,40px);margin:clamp(28px,4vh,64px) 0 0}
+.proc-stage{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(16px,2.5vh,32px);margin:clamp(20px,3vh,48px) 0 0}
 .proc-row-block{display:flex;flex-direction:row;flex-wrap:wrap;align-items:center;justify-content:center;gap:clamp(12px,2vw,28px);width:100%}
-.proc-row-block.repeated-row{margin-bottom:clamp(40px, 6vh, 80px)}
+.proc-row-block.repeated-row{margin-bottom:clamp(20px, 3vh, 40px)}
 .proc-row-items{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:clamp(16px,2.5vw,36px)}
 .band-label{margin:0;font-family:var(--font-mono);font-size:var(--text-caption);font-weight:var(--fw-medium);letter-spacing:var(--ls-label);text-transform:uppercase;white-space:nowrap;color:var(--n-500);padding:4px 8px;transition:color var(--dur-base) var(--ease-out),background var(--dur-base) var(--ease-out)}
 .band-label.on{background:var(--block-acid);color:var(--n-900)}
@@ -303,21 +303,21 @@ footer a{color:var(--n-0)}footer a:hover{color:var(--block-acid)}
 .pitem h3{margin:0;font-size:var(--text-display-3);line-height:1.2;letter-spacing:var(--ls-title);color:var(--n-500);transition:color var(--dur-base) var(--ease-out),text-shadow var(--dur-base) var(--ease-out)}
 .pitem.on h3{color:var(--n-0);text-shadow:0 0 24px rgba(255,255,255,.55),0 0 60px rgba(255,255,255,.25)}
 
-.wheel{position:relative;width:min(560px,58vh,40vw);aspect-ratio:1;margin:0 auto}
+.wheel{position:relative;width:min(520px,50vh,36vw);aspect-ratio:1;margin:0 auto}
 .wheel-gear{position:absolute;left:50%;top:50%;width:92%;aspect-ratio:1;transform-origin:50% 50%;color:var(--line-inverse);transition:color var(--dur-base) var(--ease-out),filter var(--dur-base) var(--ease-out)}
 .wheel-gear.on{color:var(--n-0);filter:drop-shadow(0 0 12px rgba(255,255,255,.45))}
 .wheel-core{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:46%;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center}
 .wheel-core p{margin:0;font-size:var(--text-body-sm);line-height:1.5;color:var(--n-300);text-wrap:pretty}
 .proc-cycle-list{display:none}
 @media (max-width:900px){.proc-stage{display:none}.proc-cycle-list{display:grid;grid-template-columns:1fr;gap:var(--sp-10);margin-top:var(--sp-10)}}
-.model-dark{background:var(--block-ink);color:var(--n-0);padding:var(--section-y) 0}
+.model-dark{background:var(--block-ink);color:var(--n-0);padding:var(--section-y) 0;min-height:100vh;display:flex;align-items:center;justify-content:center;box-sizing:border-box}
 .model-inner{width:100%}
 .work-sec{
   min-height:100vh;
   display:flex;
   flex-direction:column;
   gap:clamp(24px,2.5vh,36px);
-  padding:clamp(96px,11vh,144px) 0 clamp(40px,5vh,72px);
+  padding:clamp(100px,10vh,130px) 0 clamp(40px,5vh,60px);
   box-sizing:border-box;
 }
 
@@ -412,7 +412,18 @@ footer a{color:var(--n-0)}footer a:hover{color:var(--block-acid)}
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: clamp(32px, 4vw, 64px);
-  align-items: start;
+  align-items: center;
+}
+
+@media (min-width:901px){
+  #contact {
+    min-height: calc(100vh - 180px);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: clamp(60px, 8vh, 120px) 0;
+  }
 }
 
 @media (max-width:900px){
@@ -919,9 +930,9 @@ function Hero() {
               developments.
             </DisplayHeading>
           </div>
-          <p className="hero-sub">Your direct demand engine, helping you clear off-plan inventory faster while preserving your margins.</p>
+          <p className="hero-sub">We act as your direct demand engine, helping you clear your inventory faster while protecting your margins.</p>
           <div style={{ marginTop: 'var(--sp-8)' }}>
-            <Button size="lg" href="#contact" onClick={(e) => { e.preventDefault(); scrollToId('contact'); }}>Get in touch →</Button>
+            <Button size="lg" href="#contact" onClick={(e) => { e.preventDefault(); scrollToId('contact', 0); }}>Get in touch →</Button>
           </div>
         </div>
       </Frame>
@@ -1038,7 +1049,7 @@ const PROCESS = [
   { n: 'P-01', title: 'Audit', body: 'Review current absorption targets, digital touchpoints, and lead capture workflows to identify immediate margin and pipeline opportunities.' },
   { n: 'P-02', title: 'Build', body: 'Deploy landing pages, lead capture systems and auto-routing infrastructure that log prospects into developer main records alongside brokerage channels.' },
   { n: 'P-03', title: 'Cast', body: 'Onboard an on-camera host to give local and international buyers transparent, human proof of project momentum.' },
-  { n: 'P-04', title: 'Produce', body: 'Produce hosted site progress updates, lifestyle media, and direct-response creative that fuel advertising and eliminate doubt during reservation holds.' },
+  { n: 'P-04', title: 'Produce', body: 'Produce hosted site progress updates, aerial passes, and lifestyle media that eliminate distance anxiety during reservation holds.' },
   { n: 'P-05', title: 'Distribute', body: 'Launch targeted campaigns across key local and foreign buyer markets, scaling high-intent inquiry volume straight into your direct funnel.' },
   { n: 'P-06', title: 'Nurture', body: 'Maintain continuous touchpoints through reservation holds and multi-year construction cycles to convert temporary holds into signed contracts.' },
   { n: 'P-07', title: 'Recycle', body: 'Cross-promote non-converting leads into upcoming off-plan projects across your portfolio at zero additional acquisition cost.' }
@@ -1206,7 +1217,7 @@ function Model() {
 /* ── 7. Selected work ── */
 const WORK = [
   { id: 'W-01', client: 'Baia Vista', cat: '175-Unit Development', poster: 'assets/baia-vista-poster.jpg', video: 'assets/baia-vista-hover.mp4', body: 'Direct demand and nurturing engine running as one system for the 175-unit Curaçao development, driving absorption velocity.' },
-  { id: 'W-02', client: 'CoveCasa', cat: 'Vacation Rental Portfolio', poster: 'assets/covecasa-poster.jpg', video: 'assets/covecasa-hover.mp4', body: 'Built paid media, funnels, and content production for a luxury rental portfolio, scaling it to 30 properties in year one.' }
+  { id: 'W-02', client: 'CoveCasa', cat: 'Vacation Rental Portfolio', poster: 'assets/covecasa-poster.jpg', video: 'assets/covecasa-hover.mp4', body: 'Built paid media, funnels, and content production for a luxury rental portfolio, scaling it to 30 properties under management in year one.' }
 ];
 
 const WorkPanel = ({ w, active, dim, onEnter, onLeave, vref }) => (
@@ -1289,7 +1300,7 @@ function Founder() {
             </div>
             <div className={rv + ' founder-copy'}>
               <div ref={head}><DisplayHeading size={2}><span className="lines-wide">Island born. Made in<br />Los Angeles. <span className={'mark' + (lit ? ' on' : '')}>Returned.</span></span><span className="lines-narrow">Island born.<br />Made in<br />Los Angeles.<br /><span className={'mark' + (lit ? ' on' : '')}>Returned.</span></span></DisplayHeading></div>
-              <p style={{ maxWidth: '54ch', marginTop: 'var(--sp-10)', color: 'var(--text-secondary)', textWrap: 'pretty' }}>The Now Machine acts as your fractional marketing function. One operator owns your pipeline outcomes with senior specialists behind every discipline, aligning 100% with developer P&L objectives.</p>
+              <p style={{ maxWidth: '100%', marginTop: 'var(--sp-10)', color: 'var(--text-secondary)' }}>The Now Machine acts as your fractional marketing function. One operator owns your pipeline outcomes with senior specialists behind every discipline, aligning 100% with developer P&L objectives.</p>
             </div>
           </div>
           <div className={'track-grid ' + rv}>
@@ -1451,7 +1462,7 @@ function Contact() {
               <DisplayHeading className="rev" size={1}>
                 Let's create<br />
                 direct demand<br />
-                for your project.
+                for your portfolio.
               </DisplayHeading>
             </div>
             <div className="lines-narrow">
@@ -1475,7 +1486,7 @@ function Contact() {
 function Footer() {
   return (
     <SiteFooter wordmark={<span className="foot-mark"><img src="assets/foot-wordmark.png" alt="the now machine" width="941" height="94" loading="lazy" decoding="async" /></span>} columns={[]}
-      note={<span>Developer demand and nurturing engine for resort developments · <a href="#contact" onClick={(e) => { e.preventDefault(); scrollToId('contact'); }}>Contact</a><span style={{ display: 'block', marginTop: 'var(--sp-3)' }}>Veerstraat 9a, Willemstad, Curaçao</span><span style={{ display: 'block', marginTop: 'var(--sp-4)', textAlign: 'center' }}>© 2026 The Now Machine. All rights reserved.</span></span>} />
+      note={<span>Developer demand and nurturing engine for resort developments · <a href="#contact" onClick={(e) => { e.preventDefault(); scrollToId('contact', 0); }}>Contact</a><span style={{ display: 'block', marginTop: 'var(--sp-3)' }}>Veerstraat 9a, Willemstad, Curaçao</span><span style={{ display: 'block', marginTop: 'var(--sp-4)', textAlign: 'center' }}>© 2026 The Now Machine. All rights reserved.</span></span>} />
   );
 }
 
@@ -1499,17 +1510,25 @@ function Nav() {
     if (typeof l === 'string' && NAV[l]) {
       const id = NAV[l];
       if (id === 'capabilities') {
-        scrollToId(id, 80);
+        scrollToId(id, 0);
         return;
       }
       if (id === 'process') {
         window.dispatchEvent(new CustomEvent('tnm:process-jump'));
-        scrollToId(id, 180);
+        scrollToId(id, 0);
         return;
       }
-      scrollToId(id);
+      if (id === 'work') {
+        scrollToId(id, 0);
+        return;
+      }
+      if (id === 'contact') {
+        scrollToId(id, 0);
+        return;
+      }
+      scrollToId(id, 0);
     } else if (l === 'home') window.scrollTo({ top: 0, behavior: 'smooth' });
-    else scrollToId('contact');
+    else scrollToId('contact', 0);
   };
   return (
     <div className="tnm-nav">
