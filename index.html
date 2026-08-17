@@ -420,6 +420,29 @@ footer a{color:var(--n-0)}footer a:hover{color:var(--block-acid)}
   flex-direction: column;
 }
 
+.linkedin-badge-link {
+  position: absolute;
+  right: var(--sp-4);
+  bottom: var(--sp-4);
+  background: var(--surface-scrim);
+  backdrop-filter: var(--blur-chrome);
+  width: 32px;
+  height: 32px;
+  border-radius: var(--r-pill);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--n-0);
+  text-decoration: none;
+  z-index: 5;
+  transition: background var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out);
+}
+.linkedin-badge-link:hover {
+  background: rgba(13, 13, 13, 0.85);
+  transform: scale(1.08);
+  color: var(--n-0);
+}
+
 @media (min-width:901px){
   .contact-footer-container {
     height: 100vh;
@@ -1309,7 +1332,10 @@ function Founder() {
               <div className="founder-portrait">
                 <img src="assets/operator-portrait.jpg" alt="Chris Rosa" loading="lazy" decoding="async" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
               </div>
-              <MonoLabel tone="inverse" size="xs" style={{ position: 'absolute', left: 'var(--sp-4)', bottom: 'var(--sp-4)', background: 'var(--surface-scrim)', backdropFilter: 'var(--blur-chrome)', padding: '6px 10px', borderRadius: 'var(--r-pill)', pointerEvents: 'none' }}>OP-01 · Chris, Founder & Operatorr</MonoLabel>
+              <MonoLabel tone="inverse" size="xs" style={{ position: 'absolute', left: 'var(--sp-4)', bottom: 'var(--sp-4)', background: 'var(--surface-scrim)', backdropFilter: 'var(--blur-chrome)', padding: '6px 10px', borderRadius: 'var(--r-pill)', pointerEvents: 'none' }}>OP-01 · Chris, Founder & Operator</MonoLabel>
+              <a href="https://www.linkedin.com/in/chrisjrosa/" target="_blank" rel="noopener noreferrer" aria-label="Chris Rosa LinkedIn Profile" className="linkedin-badge-link">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+              </a>
             </div>
             <div className={rv + ' founder-copy'}>
               <div ref={head}><DisplayHeading size={2}><span className="lines-wide">Island born. Made in<br />Los Angeles. <span className={'mark' + (lit ? ' on' : '')}>Returned.</span></span><span className="lines-narrow">Island born.<br />Made in<br />Los Angeles.<br /><span className={'mark' + (lit ? ' on' : '')}>Returned.</span></span></DisplayHeading></div>
