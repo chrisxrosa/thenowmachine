@@ -418,7 +418,7 @@ const base = {
 const sizes = {
   sm: {
     fontSize: 'var(--text-caption)',
-    padding: '8px 14px'
+  padding: '8px 14px'
   },
   md: {
     fontSize: 'var(--text-body-sm)',
@@ -990,36 +990,6 @@ Object.assign(window, { Hero, Capabilities });
 <script type="text/babel">
 const { DisplayHeading, MonoLabel, Button, SiteFooter } = window.TheNowMachineDesignSystem_5b6ea4;
 
-/* ── The model ── */
-function Model() {
-  const wrap = React.useRef(null);
-  const p = useCrossProgress(wrap);
-  const on = t => (p > t ? ' on' : '');
-  return (
-    <section ref={wrap} id="operator" data-screen-label="The model" className="model-dark">
-      <div className="model-inner">
-        <Frame style={{ width: '100%' }}>
-          <DisplayHeading size={1} tone="inverse" className="lines-wide">
-            <span className="ln">Built for <span className={'mark' + on(0.45)}>developers,</span></span>
-            <span className="ln">not just brokerages.</span>
-            <span className="ln">Focused on <span className={'mark' + on(0.48)}>absorption,</span></span>
-            <span className="ln">not vanity metrics.</span>
-          </DisplayHeading>
-          <DisplayHeading size={1} tone="inverse" className="lines-narrow">
-            <span className="ln">Engineered for</span>
-            <span className="ln"><span className={'mark' + on(0.45)}>developers,</span></span>
-            <span className="ln">not general</span>
-            <span className="ln">brokerages.</span>
-            <span className="ln">Focused on</span>
-            <span className="ln"><span className={'mark' + on(0.48)}>absorption,</span> not</span>
-            <span className="ln">vanity metrics.</span>
-          </DisplayHeading>
-        </Frame>
-      </div>
-    </section>
-  );
-}
-
 /* ── Selected work ── */
 const WORK = [
   { id: 'W-01', client: 'Baia Vista', cat: '175-Unit Development', poster: 'assets/baia-vista-poster.jpg', video: 'assets/baia-vista-hover.mp4', body: 'Direct demand and nurturing engine running as one system for the 175-unit Curaçao development, driving absorption velocity.' },
@@ -1036,7 +1006,7 @@ const WorkPanel = ({ w, active, dim, onEnter, onLeave, vref }) => (
       <MonoLabel tone="inverse">{w.client}</MonoLabel>
       <MonoLabel tone="inverse" style={{ opacity: .62 }}>{w.cat}</MonoLabel>
       {w.body && <p className="wpanel-body">{w.body}</p>}
-    </div>
+      </div>
   </div>
 );
 
@@ -1237,7 +1207,7 @@ function ContactAndFooter() {
   );
 }
 
-Object.assign(window, { Model, Work, ContactAndFooter });
+Object.assign(window, { Work, ContactAndFooter });
 
 </script>
 <script type="text/babel">
@@ -1289,7 +1259,6 @@ function Site() {
       <Hero />
       <Capabilities />
       <Work />
-      <Model />
       <ContactAndFooter />
     </React.Fragment>
   );
