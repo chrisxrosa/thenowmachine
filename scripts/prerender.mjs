@@ -1,62 +1,136 @@
-// Loads the site in a real headless Chromium, waits for React/Babel to
-// actually finish mounting, and writes the rendered DOM into dist/index.html
-// in place of the empty <div id="root"></div>. Everything else in dist/ —
-// assets, CNAME, favicons — was already copied by the workflow and is left
-// untouched.
+// Loads the full site in headless Chromium, waits for React/Babel to mount all
+// expected sections, then injects the rendered markup into dist/index.html.
+// Assets and other files already copied into dist/ are left untouched.
 
 import { chromium } from 'playwright';
 import fs from 'node:fs/promises';
 
-const URL = 'http://localhost:8080/index.html';
-const OUT = 'dist/index.html';
+const URL = process.env.PRERENDER_URL || 'http://localhost:8080/index.html';
+const OUT = process.env.PRERENDER_OUT || 'dist/index.html';
 const ROOT_PLACEHOLDER = '<div id="root"></div>';
 
+const EXPECTED_SECTIONS = [
+  '#capabilities',
+  '#operator',
+  '#work',
+  '#contact'
+];
+
 const browser = await chromium.launch();
-const page = await browser.newPage();
 
-const pageErrors = [];
-page.on('pageerror', (err) => pageErrors.push(String(err)));
+let renderedHTML = '';
+let pageErrors = [];
+let designSystemErrors = [];
 
-await page.goto(URL, { waitUntil: 'networkidle' });
+try {
+  const page = await browser.newPage();
 
-// #process and #capabilities only exist once React has actually rendered the
-// Process and Capabilities components — a stronger signal than "scripts loaded."
-await page.waitForSelector('#process', { timeout: 20000 });
-await page.waitForSelector('#capabilities', { timeout: 20000 });
+  page.on('pageerror', (error) => {
+    pageErrors.push(String(error));
+  });
 
-// Small buffer for anything on a rAF/useEffect tick (scroll-reveal classes,
-// the hero handoff's initial tick). Doesn't affect which text ends up in the
-// DOM — everything on this page renders unconditionally, scroll effects only
-// change opacity/transform — but it keeps the captured markup tidy.
-await page.waitForTimeout(1000);
+  // Wait for the document to load. Do not depend on networkidle,
+  // since fonts and videos may continue loading.
+  await page.goto(URL, {
+    waitUntil: 'domcontentloaded'
+  });
 
-if (pageErrors.length) {
-  console.error('Page threw errors during render — aborting so a broken snapshot never ships:');
-  for (const e of pageErrors) console.error(' ', e);
+  // Verify that React has mounted the complete website.
+  await page.waitForFunction((selectors) => {
+    const root = document.querySelector('#root');
+
+    if (!root) return false;
+
+    const allSectionsExist = selectors.every(
+      (selector) => root.querySelector(selector)
+    );
+
+    const hasWorkPanels =
+      root.querySelectorAll('#work .wpanel').length >= 1;
+
+    const hasContactForm =
+      Boolean(root.querySelector('#contact form'));
+
+    const hasCapabilities =
+      root.querySelectorAll('#capabilities .cap').length >= 3;
+
+    return (
+      allSectionsExist &&
+      hasWorkPanels &&
+      hasContactForm &&
+      hasCapabilities
+    );
+  }, EXPECTED_SECTIONS, {
+    timeout: 30000
+  });
+
+  // Allow React effects and initial observers to settle.
+  await page.waitForTimeout(500);
+
+  // Check for design-system errors.
+  designSystemErrors = await page.evaluate(() => {
+    return window.TheNowMachineDesignSystem_5b6ea4?.__errors || [];
+  });
+
+  if (pageErrors.length || designSystemErrors.length) {
+    console.error(
+      'The page reported errors during render — refusing to ship a broken snapshot.'
+    );
+
+    for (const error of pageErrors) {
+      console.error('Page error:', error);
+    }
+
+    for (const error of designSystemErrors) {
+      console.error('Design-system error:', error);
+    }
+
+    process.exitCode = 1;
+  } else {
+    renderedHTML = await page.$eval(
+      '#root',
+      (element) => element.innerHTML
+    );
+  }
+
+} finally {
   await browser.close();
-  process.exit(1);
 }
 
-const renderedHTML = await page.$eval('#root', (el) => el.innerHTML);
-await browser.close();
+// Stop if any errors were reported.
+if (process.exitCode) {
+  process.exit(process.exitCode);
+}
 
+// Make sure React actually rendered meaningful content.
 if (!renderedHTML || renderedHTML.trim().length < 200) {
   throw new Error(
     `Rendered content looks too short (${renderedHTML.length} chars) — ` +
-    `the app likely failed to mount. Aborting rather than shipping an empty page.`
+    'React may not have mounted correctly. Refusing to ship an empty page.'
   );
 }
 
+// Read the original HTML template.
 const template = await fs.readFile(OUT, 'utf8');
 
+// Verify that the empty React root exists.
 if (!template.includes(ROOT_PLACEHOLDER)) {
   throw new Error(
     `Could not find ${JSON.stringify(ROOT_PLACEHOLDER)} in ${OUT}. ` +
-    `If the root div's markup changed, update ROOT_PLACEHOLDER in this script to match.`
+    'Make sure the source index.html still contains the empty root placeholder.'
   );
 }
 
-const merged = template.replace(ROOT_PLACEHOLDER, `<div id="root">${renderedHTML}</div>`);
+// Inject the prerendered React HTML.
+const merged = template.replace(
+  ROOT_PLACEHOLDER,
+  `<div id="root">${renderedHTML}</div>`
+);
+
 await fs.writeFile(OUT, merged, 'utf8');
 
-console.log(`Prerendered ${renderedHTML.length} chars of content into ${OUT}`);
+console.log(`Prerendered ${renderedHTML.length} chars into ${OUT}`);
+
+console.log(
+  `Verified sections: ${EXPECTED_SECTIONS.join(', ')}`
+);
