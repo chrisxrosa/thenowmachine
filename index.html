@@ -57,6 +57,7 @@
 
   --line-hairline:var(--n-300);
   --line-strong:var(--n-900);
+  --line-inverse:rgba(255,255,255,.28);
   --menu-height:88px;
 }
 
@@ -154,6 +155,7 @@ h1,h2,h3,.ds-display{text-transform:none!important;font-family:var(--font-displa
   --dur-slow:520ms;
   --dur-scroll:900ms;
   --ease-out:cubic-bezier(.22,.61,.36,1);
+  --ease-inout:cubic-bezier(.65,.05,.36,1);
   --ease-scroll:cubic-bezier(.16,1,.3,1);
 }
 
@@ -173,7 +175,8 @@ a{color:var(--text-link)}a:hover{color:var(--text-link-hover)}
 .nav-logo{height:26px;width:auto}
 .ln{display:block}
 .lines-narrow{display:none}
-@media (max-width:900px){.lines-wide{display:none}.lines-narrow{display:block}}
+@media (max-width:900px){.lines-wide{display:none}.lines-narrow{display:block}
+.model-inner .lines-narrow{font-size:clamp(1.9rem,8.4vw,2.5rem)}}
 .mark{background-image:linear-gradient(var(--block-acid),var(--block-acid));background-repeat:no-repeat;background-size:0% .9em;background-position:0 62%;padding:0 .08em;-webkit-box-decoration-break:clone;box-decoration-break:clone;transition:background-size 700ms var(--ease-scroll),color 260ms 320ms var(--ease-out)}
 .mark.on{background-size:100% .9em;color:var(--n-900)}
 ::selection{background:var(--block-acid);color:var(--n-900)}
@@ -198,6 +201,43 @@ a{color:var(--text-link)}a:hover{color:var(--text-link-hover)}
 .hero-media{position:absolute;inset:0;border-radius:var(--r-lg);overflow:hidden;background:var(--n-1000)}
 .hero-media video{width:100%;height:100%;object-fit:cover;display:block}
 
+.cap-media{position:relative;width:100%;aspect-ratio:16/10;border-radius:var(--r-lg);overflow:hidden;background:var(--block-acid);margin-bottom:var(--sp-8)}
+
+.cap-title{transition:color var(--dur-base) var(--ease-out),text-shadow var(--dur-base) var(--ease-out)}
+.cap:hover .cap-title{color:var(--n-0);text-shadow:0 0 24px rgba(255,255,255,.55),0 0 60px rgba(255,255,255,.25)}
+
+.viz{width:100%;height:100%;display:block;color:var(--n-900)}
+.viz-br{transition:transform var(--dur-base) var(--ease-out)}
+.cap:hover .viz-br-tl{transform:translate(11px,9px)}
+.cap:hover .viz-br-tr{transform:translate(-11px,9px)}
+.cap:hover .viz-br-bl{transform:translate(11px,-9px)}
+.cap:hover .viz-br-br{transform:translate(-11px,-9px)}
+
+.viz-house{opacity:.42;transition:opacity var(--dur-base) var(--ease-out)}
+.cap:hover .viz-house{opacity:.7}
+.viz-pulse{transform-box:view-box;transform-origin:160px 112px;transition:transform var(--dur-base) var(--ease-out)}
+.cap:hover .viz-pulse{transform:scale(1.09)}
+.viz-orbit{transform-box:view-box;transform-origin:160px 100px;animation:vizSpin 26s linear infinite}
+.cap:hover .viz-orbit{animation-duration:5s}
+@keyframes vizSpin{to{transform:rotate(360deg)}}
+
+.viz-drop{opacity:0}
+.viz-drop.d1{--dx:22px}
+.viz-drop.d2{--dx:0px}
+.viz-drop.d3{--dx:-22px}
+
+.viz-drop{animation:vizDrop 5.4s var(--ease-inout) infinite}
+.viz-drop.d2{animation-delay:1.8s}
+.viz-drop.d3{animation-delay:3.6s}
+.cap:hover .viz-drop{animation-duration:2.2s}
+@keyframes vizDrop{
+  0%{opacity:0;transform:translate(0,0)}
+  12%{opacity:1;transform:translate(0,8px)}
+  62%{opacity:1;transform:translate(var(--dx),84px)}
+  78%{opacity:1;transform:translate(var(--dx),108px)}
+  100%{opacity:0;transform:translate(var(--dx),132px)}
+}
+@media (prefers-reduced-motion:reduce){.viz-orbit,.viz-drop{animation:none}.cap:hover .viz-br,.cap:hover .viz-pulse{transform:none}}
 .foot-mark{display:block;width:100%}
 
 div:has(>.foot-mark){width:100%;max-width:100%}
@@ -207,7 +247,14 @@ div:has(>div>.foot-mark){grid-template-columns:1fr!important}
 .foot-mark img{width:clamp(60%,295px + 21.9vw,100%);max-width:100%;height:auto;display:block}
 
 @media (min-width:901px){.foot-mark img{width:48%}}
+.caps-hold{background:var(--n-900);color:var(--n-50);padding:clamp(110px, 12vh, 160px) 0 var(--section-y)}
+.caps-inner{width:100%}
+.caps-hold .cap{border-top-color:var(--line-inverse)}
 
+.caps-hold .cap p{color:var(--n-300);text-wrap:pretty}
+.caps-hold .cap:hover{border-top-color:var(--n-50)}
+.caps-hold .cap:hover p{color:var(--n-50)}
+.caps-hold .cap .id{color:var(--n-500)}
 .acid-block{background:var(--block-acid);color:var(--n-900);padding:var(--section-y) 0;min-height:auto;display:flex;flex-direction:column;justify-content:center}
 .acid-block>div{width:100%}
 .acid-block a{color:var(--n-900)}
@@ -222,7 +269,17 @@ footer a{color:var(--n-0)}footer a:hover{color:var(--block-acid)}
 @media (max-width:900px){.hero-eyebrow{margin-bottom:var(--sp-5)}.hero-sub{margin-top:var(--sp-5);max-width:60ch;font-size:var(--text-body)}}
 
 @media (min-width:901px){.hero-sub{font-size:min(var(--text-lead),2.1vw)}}
+.cap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp-12);align-items:start}
 
+.cap{border-top:1px solid var(--line-hairline);padding-top:var(--sp-6);transition:border-color var(--dur-base) var(--ease-out)}
+.cap:hover{border-top-color:var(--line-strong)}
+.cap p{color:var(--text-secondary);transition:color var(--dur-base) var(--ease-out)}
+.cap:hover p{color:var(--text-primary)}
+.cap .id{transition:color var(--dur-base) var(--ease-out)}
+.cap:hover .id{color:var(--block-ember)}
+
+.model-dark{background:var(--block-ink);color:var(--n-0);padding:var(--section-y) 0;min-height:100vh;display:flex;align-items:center;justify-content:center;box-sizing:border-box}
+.model-inner{width:100%}
 .work-sec{
   min-height:100vh;
   display:flex;
@@ -321,6 +378,7 @@ footer a{color:var(--n-0)}footer a:hover{color:var(--block-acid)}
 @media (max-width:900px){
 .hero-media-holder{height:auto;aspect-ratio:16/9}
 
+.cap-grid{grid-template-columns:1fr;gap:var(--sp-10)}
 .wdiptych{flex-direction:column;gap:var(--sp-4)}
 .wpanel{min-height:58vh}
 .wpanel.on{flex-grow:1}
@@ -725,8 +783,26 @@ __ds_ns.NavBar = __ds_scope.NavBar;
 </head><body>
 <div id="root"></div>
 <script type="text/babel">
+const { Button } = window.TheNowMachineDesignSystem_5b6ea4;
+
+const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+
 function Frame({ children, style, wide, ...rest }) {
   return <div style={{ maxWidth: 'var(--max-content)', margin: '0 auto', paddingLeft: wide ? 'var(--gutter-lg)' : 'var(--gutter)', paddingRight: wide ? 'var(--gutter-lg)' : 'var(--gutter)', ...style }} {...rest}>{children}</div>;
+}
+
+function useScroll(fn) {
+  const cb = React.useRef(fn);
+  cb.current = fn;
+  React.useEffect(() => {
+    let raf = null;
+    const run = () => { raf = null; cb.current(); };
+    const on = () => { if (raf === null) raf = requestAnimationFrame(run); };
+    cb.current();
+    window.addEventListener('scroll', on, { passive: true });
+    window.addEventListener('resize', on);
+    return () => { if (raf !== null) cancelAnimationFrame(raf); window.removeEventListener('scroll', on); window.removeEventListener('resize', on); };
+  }, []);
 }
 
 function useReveal() {
@@ -737,13 +813,36 @@ function useReveal() {
   }, []);
 }
 
+function useInView(id) {
+  const [seen, setSeen] = React.useState(false);
+  React.useEffect(() => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const io = new IntersectionObserver(es => setSeen(es[0].isIntersecting), { rootMargin: '-40% 0px -20% 0px' });
+    io.observe(el);
+    return () => io.disconnect();
+  }, [id]);
+  return seen;
+}
+
 function scrollToId(id, offset = 96) {
   const el = document.getElementById(id);
   if (!el) return;
   window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - offset, behavior: 'smooth' });
 }
 
-Object.assign(window, { Frame, useReveal, scrollToId });
+function useCrossProgress(ref) {
+  const [p, setP] = React.useState(0);
+  useScroll(() => {
+    const el = ref.current; if (!el) return;
+    const r = el.getBoundingClientRect();
+    const vh = window.innerHeight;
+    setP(clamp((vh - r.top) / (vh + r.height), 0, 1));
+  });
+  return p;
+}
+
+Object.assign(window, { clamp, Frame, useScroll, useReveal, useInView, scrollToId, useCrossProgress });
 
 </script>
 <script type="text/babel">
@@ -796,7 +895,137 @@ Object.assign(window, { Hero });
 
 </script>
 <script type="text/babel">
+const { DisplayHeading, MonoLabel } = window.TheNowMachineDesignSystem_5b6ea4;
+
+/* ── Capabilities ── */
+function Viz({ kind }) {
+  if (kind === 'globe') return (
+    <svg className="viz" viewBox="0 0 320 200" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.25">
+      <circle cx="160" cy="100" r="50" />
+      <ellipse cx="160" cy="100" rx="50" ry="19" />
+      <ellipse cx="160" cy="100" rx="21" ry="50" />
+      <path d="M110 100h100" />
+      <g className="viz-orbit">
+        <circle cx="160" cy="100" r="74" strokeDasharray="3 10" />
+        <circle cx="234" cy="100" r="3.5" fill="currentColor" stroke="none" />
+        <circle cx="86" cy="100" r="2.5" fill="currentColor" stroke="none" />
+      </g>
+    </svg>
+  );
+  if (kind === 'funnel') return (
+    <svg className="viz" viewBox="0 0 320 200" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.25">
+      <path d="M104 62h112l-40 52v42l-32 12v-54z" strokeLinejoin="round" />
+      <path d="M92 46h136" strokeDasharray="4 8" />
+      <circle className="viz-drop d1" cx="138" cy="30" r="3.5" fill="currentColor" stroke="none" />
+      <circle className="viz-drop d2" cx="160" cy="30" r="3.5" fill="currentColor" stroke="none" />
+      <circle className="viz-drop d3" cx="182" cy="30" r="3.5" fill="currentColor" stroke="none" />
+    </svg>
+  );
+  return (
+    <svg className="viz" viewBox="0 0 320 200" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.25">
+      <g className="viz-house">
+        <path d="M92 94 L160 48 L228 94" strokeLinejoin="round" />
+        <path d="M106 92v66h108V92" strokeLinejoin="round" />
+      </g>
+      <circle className="viz-pulse" cx="160" cy="112" r="17" />
+      <path d="M133 160c0-15 12-24 27-24s27 9 27 24" />
+      <path className="viz-br viz-br-tl" d="M74 60V38h22" strokeLinejoin="round" />
+      <path className="viz-br viz-br-tr" d="M246 60V38h-22" strokeLinejoin="round" />
+      <path className="viz-br viz-br-bl" d="M74 152v22h22" strokeLinejoin="round" />
+      <path className="viz-br viz-br-br" d="M246 152v22h-22" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+const CAPS = [
+  {
+    id: 'C-01',
+    title: 'The Demand Engine',
+    body: "Targeted ad campaigns and lead funnels designed to capture local and international buyers directly, protecting developer margins and enabling lead recyclability across the portfolio.",
+    viz: 'globe',
+    bullets: ['Google Ads', 'Meta Ads', 'LinkedIn Ads']
+  },
+  {
+    id: 'C-02',
+    title: 'The Nurture Engine',
+    body: "Social media and email marketing that maintains strong brand momentum, turning inquiries into signed contracts and eliminating buyer distance anxiety.",
+    viz: 'funnel',
+    bullets: ['Social Media Management', 'Email Marketing', 'Lead Funnels']
+  },
+  {
+    id: 'C-03',
+    title: 'The Fuel',
+    body: "On-camera hosted storytelling, lifestyle media, and site progress updates that build tangible project credibility and feed both the demand and nurture engine.",
+    viz: 'cast',
+    bullets: ['Renders, animations, and virtual tours', 'Construction Updates', 'Lifestyle content']
+  }
+];
+
+function Capabilities() {
+  return (
+    <section id="capabilities" data-screen-label="Capabilities" className="caps-hold">
+      <div className="caps-inner">
+        <Frame style={{ width: '100%' }}>
+          <DisplayHeading size={1} tone="inverse" style={{ marginBottom: 'var(--sp-16)' }}>What we run</DisplayHeading>
+          <div className="cap-grid">
+            {CAPS.map(c => (
+              <article key={c.id} className="cap">
+                <div className="cap-media"><Viz kind={c.viz} /></div>
+                <MonoLabel className="id" tone="muted" style={{ display: 'block', marginBottom: 'var(--sp-8)' }}>{c.id}</MonoLabel>
+                <h3 className="cap-title" style={{ margin: '0 0 var(--sp-5)', fontFamily: 'var(--font-display)', fontWeight: 'var(--fw-black)', fontSize: 'var(--text-display-3)', lineHeight: 'var(--lh-tight)', letterSpacing: 'var(--ls-title)' }}>{c.title}</h3>
+                <p style={{ margin: 0 }}>{c.body}</p>
+                {c.bullets && (
+                  <ul style={{ margin: 'var(--sp-6) 0 0', paddingLeft: '1.2em', color: 'var(--n-300)', fontSize: 'var(--text-body-sm)', display: 'grid', gap: 'var(--sp-2)' }}>
+                    {c.bullets.map((b, i) => (
+                      <li key={i}>{b}</li>
+                    ))}
+                  </ul>
+                )}
+              </article>
+            ))}
+          </div>
+        </Frame>
+      </div>
+    </section>
+  );
+}
+
+Object.assign(window, { Capabilities });
+
+</script>
+
+<script type="text/babel">
 const { DisplayHeading, MonoLabel, Button, SiteFooter } = window.TheNowMachineDesignSystem_5b6ea4;
+
+/* ── The model ── */
+function Model() {
+  const wrap = React.useRef(null);
+  const p = useCrossProgress(wrap);
+  const on = t => (p > t ? ' on' : '');
+  return (
+    <section ref={wrap} id="operator" data-screen-label="The model" className="model-dark">
+      <div className="model-inner">
+        <Frame style={{ width: '100%' }}>
+          <DisplayHeading size={1} tone="inverse" className="lines-wide">
+            <span className="ln">Built for <span className={'mark' + on(0.45)}>developers,</span></span>
+            <span className="ln">not just brokerages.</span>
+            <span className="ln">Focused on <span className={'mark' + on(0.48)}>absorption,</span></span>
+            <span className="ln">not vanity metrics.</span>
+          </DisplayHeading>
+          <DisplayHeading size={1} tone="inverse" className="lines-narrow">
+            <span className="ln">Engineered for</span>
+            <span className="ln"><span className={'mark' + on(0.45)}>developers,</span></span>
+            <span className="ln">not general</span>
+            <span className="ln">brokerages.</span>
+            <span className="ln">Focused on</span>
+            <span className="ln"><span className={'mark' + on(0.48)}>absorption,</span> not</span>
+            <span className="ln">vanity metrics.</span>
+          </DisplayHeading>
+        </Frame>
+      </div>
+    </section>
+  );
+}
 
 /* ── Selected work ── */
 const WORK = [
@@ -804,9 +1033,9 @@ const WORK = [
   { id: 'W-02', client: 'CoveCasa', cat: 'Vacation Rental Portfolio', poster: 'assets/covecasa-poster.jpg', video: 'assets/covecasa-hover.mp4', body: 'Built paid media, funnels, and content production for a luxury rental portfolio, scaling it to 30 properties under management in year one.' }
 ];
 
-const WorkPanel = ({ w, active, dim, onEnter, vref }) => (
+const WorkPanel = ({ w, active, dim, onEnter, onLeave, vref }) => (
   <div className={'wpanel' + (active ? ' on' : '') + (dim ? ' dim' : '')} data-id={w.id}
-    onMouseEnter={onEnter}>
+    onMouseEnter={onEnter} onMouseLeave={onLeave}>
     <img className="wpanel-still" src={w.poster} alt={w.client} loading="lazy" decoding="async" />
     {w.video && <video className="wpanel-video" ref={vref} src={w.video} muted loop playsInline preload="none" />}
     <div className="wpanel-scrim" aria-hidden="true" />
@@ -840,6 +1069,7 @@ function Work() {
             active={hov === n}
             dim={hov >= 0 && hov !== n}
             onEnter={() => setHov(n)}
+            onLeave={() => {}}
             vref={el => { vids.current[w.id] = el; }} />
         ))}
       </div>
@@ -1014,13 +1244,13 @@ function ContactAndFooter() {
   );
 }
 
-Object.assign(window, { Work, ContactAndFooter });
+Object.assign(window, { Model, Work, ContactAndFooter });
 
 </script>
 <script type="text/babel">
 const { NavBar, LiveDot } = window.TheNowMachineDesignSystem_5b6ea4;
 
-const NAV = { 'Work': 'work', 'Get in touch': 'contact' };
+const NAV = { 'What we run': 'capabilities', 'Work': 'work', 'Services': 'capabilities', 'Get in touch': 'contact' };
 
 function Nav() {
   const [narrow, setNarrow] = React.useState(() => window.matchMedia('(max-width:900px)').matches);
@@ -1047,7 +1277,7 @@ function Nav() {
   };
   return (
     <div className="tnm-nav">
-      <NavBar links={narrow ? [] : ['Work']} ctaLive={false} onNavigate={go}
+      <NavBar links={narrow ? ['Services'] : ['What we run', 'Work']} ctaLive={false} onNavigate={go}
         wordmark={<img className="nav-logo" src="assets/logo-now.png" alt="The Now Machine" width="63" height="26" decoding="async" />}
         cta={narrow ? null : <span style={{ display: 'inline-flex', alignItems: 'center', gap: 'var(--sp-3)' }}>Get in touch<LiveDot className="tnm-pulse" /></span>} />
     </div>
@@ -1060,7 +1290,9 @@ function Site() {
     <React.Fragment>
       <Nav />
       <Hero />
+      <Capabilities />
       <Work />
+      <Model />
       <ContactAndFooter />
     </React.Fragment>
   );
