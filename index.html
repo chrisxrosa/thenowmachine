@@ -782,7 +782,6 @@ __ds_ns.NavBar = __ds_scope.NavBar;
 </script>
 </head><body>
 <div id="root"></div>
-<div id="process" style="position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none;"></div>
 <script type="text/babel">
 const { Button } = window.TheNowMachineDesignSystem_5b6ea4;
 
@@ -892,100 +891,7 @@ function Hero() {
   );
 }
 
-/* ── Capabilities ── */
-function Viz({ kind }) {
-  if (kind === 'globe') return (
-    <svg className="viz" viewBox="0 0 320 200" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.25">
-      <circle cx="160" cy="100" r="50" />
-      <ellipse cx="160" cy="100" rx="50" ry="19" />
-      <ellipse cx="160" cy="100" rx="21" ry="50" />
-      <path d="M110 100h100" />
-      <g className="viz-orbit">
-        <circle cx="160" cy="100" r="74" strokeDasharray="3 10" />
-        <circle cx="234" cy="100" r="3.5" fill="currentColor" stroke="none" />
-        <circle cx="86" cy="100" r="2.5" fill="currentColor" stroke="none" />
-      </g>
-    </svg>
-  );
-  if (kind === 'funnel') return (
-    <svg className="viz" viewBox="0 0 320 200" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.25">
-      <path d="M104 62h112l-40 52v42l-32 12v-54z" strokeLinejoin="round" />
-      <path d="M92 46h136" strokeDasharray="4 8" />
-      <circle className="viz-drop d1" cx="138" cy="30" r="3.5" fill="currentColor" stroke="none" />
-      <circle className="viz-drop d2" cx="160" cy="30" r="3.5" fill="currentColor" stroke="none" />
-      <circle className="viz-drop d3" cx="182" cy="30" r="3.5" fill="currentColor" stroke="none" />
-    </svg>
-  );
-  return (
-    <svg className="viz" viewBox="0 0 320 200" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.25">
-      <g className="viz-house">
-        <path d="M92 94 L160 48 L228 94" strokeLinejoin="round" />
-        <path d="M106 92v66h108V92" strokeLinejoin="round" />
-      </g>
-      <circle className="viz-pulse" cx="160" cy="112" r="17" />
-      <path d="M133 160c0-15 12-24 27-24s27 9 27 24" />
-      <path className="viz-br viz-br-tl" d="M74 60V38h22" strokeLinejoin="round" />
-      <path className="viz-br viz-br-tr" d="M246 60V38h-22" strokeLinejoin="round" />
-      <path className="viz-br viz-br-bl" d="M74 152v22h22" strokeLinejoin="round" />
-      <path className="viz-br viz-br-br" d="M246 152v22h-22" strokeLinejoin="round" />
-    </svg>
-  );
-}
-
-const CAPS = [
-  { 
-    id: 'C-01', 
-    title: 'The Demand Engine', 
-    body: "Targeted ad campaigns and lead funnels designed to capture local and international buyers directly, protecting developer margins and enabling lead recyclability across the portfolio.", 
-    viz: 'globe',
-    bullets: ['Google Ads', 'Meta Ads', 'LinkedIn Ads']
-  },
-  { 
-    id: 'C-02', 
-    title: 'The Nurture Engine', 
-    body: "Social media and email marketing that maintains strong brand momentum, turning inquiries into signed contracts and eliminating buyer distance anxiety.", 
-    viz: 'funnel',
-    bullets: ['Social Media Management', 'Email Marketing', 'Lead Funnels']
-  },
-  { 
-    id: 'C-03', 
-    title: 'The Fuel', 
-    body: "On-camera hosted storytelling, lifestyle media, and site progress updates that build tangible project credibility and feed both the demand and nurture engine.", 
-    viz: 'cast',
-    bullets: ['Renders, animations, and virtual tours', 'Construction Updates', 'Lifestyle content']
-  }
-];
-
-function Capabilities() {
-  return (
-    <section id="capabilities" data-screen-label="Capabilities" className="caps-hold">
-      <div className="caps-inner">
-        <Frame style={{ width: '100%' }}>
-          <DisplayHeading size={1} tone="inverse" style={{ marginBottom: 'var(--sp-16)' }}>What we run</DisplayHeading>
-          <div className="cap-grid">
-            {CAPS.map(c => (
-              <article key={c.id} className="cap">
-                <div className="cap-media"><Viz kind={c.viz} /></div>
-                <MonoLabel className="id" tone="muted" style={{ display: 'block', marginBottom: 'var(--sp-8)' }}>{c.id}</MonoLabel>
-                <h3 className="cap-title" style={{ margin: '0 0 var(--sp-5)', fontFamily: 'var(--font-display)', fontWeight: 'var(--fw-black)', fontSize: 'var(--text-display-3)', lineHeight: 'var(--lh-tight)', letterSpacing: 'var(--ls-title)' }}>{c.title}</h3>
-                <p style={{ margin: 0 }}>{c.body}</p>
-                {c.bullets && (
-                  <ul style={{ margin: 'var(--sp-6) 0 0', paddingLeft: '1.2em', color: 'var(--n-300)', fontSize: 'var(--text-body-sm)', display: 'grid', gap: 'var(--sp-2)' }}>
-                    {c.bullets.map((b, i) => (
-                      <li key={i}>{b}</li>
-                    ))}
-                  </ul>
-                )}
-              </article>
-            ))}
-          </div>
-        </Frame>
-      </div>
-    </section>
-  );
-}
-
-Object.assign(window, { Hero, Capabilities });
+Object.assign(window, { Hero });
 
 </script>
 <script type="text/babel">
@@ -1155,4 +1061,132 @@ function ContactForm() {
         />
       </div>
       <div style={{ marginTop: 'var(--sp-2)', display: 'flex', alignItems: 'center', gap: 'var(--sp-4)', flexWrap: 'wrap' }}>
-        <Button size="lg" disabled={status ===
+        <Button size="lg" disabled={status === 'sending'}>
+          {status === 'sending' ? 'Submitting Request...' : 'Get in touch →'}
+        </Button>
+        {status === 'success' && (
+          <span style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-caption)', fontWeight: 'var(--fw-bold)', color: 'var(--n-900)' }}>
+            ✓ Request received. We'll get back to you within 1 business day.
+          </span>
+        )}
+        {status === 'error' && (
+          <span style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-caption)', fontWeight: 'var(--fw-bold)', color: 'var(--block-ember)' }}>
+            ✕ Submission failed. Please try again or email chris@thenowmachine.com.
+          </span>
+        )}
+      </div>
+    </form>
+  );
+}
+
+/* ── Contact & Footer Container ── */
+function ContactAndFooter() {
+  return (
+    <div className="contact-footer-container">
+      <section id="contact" data-screen-label="Contact" className="acid-block">
+        <Frame>
+          <div className="contact-grid-wrap">
+            <div>
+              <div className="lines-wide">
+                <DisplayHeading className="rev" size={1}>
+                  Let's create<br />
+                  direct demand<br />
+                  for your project.
+                </DisplayHeading>
+              </div>
+              <div className="lines-narrow">
+                <DisplayHeading className="rev" size={1}>
+                  Let's create<br />
+                  direct demand<br />
+                  for your project.
+                </DisplayHeading>
+              </div>
+            </div>
+            <div className="rev" style={{ width: '100%' }}>
+              <ContactForm />
+            </div>
+          </div>
+        </Frame>
+      </section>
+      <SiteFooter wordmark={<span className="foot-mark"><img src="assets/foot-wordmark.png" alt="the now machine" width="941" height="94" loading="lazy" decoding="async" /></span>} columns={[]}
+        note={<span>Developer demand and nurturing engine for resort developments · <a href="#contact" onClick={(e) => { e.preventDefault(); scrollToId('contact', 0); }}>Contact</a><span style={{ display: 'block', marginTop: 'var(--sp-3)' }}>Veerstraat 9a, Willemstad, Curaçao</span><span style={{ display: 'block', marginTop: 'var(--sp-4)', textAlign: 'center' }}>© 2026 The Now Machine. All rights reserved.</span></span>} />
+    </div>
+  );
+}
+
+Object.assign(window, { Work, ContactAndFooter });
+
+</script>
+<script type="text/babel">
+const { NavBar, LiveDot } = window.TheNowMachineDesignSystem_5b6ea4;
+
+const NAV = { 'Work': 'work', 'Get in touch': 'contact' };
+
+function Nav() {
+  const [narrow, setNarrow] = React.useState(() => window.matchMedia('(max-width:900px)').matches);
+  React.useEffect(() => {
+    const mq = window.matchMedia('(max-width:900px)');
+    const on = e => setNarrow(e.matches);
+    mq.addEventListener('change', on);
+    return () => mq.removeEventListener('change', on);
+  }, []);
+  const go = l => {
+    if (typeof l === 'string' && NAV[l]) {
+      const id = NAV[l];
+      if (id === 'work') {
+        scrollToId(id, 0);
+        return;
+      }
+      if (id === 'contact') {
+        scrollToId(id, 0);
+        return;
+      }
+      scrollToId(id, 0);
+    } else if (l === 'home') window.scrollTo({ top: 0, behavior: 'smooth' });
+    else scrollToId('contact', 0);
+  };
+  return (
+    <div className="tnm-nav">
+      <NavBar links={narrow ? [] : ['Work']} ctaLive={false} onNavigate={go}
+        wordmark={<img className="nav-logo" src="assets/logo-now.png" alt="The Now Machine" width="63" height="26" decoding="async" />}
+        cta={narrow ? null : <span style={{ display: 'inline-flex', alignItems: 'center', gap: 'var(--sp-3)' }}>Get in touch<LiveDot className="tnm-pulse" /></span>} />
+    </div>
+  );
+}
+
+function Site() {
+  useReveal();
+  return (
+    <React.Fragment>
+      <div id="capabilities" style={{ display: 'none' }}></div>
+      <div id="process" style={{ display: 'none' }}></div>
+      <Nav />
+      <Hero />
+      <Work />
+      <ContactAndFooter />
+    </React.Fragment>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<Site />);
+
+</script>
+<script>
+(function(){
+function head(n){for(var e=n&&n.nodeType===1?n:n&&n.parentElement;e;e=e.parentElement){if(/^H[123]$/.test(e.tagName))return e;}return null;}
+function draw(){var old=document.querySelectorAll('.selb'),k;for(k=0;k<old.length;k++)old[k].remove();
+var s=getSelection();if(!s||s.isCollapsed)return;var seen={};
+for(var r=0;r<s.rangeCount;r++){var rg=s.getRangeAt(r);if(!head(rg.startContainer)&&!head(rg.endContainer))continue;
+var root=rg.commonAncestorContainer;if(root.nodeType!==1)root=root.parentElement;
+var w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT),t;
+while((t=w.nextNode())){if(!rg.intersectsNode(t)||!t.nodeValue.trim())continue;var h=head(t);if(!h)continue;
+var sub=document.createRange();sub.selectNodeContents(t);
+if(t===rg.startContainer&&rg.startOffset>sub.startOffset)sub.setStart(t,rg.startOffset);
+if(t===rg.endContainer&&rg.endOffset<sub.endOffset)sub.setEnd(t,rg.endOffset);
+var fs=parseFloat(getComputedStyle(t.parentElement).fontSize),hb=h.getBoundingClientRect(),rects=sub.getClientRects();
+for(var i=0;i<rects.length;i++){var q=rects[i];if(q.width<1)continue;
+var top=q.bottom-fs*1.15,key=Math.round(q.left)+':'+Math.round(top)+':'+Math.round(q.width);if(seen[key])continue;seen[key]=1;
+var b=document.createElement('i');b.className='selb';b.style.left=(q.left-hb.left)+'px';b.style.width=q.width+'px';b.style.height=(fs*.9)+'px';b.style.top=(top-hb.top)+'px';h.appendChild(b);}}}}
+document.addEventListener('selectionchange',draw);addEventListener('resize',draw);})();
+</script>
+</body></html>
